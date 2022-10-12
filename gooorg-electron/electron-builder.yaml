@@ -1,0 +1,26 @@
+appId: your.app.id
+asar: true
+directories:
+  output: release/${version}
+
+files:
+- dist
+- electron
+
+mac:
+  artifactName: "${productName}_${version}.${ext}"
+  target:
+  - dmg
+  icon: "dist/icon.ico"
+win:
+  target:
+  - target: nsis
+    arch:
+    - x64
+  artifactName: "${productName}_${version}.${ext}"
+  icon: "dist/icon.ico"
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
