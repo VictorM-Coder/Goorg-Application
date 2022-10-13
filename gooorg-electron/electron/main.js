@@ -17,7 +17,7 @@ async function createWindow () {
       preload: join(__dirname, '../electron/preload.js'),
       nodeIntegration: true
     },
-    icon: join(__dirname, "../public/icon.png")
+    icon: join(__dirname, "../public/icon.ico")
   })
 
   if (app.isPackaged) {
