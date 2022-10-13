@@ -2,22 +2,38 @@ package com.goorg.goorgjava.model.atividade;
 
 import com.goorg.goorgjava.enums.Fase;
 import com.goorg.goorgjava.model.atividade.gerenciador.GerenciadorTarefas;
+import org.hibernate.annotations.Cascade;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Entity
 public class Atividade implements GerenciadorTarefas {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String titulo;
     private String descricao;
+
+    @ElementCollection
     private List<String> anotacoes;
     private LocalDate dataInicio;
     private LocalDate dataFinal;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "atividade")
     private List<Tarefa> tarefas;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
     private TagDePrioridade tagDePrioridade;
     private String nomeWorkspace;
+
+    @Enumerated(value = EnumType.STRING)
     private Fase fase;
 
     public Atividade(){
@@ -35,7 +51,6 @@ public class Atividade implements GerenciadorTarefas {
         this.dataFinal = dataFinal;
         this.tagDePrioridade = tagDePrioridade;
         this.nomeWorkspace = nomeWorkspace;
-        this.fase = fase;
     }
 
     @Override

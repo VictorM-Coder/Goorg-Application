@@ -1,9 +1,25 @@
 package com.goorg.goorgjava.model.atividade;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+@Entity
 public class Tarefa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String titulo;
+
+    @NotNull
     private boolean completo;
+
+    @ManyToOne
+    @JoinColumn
+    private Atividade atividade;
+
 
     public Tarefa(){
         this.completo = false;

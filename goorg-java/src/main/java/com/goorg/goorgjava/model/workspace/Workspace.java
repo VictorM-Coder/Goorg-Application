@@ -1,9 +1,21 @@
 package com.goorg.goorgjava.model.workspace;
 
+import javax.persistence.*;
+
+@Entity
 public class Workspace {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String nome;
+
     private String descricao;
-    private Kanban kanban;
+
+//    @OneToOne(mappedBy = "workspace_id")
+//    private Kanban kanban;
 
     public String getNome() {
         return nome;
