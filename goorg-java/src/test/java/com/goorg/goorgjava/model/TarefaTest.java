@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TarefaTeste {
+public class TarefaTest {
     @Test
     @DisplayName("A tarefa é iniciada corretamente")
     void tarefaCompleta_False_Quando_TarefaConstruida(){

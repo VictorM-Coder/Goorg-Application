@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class TagDePrioridade {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String nome;
 
     public TagDePrioridade(String nome) {
