@@ -2,7 +2,7 @@ package com.goorg.goorgjava.model.atividade;
 
 import com.goorg.goorgjava.enums.Fase;
 import com.goorg.goorgjava.model.atividade.gerenciador.GerenciadorTarefas;
-import org.hibernate.annotations.Cascade;
+import com.goorg.goorgjava.model.workspace.Workspace;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,7 +31,9 @@ public class Atividade implements GerenciadorTarefas {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private TagDePrioridade tagDePrioridade;
-    private String nomeWorkspace;
+
+    @ManyToOne
+    private Workspace workspace;
 
     @Enumerated(value = EnumType.STRING)
     private Fase fase;
@@ -41,7 +43,7 @@ public class Atividade implements GerenciadorTarefas {
         this.tarefas = new ArrayList<>();
     }
 
-    public Atividade(Long id, String titulo, String descricao, List<String> anotacoes, LocalDate dataInicio, LocalDate dataFinal, TagDePrioridade tagDePrioridade, String nomeWorkspace) {
+    public Atividade(Long id, String titulo, String descricao, List<String> anotacoes, LocalDate dataInicio, LocalDate dataFinal, TagDePrioridade tagDePrioridade, Workspace workspace) {
         this();
         this.id = id;
         this.titulo = titulo;
@@ -50,7 +52,7 @@ public class Atividade implements GerenciadorTarefas {
         this.dataInicio = dataInicio;
         this.dataFinal = dataFinal;
         this.tagDePrioridade = tagDePrioridade;
-        this.nomeWorkspace = nomeWorkspace;
+        this.workspace = workspace;
     }
 
     @Override
@@ -135,8 +137,8 @@ public class Atividade implements GerenciadorTarefas {
         return tagDePrioridade;
     }
 
-    public String getNomeWorkspace() {
-        return nomeWorkspace;
+    public Workspace getWorkspace() {
+        return this.workspace;
     }
 
     public Fase getFase() {

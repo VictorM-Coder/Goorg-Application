@@ -1,6 +1,9 @@
 package com.goorg.goorgjava.model.workspace;
 
+import com.goorg.goorgjava.model.atividade.Atividade;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Workspace {
@@ -14,8 +17,8 @@ public class Workspace {
 
     private String descricao;
 
-//    @OneToOne(mappedBy = "workspace_id")
-//    private Kanban kanban;
+    @OneToMany(mappedBy = "workspace")
+    private List<Atividade> atividades;
 
     public String getNome() {
         return nome;
