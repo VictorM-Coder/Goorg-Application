@@ -20,7 +20,7 @@ module.exports = {
         "red-ligth": "#FF6868",
       },
       backgroundImage: {
-        loginHero: 'url(/src/assets/bg.png)',
+        loginHero: 'url(/src/assets/bg-login.png)',
       },
       screens: {
         'xlmax': {'max': '1200px'},
