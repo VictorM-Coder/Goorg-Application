@@ -22,12 +22,11 @@ public class AtividadeRepositoryTest {
     @DisplayName("Uma atividade é salva corretamente")
     public void save_AtividadePersistida_Quando_sucesso(){
         Atividade atividadeValida = AtividadeCreator.criarAtividadeValida();
-        System.out.println(atividadeValida.getTitulo());
-        this.repository.save(atividadeValida);
-        Optional<Atividade> atividadeSalva = this.repository.findById(atividadeValida.getId());
+        Atividade atividadeSalva = this.repository.save(atividadeValida);
+        Optional<Atividade> atividade = this.repository.findById(atividadeValida.getId());
 
-        Assertions.assertTrue(atividadeSalva.isPresent());
-        Assertions.assertEquals(atividadeValida, atividadeSalva.get());
+        Assertions.assertTrue(atividade.isPresent());
+        Assertions.assertEquals(atividadeSalva, atividade.get());
     }
 
     @Test
