@@ -42,7 +42,6 @@ public class AtividadeRepositoryTest {
 
         Assertions.assertTrue(atividade.isPresent());
         Assertions.assertFalse(atividade.isEmpty());
-        System.out.println(atividade.get() + "/n" + atividadeSaved);
         Assertions.assertTrue(atividade.get().equals(atividadeSaved));
     }
 
