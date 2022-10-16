@@ -6,10 +6,21 @@ import javax.persistence.*;
 public class TagDePrioridade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
     private String nome;
 
     public TagDePrioridade(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "TagDePrioridade{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 
     public TagDePrioridade() {

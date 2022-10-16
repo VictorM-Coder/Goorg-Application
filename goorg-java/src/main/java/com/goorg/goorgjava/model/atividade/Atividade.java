@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Entity
@@ -29,7 +30,7 @@ public class Atividade implements GerenciadorTarefas {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "atividade")
     private List<Tarefa> tarefas;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private TagDePrioridade tagDePrioridade;
 
     @ManyToOne
@@ -53,6 +54,35 @@ public class Atividade implements GerenciadorTarefas {
         this.dataFinal = dataFinal;
         this.tagDePrioridade = tagDePrioridade;
         this.workspace = workspace;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Atividade atividade = (Atividade) o;
+        return Objects.equals(id, atividade.id) && Objects.equals(titulo, atividade.titulo);
+    }
+
+    @Override
+    public String toString() {
+        return "Atividade{" +
+                "id=" + id +
+                ", titulo='" + titulo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", anotacoes=" + anotacoes +
+                ", dataInicio=" + dataInicio +
+                ", dataFinal=" + dataFinal +
+                ", tarefas=" + tarefas +
+                ", tagDePrioridade=" + tagDePrioridade +
+                ", workspace=" + workspace +
+                ", fase=" + fase +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titulo, descricao, anotacoes, dataInicio, dataFinal, tarefas, tagDePrioridade, workspace, fase);
     }
 
     @Override
