@@ -30,7 +30,7 @@ public class Atividade implements GerenciadorTarefas {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "atividade")
     private List<Tarefa> tarefas;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private TagDePrioridade tagDePrioridade;
 
     @ManyToOne

@@ -4,7 +4,6 @@ import com.goorg.goorgjava.model.atividade.Atividade;
 import com.goorg.goorgjava.repositories.AtividadeRepository;
 import com.goorg.goorgjava.util.AtividadeCreator;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,40 +15,35 @@ import java.util.Optional;
 
 @DataJpaTest
 public class AtividadeRepositoryTest {
-
-    private Atividade atividadeValida;
-
     @Autowired
     private AtividadeRepository repository;
-
-    @BeforeEach
-    private void setUp(){
-        this.atividadeValida = AtividadeCreator.criarAtividadeValida();
-    }
 
     @Test
     @DisplayName("Uma atividade é salva corretamente")
     public void save_AtividadePersistida_Quando_sucesso(){
+        Atividade atividadeValida = AtividadeCreator.criarAtividadeValida();
         System.out.println(atividadeValida.getTitulo());
         this.repository.save(atividadeValida);
-        Optional<Atividade> atividadeSalva = this.repository.findById(this.atividadeValida.getId());
+        Optional<Atividade> atividadeSalva = this.repository.findById(atividadeValida.getId());
 
         Assertions.assertTrue(atividadeSalva.isPresent());
-        Assertions.assertEquals(this.atividadeValida, atividadeSalva.get());
+        Assertions.assertEquals(atividadeValida, atividadeSalva.get());
     }
 
     @Test
     @DisplayName("Burcar o id de uma atividade retorna uma atividade quando é executado corretamente")
     void findById_ReturnaUmaListaDeAtividade_Quando_Successo(){
-        Atividade atividadeSaved = this.repository.save(this.atividadeValida);
+        Atividade atividadeValida = AtividadeCreator.criarAtividadeValida();
+        Atividade atividadeSaved = this.repository.save(atividadeValida);
 
         Long id = atividadeSaved.getId();
 
-        Optional<Atividade> atividades = this.repository.findById(id);
+        Optional<Atividade> atividade = this.repository.findById(id);
 
-        Assertions.assertTrue(atividades.isPresent());
-        Assertions.assertFalse(atividades.isEmpty());
-        Assertions.assertTrue(atividades.get().equals(this.atividadeValida));
+        Assertions.assertTrue(atividade.isPresent());
+        Assertions.assertFalse(atividade.isEmpty());
+        System.out.println(atividade.get() + "/n" + atividadeSaved);
+        Assertions.assertTrue(atividade.get().equals(atividadeSaved));
     }
 
     @Test
@@ -68,7 +62,7 @@ public class AtividadeRepositoryTest {
 
             Assertions.assertTrue(atividadeSaved.isPresent());
             Assertions.assertFalse(atividadeSaved.isEmpty());
-            Assertions.assertTrue(atividadeSaved.get().equals(atividadesValidas.get(cont)));
+            Assertions.assertTrue(atividadeSaved.get().equals(atividadesSaved.get(cont)));
         }
     }
 }
