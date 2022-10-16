@@ -1,5 +1,7 @@
-const { app, BrowserWindow, shell } = require('electron')
-const { join } = require('path')
+const { app, BrowserWindow, shell, ipcMain } = require('electron')
+const { join } = require('path');
+
+//require('./requests');
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -14,17 +16,17 @@ async function createWindow () {
     width: 1024,
     height: 768,
     webPreferences: {
-      preload: join(__dirname, '../electron/preload.js'),
-      nodeIntegration: true
+      nodeIntegration: true,
+      worldSafeExecuteJavaScript: true,
+      contextIsolation: true,
+      preload: join(__dirname, "preload.js") // use a preload script
     },
     icon: join(__dirname, "../public/icon.ico")
   })
-
+  
   if (app.isPackaged) {
-    win.removeMenu()
     win.loadFile(join(__dirname, '../dist/index.html'))
   } else {
-    win.removeMenu()
     win.loadURL('http://127.0.0.1:5173/')
   }
 }
