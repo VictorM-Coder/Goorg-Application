@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
+@org.springframework.stereotype.Service
 public class AtividadeService implements Service<Atividade,Long> {
     @Autowired
     private AtividadeRepository atividadeRepository;
