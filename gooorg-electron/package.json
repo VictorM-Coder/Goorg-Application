@@ -22,7 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1",
-    "swiper": "^8.4.4"
+    "swiper": "^8.4.4",
+    "tree-kill": "^1.2.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

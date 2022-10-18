@@ -1,9 +1,13 @@
-export function LogoMinemized() {
+interface LogoMimemizedProps {
+  size?: number;
+}
+
+export function LogoMinemized({ size = 0 }: LogoMimemizedProps ){
    return (
      <svg
        xmlns="http://www.w3.org/2000/svg"
-       width="51"
-       height="46"
+       width={(size) ? size : '51'}
+       height={(size) ? size : '46'}
        fill="none"
        viewBox="0 0 59 54"
      >
