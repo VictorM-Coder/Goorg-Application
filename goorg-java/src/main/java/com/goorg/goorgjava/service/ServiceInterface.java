@@ -1,11 +1,12 @@
 package com.goorg.goorgjava.service;
 
-import com.goorg.goorgjava.model.atividade.Atividade;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface Service<E, K> {
+@Service
+public interface ServiceInterface<E, K> {
     void save(E e);
 
     void saveAll(List<E> eList);

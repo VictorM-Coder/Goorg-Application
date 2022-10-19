@@ -33,7 +33,7 @@ public class Atividade implements GerenciadorTarefas {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private TagDePrioridade tagDePrioridade;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Workspace workspace;
 
     @Enumerated(value = EnumType.STRING)

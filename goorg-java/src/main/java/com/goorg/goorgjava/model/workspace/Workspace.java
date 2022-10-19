@@ -3,7 +3,6 @@ package com.goorg.goorgjava.model.workspace;
 import com.goorg.goorgjava.model.atividade.Atividade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
