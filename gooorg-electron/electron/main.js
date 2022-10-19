@@ -1,7 +1,6 @@
-const { app, BrowserWindow, shell, ipcMain } = require('electron')
+const { app, BrowserWindow } = require('electron')
 const { join } = require('path');
-
-//require('./requests');
+const { spawn } = require('child_process');
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -19,16 +18,19 @@ async function createWindow () {
       nodeIntegration: true,
       worldSafeExecuteJavaScript: true,
       contextIsolation: true,
-      preload: join(__dirname, "preload.js") // use a preload script
+      preload: join(__dirname, "preload.js") 
     },
     icon: join(__dirname, "../public/icon.ico")
   })
-  
+
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../dist/index.html'))
   } else {
     win.loadURL('http://127.0.0.1:5173/')
   }
+  
+  //const jarPath = join(__dirname, "/target/api.jar")
+  //qspawn('java', ['-jar', jarPath]);
 }
 
 app.whenReady().then(createWindow)
@@ -54,3 +56,5 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+

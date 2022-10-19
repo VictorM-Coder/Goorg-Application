@@ -1,11 +1,18 @@
+import axios from "axios";
 import { Calendar } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Sidebar } from "../../components/Sidebar";
 import { SidebarContex } from "../../contexts/SidebarContext";
 import { WorkspacesRecents } from "./WorkspacesRecents";
 
 export function Home() {
    const weekDays = ['Domingo', 'Segunda Feira', 'Terça Feira', 'Quarta Feira', 'Quinta Feira', 'Sexta Feira', 'Sabado']
+   const [activitys, setActivitys] = useState<any[]>([])
+
+   useEffect(() => {
+      axios.get("http://localhost:8080/ds")
+      .then(res => console.log(res.data));
+   },[])
 
    return (
       <div className="flex h-screen">
