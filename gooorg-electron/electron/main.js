@@ -1,9 +1,6 @@
 const { app, BrowserWindow } = require('electron')
 const { join } = require('path');
-const { fork } = require('child_process');
-const { execFile } = require('child_process');
-
-//require('./requests');
+const { spawn } = require('child_process');
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
@@ -21,7 +18,7 @@ async function createWindow () {
       nodeIntegration: true,
       worldSafeExecuteJavaScript: true,
       contextIsolation: true,
-      preload: join(__dirname, "preload.js") // use a preload script
+      preload: join(__dirname, "preload.js") 
     },
     icon: join(__dirname, "../public/icon.ico")
   })
@@ -31,41 +28,16 @@ async function createWindow () {
   } else {
     win.loadURL('http://127.0.0.1:5173/')
   }
+  
+  //const jarPath = join(__dirname, "/target/api.jar")
+  //qspawn('java', ['-jar', jarPath]);
 }
-
-// const child = fork(join(__dirname, 'target/api.jar'), ['java -jar'], {
-//   stdio: 'pipe'
-// });
-
-// child.on('error', (err) => {
-//   console.log(err)
-// });
-
-var jarPath = app.getAppPath() + '\\target\\api.jar';
-var child = require('child_process').spawn('java', ['-jar', jarPath, '']);
-
-//console.log(child.exitCode);
-
-execFile(join(__dirname, '\\script.sh'), (error, stdout, stderr) => {
-  if (error) {
-    console.error(`error: ${error.message}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`stderr: ${stderr}`);
-    return;
-  }
-
-  console.log(`stdout:\n${stdout}`);
-});
 
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
   win = null
   if (process.platform !== 'darwin') app.quit()
-  var kill = require('tree-kill');
-  kill(child.pid);
 })
 
 app.on('second-instance', () => {
