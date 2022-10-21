@@ -27,7 +27,7 @@ public class Activity implements TaskManager {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "atividade")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "activity")
     private List<Task> tasks;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
