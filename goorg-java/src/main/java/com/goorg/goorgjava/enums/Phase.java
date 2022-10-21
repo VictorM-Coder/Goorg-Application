@@ -1,5 +1,5 @@
 package com.goorg.goorgjava.enums;
 
-public enum Fase {
+public enum Phase {
     TO_DO, DOING, DONE;
 }

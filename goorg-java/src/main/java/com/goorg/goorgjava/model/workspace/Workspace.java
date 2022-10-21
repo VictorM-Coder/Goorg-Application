@@ -1,6 +1,6 @@
 package com.goorg.goorgjava.model.workspace;
 
-import com.goorg.goorgjava.model.atividade.Atividade;
+import com.goorg.goorgjava.model.atividade.Activity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,30 +13,30 @@ public class Workspace {
     private Long id;
 
     @Column(unique = true)
-    private String nome;
+    private String name;
 
-    private String descricao;
+    private String description;
 
     @OneToMany(mappedBy = "workspace", cascade = CascadeType.PERSIST)
-    private List<Atividade> atividades;
+    private List<Activity> activities;
 
     public Workspace() {
     }
 
-    public Workspace(Long id, String nome, String descricao, List<Atividade> atividades) {
+    public Workspace(Long id, String name, String description, List<Activity> activities) {
         this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.atividades = atividades;
+        this.name = name;
+        this.description = description;
+        this.activities = activities;
     }
 
     @Override
     public String toString() {
         return "Workspace{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", atividades=" + atividades +
+                ", nome='" + name + '\'' +
+                ", descricao='" + description + '\'' +
+                ", atividades=" + activities +
                 '}';
     }
 
@@ -44,15 +44,15 @@ public class Workspace {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public int getQuantidadeAtividades(){
-        return 0;
+    public int getCountActivities(){
+        return this.activities.size();
     }
 }

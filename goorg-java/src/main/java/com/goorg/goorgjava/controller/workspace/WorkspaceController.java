@@ -32,7 +32,7 @@ public class WorkspaceController {
     }
 
     @GetMapping(path = "/{id}")
-    public @ResponseBody Optional<Workspace> getWorkspacePorId(@PathVariable Long id){
+    public @ResponseBody Optional<Workspace> getWorkspaceById(@PathVariable Long id){
         return this.workspaceService.getById(id);
     }
 }
