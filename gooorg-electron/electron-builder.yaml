@@ -19,6 +19,7 @@ win:
     - x64
   artifactName: "${productName}_${version}.${ext}"
   icon: "dist/icon.ico"
+  asarUnpack: "electron"
 nsis:
   oneClick: false
   perMachine: false

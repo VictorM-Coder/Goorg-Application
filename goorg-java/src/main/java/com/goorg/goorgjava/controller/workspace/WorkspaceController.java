@@ -15,22 +15,22 @@ import java.util.Optional;
 public class WorkspaceController {
     @Autowired
     private WorkspaceService workspaceService;
-
+   
     @PostMapping
     public @ResponseBody void postWorkspace(@Valid @RequestBody Workspace workspace){
         this.workspaceService.save(workspace);
     }
-
+    
     @PostMapping(path = "/all")
     public @ResponseBody void postWorkspaces(@Valid @RequestBody List<Workspace> workspaces){
         this.workspaceService.saveAll(workspaces);
     }
-
+    
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Workspace> getAllWorkspaces(){
         return this.workspaceService.getAll();
     }
-
+    
     @GetMapping(path = "/{id}")
     public @ResponseBody Optional<Workspace> getWorkspacePorId(@PathVariable Long id){
         return this.workspaceService.getById(id);

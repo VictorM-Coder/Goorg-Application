@@ -1,5 +1,7 @@
 import { Box, Modal } from "@mui/material";
 import { ShareNetwork, X } from "phosphor-react";
+import { useState } from "react";
+import { useWorkspaces } from "../hooks/useWorkspaces";
 import { NewWorkspaceModalProps } from "../interfaces/workspaces";
 
 const style = {
@@ -15,6 +17,19 @@ const style = {
 }
 
 export function NewWorkspaceModal({ onNewWorkspaceModal, handleCloseNewWorkspaceModal }: NewWorkspaceModalProps) {
+   const [name, setName] = useState('');
+   const [description, setDescription] = useState('');
+
+   const { addNewWorkspace } = useWorkspaces();
+
+   function handleSubmit(event: any) {
+      event.preventDefault();
+      const newWorkspace = { name, description };
+      setName('');
+      setDescription('');
+      
+      addNewWorkspace(newWorkspace);
+   }
    
    return (
       <Modal 
@@ -35,11 +50,12 @@ export function NewWorkspaceModal({ onNewWorkspaceModal, handleCloseNewWorkspace
                   </button>
                </header>
 
-               <form className="flex flex-col gap-3">
+               <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
                   <div className="flex flex-col gap-1 text-gray-600">
                      <label className="text-[13px] font-medium">Nome</label>
                      <input 
                         type="text"
+                        onChange={event => setName(event.target.value)}
                         className="w-full px-3 py-2 rounded text-[13px] text-gray-500 bg-gray-200 border border-gray-200 focus:outline-gray-300 focus:bg-transparent"
                      />
                   </div>
@@ -48,6 +64,7 @@ export function NewWorkspaceModal({ onNewWorkspaceModal, handleCloseNewWorkspace
                      <label htmlFor="description" className="text-[13px] font-medium">Descrição</label>
                      <textarea 
                         className="w-full px-3 py-2 rounded text-[13px] text-gray-500 bg-gray-200 border border-gray-200 focus:outline-gray-300 focus:bg-transparent"
+                        onChange={event => setDescription(event.target.value)}
                      >
                      </textarea>
                   </div>
