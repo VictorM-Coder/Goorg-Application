@@ -71,7 +71,6 @@ export function WorkspacesRecents() {
                                     name={workspace.name}
                                     countActivitys={workspace.countActivitys}
                                     description={workspace.description}
-                                    color={workspace.color}
                                  />
                               </Link>   
                            </Slide>

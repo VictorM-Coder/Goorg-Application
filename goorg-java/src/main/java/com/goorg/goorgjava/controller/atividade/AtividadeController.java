@@ -15,22 +15,22 @@ import java.util.Optional;
 public class AtividadeController {
     @Autowired
     private AtividadeService atividadeService;
-
+    
     @PostMapping
     public @ResponseBody void postAtividade(@Valid @RequestBody Atividade atividade){
         this.atividadeService.save(atividade);
     }
-
+    
     @PostMapping(path = "/all")
     public @ResponseBody void postAtividades(@Valid @RequestBody List<Atividade> atividades){
         this.atividadeService.saveAll(atividades);
     }
-
+    
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Atividade> getAllAtividades(){
         return this.atividadeService.getAll();
     }
-
+    
     @GetMapping(path = "/{id}")
     public @ResponseBody Optional<Atividade> getAtividadePorId(@PathVariable Long id){
         return this.atividadeService.getById(id);

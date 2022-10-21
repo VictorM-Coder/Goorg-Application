@@ -7,9 +7,9 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 
-let win = null
+let win = null;
 
-async function createWindow () {
+function createWindow () {
   win = new BrowserWindow({
     title: 'Main window',
     width: 1024,
@@ -17,7 +17,6 @@ async function createWindow () {
     webPreferences: {
       nodeIntegration: true,
       worldSafeExecuteJavaScript: true,
-      contextIsolation: true,
       preload: join(__dirname, "preload.js") 
     },
     icon: join(__dirname, "../public/icon.ico")
@@ -25,19 +24,20 @@ async function createWindow () {
 
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../dist/index.html'))
+    const jarPath = join(process.resourcesPath, "./app.asar.unpacked/electron/target/goorg-java-0.0.1-SNAPSHOT.jar")
+    spawn('java', ['-jar', jarPath]);
   } else {
     win.loadURL('http://127.0.0.1:5173/')
+    const jarPath = join(__dirname, "/target/goorg-java-0.0.1-SNAPSHOT.jar")
+    spawn('java', ['-jar', jarPath]);
   }
-  
-  //const jarPath = join(__dirname, "/target/api.jar")
-  //qspawn('java', ['-jar', jarPath]);
 }
 
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
   win = null
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin') app.quit();
 })
 
 app.on('second-instance', () => {
