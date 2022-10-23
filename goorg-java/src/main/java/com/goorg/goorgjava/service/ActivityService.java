@@ -1,6 +1,7 @@
 package com.goorg.goorgjava.service;
 
 import com.goorg.goorgjava.model.atividade.Activity;
+import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,9 @@ public class ActivityService implements ServiceInterface<Activity,Long> {
     @Override
     public Optional<Activity> getById(Long id) {
         return this.activityRepository.findById(id);
+    }
+
+    public Iterable<Activity> getActivityByWorkspaceName(String name){
+        return this.activityRepository.findActivitiesByWorkspaceName(name);
     }
 }

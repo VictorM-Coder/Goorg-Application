@@ -12,11 +12,24 @@ public class ActivityCreator {
         return new Activity(1L, "atividade", "descrição", null, null, null, new PriorityTag("tag"), new Workspace());
     }
 
+    public static Activity createValidActivity(Workspace workspace){
+        return new Activity(1L, "atividade", "descrição", null, null, null, new PriorityTag("tag"), workspace);
+    }
+
     public static List<Activity> createValidActivitiesList(){
         List<Activity> list = new ArrayList<Activity>();
         list.add(new Activity(1L, "atividade", "descrição", null, null, null, null, new Workspace()));
         list.add(new Activity(2L, "atividade2", "descrição", null, null, null, null, new Workspace()));
         list.add(new Activity(3L, "atividade3", "descrição", null, null, null, null, new Workspace()));
+
+        return list;
+    }
+
+    public static List<Activity> createValidActivitiesList(Workspace workspace){
+        List<Activity> list = new ArrayList<Activity>();
+        list.add(new Activity(1L, "atividade", "descrição", null, null, null, null, workspace));
+        list.add(new Activity(2L, "atividade2", "descrição", null, null, null, null, workspace));
+        list.add(new Activity(3L, "atividade3", "descrição", null, null, null, null, workspace));
 
         return list;
     }
