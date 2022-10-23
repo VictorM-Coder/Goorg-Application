@@ -4,58 +4,58 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Tarefa {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String titulo;
+    private String title;
 
     @NotNull
-    private boolean completo;
+    private boolean complete;
 
     @ManyToOne
     @JoinColumn
-    private Atividade atividade;
+    private Activity activity;
 
 
-    public Tarefa(){
-        this.completo = false;
+    public Task(){
+        this.complete = false;
     }
 
-    public Tarefa(String titulo){
+    public Task(String title){
         this();
-        this.titulo = titulo;
+        this.title = title;
     }
 
-    public Tarefa(Long id, String titulo){
-        this(titulo);
+    public Task(Long id, String title){
+        this(title);
         this.id = id;
     }
 
     public void completar(){
-        this.completo = true;
+        this.complete = true;
     }
 
     public void voltarEstado(){
-        this.completo = false;
+        this.complete = false;
     }
 
     public boolean getStatus(){
-        return this.completo;
+        return this.complete;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitle(String titulo) {
+        this.title = titulo;
     }
 }

@@ -3,35 +3,35 @@ package com.goorg.goorgjava.model.atividade;
 import javax.persistence.*;
 
 @Entity
-public class TagDePrioridade {
+public class PriorityTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true)
-    private String nome;
+    private String name;
 
-    public TagDePrioridade(String nome) {
-        this.nome = nome;
+    public PriorityTag(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "TagDePrioridade{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
+                ", nome='" + name + '\'' +
                 '}';
     }
 
-    public TagDePrioridade() {
+    public PriorityTag() {
 
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 }

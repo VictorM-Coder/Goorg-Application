@@ -2,7 +2,7 @@ package com.goorg.goorgjava.repository;
 
 import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.WorkspaceRepository;
-import com.goorg.goorgjava.util.AtividadeCreator;
+import com.goorg.goorgjava.util.ActivityCreator;
 import com.goorg.goorgjava.util.WorkspaceCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ public class WorkspaceRepositoryTest {
     @Test
     @DisplayName("Um workspace é salvo corretamente")
     public void save_Workspace_Quando_sucesso(){
-        Workspace workspaceValido = WorkspaceCreator.criarWorkspaceValido();
+        Workspace workspaceValido = WorkspaceCreator.createValidWorkspace();
         Workspace workspaceSalvo = this.repository.save(workspaceValido);
         Optional<Workspace> workspace = this.repository.findById(workspaceSalvo.getId());
 
@@ -32,7 +32,7 @@ public class WorkspaceRepositoryTest {
     @Test
     @DisplayName("Burcar o id de um workspace retorna um workspace quando é executado corretamente")
     void findById_ReturnaUmaListaDeWorkspace_Quando_Successo(){
-        Workspace workspaceValido = WorkspaceCreator.criarWorkspaceValido();
+        Workspace workspaceValido = WorkspaceCreator.createValidWorkspace();
         Workspace workspaceSalvo = this.repository.save(workspaceValido);
 
         Long id = workspaceValido.getId();
@@ -47,12 +47,12 @@ public class WorkspaceRepositoryTest {
     @Test
     @DisplayName("Salva uma lista de workspaces quando é executada corretamente")
     void save_AWorkspacePersistido_Quando_Successo(){
-        List<Workspace> workspaceValido = WorkspaceCreator.criarListaDeWorkspacesValidos();
+        List<Workspace> workspaceValido = WorkspaceCreator.createValidWorkspaceList();
         List<Workspace> workspacesSalvos = (List<Workspace>) this.repository.saveAll(workspaceValido);
 
         Assertions.assertNotNull(workspacesSalvos);
         Assertions.assertFalse(workspacesSalvos.isEmpty());
-        Assertions.assertEquals(workspacesSalvos.size(), AtividadeCreator.criarListaDeAtividadesValidas().size());
+        Assertions.assertEquals(workspacesSalvos.size(), ActivityCreator.createValidActivitiesList().size());
 
         for (int cont = 0; cont < workspacesSalvos.size(); cont++){
             Long id = workspacesSalvos.get(cont).getId();
