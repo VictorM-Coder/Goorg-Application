@@ -1,0 +1,16 @@
+com\goorg\goorgjava\repositories\AtividadeRepository.class
+com\goorg\goorgjava\model\atividade\Atividade.class
+com\goorg\goorgjava\repositories\TagDePrioridadeRepository.class
+com\goorg\goorgjava\model\workspace\Workspace.class
+com\goorg\goorgjava\service\AtividadeService.class
+com\goorg\goorgjava\controller\workspace\WorkspaceController.class
+com\goorg\goorgjava\service\ServiceInterface.class
+com\goorg\goorgjava\enums\Fase.class
+com\goorg\goorgjava\controller\atividade\AtividadeController.class
+com\goorg\goorgjava\model\atividade\TagDePrioridade.class
+com\goorg\goorgjava\model\atividade\Tarefa.class
+com\goorg\goorgjava\repositories\WorkspaceRepository.class
+com\goorg\goorgjava\service\WorkspaceService.class
+com\goorg\goorgjava\repositories\TarefaRepository.class
+com\goorg\goorgjava\GoorgJavaApplication.class
+com\goorg\goorgjava\model\atividade\gerenciador\GerenciadorTarefas.class

@@ -1,5 +1,6 @@
 import { Box, Modal } from "@mui/material";
 import { X } from "phosphor-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogoMinemized } from "../../components/Logo";
 
@@ -22,8 +23,10 @@ interface InformNameModalProps {
 
 export function InformNameModal({ isOpenInformNameModal, onCloseInformNameModal }: InformNameModalProps) {
    const navigate = useNavigate();
+   const [nameUser, setNameUser] = useState('');
 
    function handleClick() {
+      localStorage.setItem('user', nameUser);
       navigate('/inicio')
    }
 
@@ -53,6 +56,7 @@ export function InformNameModal({ isOpenInformNameModal, onCloseInformNameModal 
                         type="text"
                         className="w-full px-3 py-2 rounded text-[13px] text-gray-500 border border-gray-300 placeholder:text-gray-300 focus:outline-gray-300 focus:bg-transparent"
                         placeholder="Informe seu nome"
+                        onChange={(event) => setNameUser(event.target.value)}
                      />
                   </div>
                   <button 

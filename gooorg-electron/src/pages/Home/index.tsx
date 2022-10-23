@@ -1,19 +1,11 @@
-import axios from "axios";
 import { Calendar } from "phosphor-react";
-import { useContext, useEffect, useState } from "react";
 import { Sidebar } from "../../components/Sidebar";
-import { SidebarContex } from "../../contexts/SidebarContext";
 import { WorkspacesRecents } from "./WorkspacesRecents";
 
 export function Home() {
    const weekDays = ['Domingo', 'Segunda Feira', 'Terça Feira', 'Quarta Feira', 'Quinta Feira', 'Sexta Feira', 'Sabado']
-   const [activitys, setActivitys] = useState<any[]>([])
-
-   useEffect(() => {
-      axios.get("http://localhost:8080/ds")
-      .then(res => console.log(res.data));
-   },[])
-
+   const user = localStorage.getItem('user');
+ 
    return (
       <div className="flex h-screen">
          <Sidebar />
@@ -33,8 +25,7 @@ export function Home() {
                <div className="bg-white rounded flex overflow-hidden px-10 py-14">
                   <div>
                      <h2 className="text-xl font-semibold text-gray-700 mb-[2px]">
-                        Seja Bem vindo,
-                        <span className="text-blue-primary"> Felipe Rodrigues.</span>
+                        Seja Bem vindo, <span className="text-blue-primary">{user}</span>
                      </h2>
                      <p className="text-sm text-gray-300 w-4/5">
                         Tenha acesso abaixo a opções rápidas e diversificadas,
