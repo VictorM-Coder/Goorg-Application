@@ -33,7 +33,7 @@ public class Activity implements TaskManager {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private PriorityTag priorityTag;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     private Workspace workspace;
 
     @Enumerated(value = EnumType.STRING)

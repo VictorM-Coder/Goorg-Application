@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.model.workspace;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.goorg.goorgjava.model.atividade.Activity;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Workspace {
 
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "workspace", cascade = CascadeType.PERSIST)
     private List<Activity> activities;
 

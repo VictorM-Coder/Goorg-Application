@@ -1,4 +1,4 @@
-package com.goorg.goorgjava.controller.atividade;
+package com.goorg.goorgjava.controller.activity;
 
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.service.ActivityService;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/atividade")
+@RequestMapping(path = "/activity")
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
@@ -34,5 +34,10 @@ public class ActivityController {
     @GetMapping(path = "/{id}")
     public @ResponseBody Optional<Activity> getActivityById(@PathVariable Long id){
         return this.activityService.getById(id);
+    }
+
+    @GetMapping(path = "/workspace/{name}")
+    public @ResponseBody Iterable<Activity> getActivitiesByWorkspaceName(@PathVariable String name){
+        return this.activityService.getActivityByWorkspaceName(name);
     }
 }
