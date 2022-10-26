@@ -34,8 +34,4 @@ public class ActivityService implements ServiceInterface<Activity> {
     public Optional<Activity> getById(Long id) {
         return this.activityRepository.findById(id);
     }
-
-    public Iterable<Activity> getActivityByWorkspaceName(String name){
-        return this.activityRepository.findActivitiesByWorkspaceName(name);
-    }
 }
