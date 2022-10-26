@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.WorkspaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,18 +9,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class WorkspaceService implements ServiceInterface<Workspace, Long> {
+@Service("WorkspaceService")
+public class WorkspaceService implements ServiceInterface<Workspace> {
     @Autowired
     private WorkspaceRepository repository;
     @Override
-    public void save(Workspace workspace) {
-        this.repository.save(workspace);
+    public Workspace save(Workspace workspace) {
+        return this.repository.save(workspace);
     }
 
     @Override
-    public void saveAll(List<Workspace> workspaces) {
-        this.saveAll(workspaces);
+    public Iterable<Workspace> saveAll(List<Workspace> workspaces) {
+        return this.saveAll(workspaces);
     }
 
     @Override

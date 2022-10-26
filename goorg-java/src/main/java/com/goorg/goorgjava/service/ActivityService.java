@@ -1,27 +1,28 @@
 package com.goorg.goorgjava.service;
 
 import com.goorg.goorgjava.model.atividade.Activity;
-import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ActivityService implements ServiceInterface<Activity,Long> {
+@Component("ActivityService")
+public class ActivityService implements ServiceInterface<Activity> {
     @Autowired
     private ActivityRepository activityRepository;
 
     @Override
-    public void save(Activity activity){
-        this.activityRepository.save(activity);
+    public Activity save(Activity activity){
+        return this.activityRepository.save(activity);
     }
 
     @Override
-    public void saveAll(List<Activity> activities){
-        this.activityRepository.saveAll(activities);
+    public Iterable<Activity> saveAll(List<Activity> activities){
+        return this.activityRepository.saveAll(activities);
     }
 
     @Override
