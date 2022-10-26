@@ -1,8 +1,0 @@
-com\goorg\goorgjava\model\AtividadeTest.class
-com\goorg\goorgjava\util\TarefaCreator.class
-com\goorg\goorgjava\model\TarefaTest.class
-com\goorg\goorgjava\util\AtividadeCreator.class
-com\goorg\goorgjava\GoorgJavaApplicationTests.class
-com\goorg\goorgjava\repository\AtividadeRepositoryTest.class
-com\goorg\goorgjava\repository\WorkspaceRepositoryTest.class
-com\goorg\goorgjava\util\WorkspaceCreator.class

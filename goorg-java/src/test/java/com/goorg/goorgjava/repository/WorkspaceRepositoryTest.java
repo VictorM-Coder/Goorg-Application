@@ -35,9 +35,7 @@ public class WorkspaceRepositoryTest {
         Workspace workspaceValido = WorkspaceCreator.createValidWorkspace();
         Workspace workspaceSalvo = this.repository.save(workspaceValido);
 
-        Long id = workspaceValido.getId();
-
-        Optional<Workspace> workspace = this.repository.findById(id);
+        Optional<Workspace> workspace = this.repository.findById(workspaceSalvo.getId());
 
         Assertions.assertTrue(workspace.isPresent());
         Assertions.assertFalse(workspace.isEmpty());
