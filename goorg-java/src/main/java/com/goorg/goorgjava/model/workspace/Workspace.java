@@ -5,6 +5,7 @@ import com.goorg.goorgjava.model.atividade.Activity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Workspace {
@@ -40,6 +41,19 @@ public class Workspace {
                 ", descricao='" + description + '\'' +
                 ", atividades=" + activities +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Workspace workspace = (Workspace) o;
+        return id.equals(workspace.id) && name.equals(workspace.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
     }
 
     public Long getId() {

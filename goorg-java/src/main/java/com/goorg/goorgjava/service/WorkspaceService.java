@@ -20,7 +20,7 @@ public class WorkspaceService implements ServiceInterface<Workspace> {
 
     @Override
     public Iterable<Workspace> saveAll(List<Workspace> workspaces) {
-        return this.saveAll(workspaces);
+        return this.repository.saveAll(workspaces);
     }
 
     @Override
