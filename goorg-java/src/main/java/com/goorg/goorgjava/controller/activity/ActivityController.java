@@ -35,9 +35,4 @@ public class ActivityController {
     public @ResponseBody Optional<Activity> getActivityById(@PathVariable Long id){
         return this.activityService.getById(id);
     }
-
-    @GetMapping(path = "/workspace/{name}")
-    public @ResponseBody Iterable<Activity> getActivitiesByWorkspaceName(@PathVariable String name){
-        return this.activityService.getActivityByWorkspaceName(name);
-    }
 }
