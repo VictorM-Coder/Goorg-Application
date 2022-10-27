@@ -1,5 +1,7 @@
 package com.goorg.goorgjava.model.atividade;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +10,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonSerialize
     private Long id;
 
     @NotNull
@@ -15,11 +18,6 @@ public class Task {
 
     @NotNull
     private boolean complete;
-
-    @ManyToOne
-    @JoinColumn
-    private Activity activity;
-
 
     public Task(){
         this.complete = false;

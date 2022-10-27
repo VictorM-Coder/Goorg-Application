@@ -1,6 +1,7 @@
 package com.goorg.goorgjava.model.workspace;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.model.atividade.Activity;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ public class Workspace {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonSerialize
     private Long id;
 
     @Column(unique = true)

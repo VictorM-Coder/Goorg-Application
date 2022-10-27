@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.model.atividade;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.model.atividade.gerenciador.TaskManager;
 import com.goorg.goorgjava.model.workspace.Workspace;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class Activity implements TaskManager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonSerialize
     private Long id;
 
     @NotNull
@@ -27,7 +29,7 @@ public class Activity implements TaskManager {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "activity")
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Task> tasks;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
