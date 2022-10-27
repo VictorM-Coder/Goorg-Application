@@ -1,0 +1,8 @@
+com\goorg\goorgjava\util\TaskCreator.class
+com\goorg\goorgjava\repository\ActivityRepositoryTest.class
+com\goorg\goorgjava\util\ActivityCreator.class
+com\goorg\goorgjava\GoorgJavaApplicationTests.class
+com\goorg\goorgjava\model\ActivityTest.class
+com\goorg\goorgjava\model\TaskTest.class
+com\goorg\goorgjava\repository\WorkspaceRepositoryTest.class
+com\goorg\goorgjava\util\WorkspaceCreator.class
