@@ -5,7 +5,10 @@ public interface  ServiceTest{
 
     public void save_PersistItem_When_Sucess();
 
-    void findById_ReturnAItemList_When_Success();
-
     void save_PersistItemsList_When_Success();
+
+    void findById_ReturnAItem_When_Success();
+
+    void findAll_ReturnItemList_When_Success();
+
 }

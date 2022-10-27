@@ -31,6 +31,7 @@ public class WorkspaceServiceTest implements ServiceTest{
         Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
         Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
         Mockito.when(this.repository.saveAll(creator.createValidItemsList())).thenReturn(this.creator.createValidItemsList());
+        Mockito.when(this.repository.findAll()).thenReturn(this.creator.createValidItemsList());
     }
 
     @Override
@@ -44,8 +45,8 @@ public class WorkspaceServiceTest implements ServiceTest{
 
     @Override
     @Test
-    @DisplayName("Burcar o id de uma atividade retorna uma atividade quando é executado corretamente")
-    public void findById_ReturnAItemList_When_Success(){
+    @DisplayName("Burcar o id de um workspace retorna um workspace quando é executado corretamente")
+    public void findById_ReturnAItem_When_Success(){
         Long expectedID = 1L;
         Optional<Workspace> workspace = this.repository.findById(expectedID);
 
@@ -56,7 +57,22 @@ public class WorkspaceServiceTest implements ServiceTest{
 
     @Override
     @Test
-    @DisplayName("Salva uma lista de Atividades quando é executada corretamente")
+    @DisplayName("Retorna uma lista de workspaces válidos quando é executado com sucesso")
+    public void findAll_ReturnItemList_When_Success() {
+        List<Workspace> workspaces = this.creator.createValidItemsList();
+        List<Workspace> workspacesGetteds = (List<Workspace>) this.workspaceService.getAll();
+
+        Assertions.assertNotNull(workspacesGetteds);
+        Assertions.assertEquals(workspacesGetteds.size(), workspaces.size());
+
+        for (int cont = 0; cont < workspaces.size(); cont++){
+            Assertions.assertEquals(workspacesGetteds.get(cont), workspaces.get(cont));
+        }
+    }
+
+    @Override
+    @Test
+    @DisplayName("Salva uma lista de Workspaces quando é executada corretamente")
     public void save_PersistItemsList_When_Success(){
         List<Workspace> workspaceList = creator.createValidItemsList();
         List<Workspace> workspacesSaved = (List<Workspace>) this.workspaceService.saveAll(workspaceList);
