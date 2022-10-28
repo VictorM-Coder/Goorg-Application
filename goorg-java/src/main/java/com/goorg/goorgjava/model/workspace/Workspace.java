@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.model.atividade.Activity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,13 +27,14 @@ public class Workspace {
     private List<Activity> activities;
 
     public Workspace() {
+        this.activities = new ArrayList<>();
     }
 
-    public Workspace(Long id, String name, String description, List<Activity> activities) {
+    public Workspace(Long id, String name, String description) {
+        this();
         this.id = id;
         this.name = name;
         this.description = description;
-        this.activities = activities;
     }
 
     @Override

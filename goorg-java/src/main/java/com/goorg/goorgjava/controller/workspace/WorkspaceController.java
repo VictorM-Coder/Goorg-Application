@@ -17,8 +17,8 @@ public class WorkspaceController {
     private WorkspaceService workspaceService;
    
     @PostMapping
-    public @ResponseBody void postWorkspace(@Valid @RequestBody Workspace workspace){
-        this.workspaceService.save(workspace);
+    public @ResponseBody Workspace postWorkspace(@Valid @RequestBody Workspace workspace){
+        return this.workspaceService.save(workspace);
     }
     
     @PostMapping(path = "/all")

@@ -180,4 +180,8 @@ public class Activity{
     public void setPhase(Phase phase) {
         this.phase = phase;
     }
+
+    public void setPriorityTag(PriorityTag priorityTag) {
+        this.priorityTag = priorityTag;
+    }
 }
