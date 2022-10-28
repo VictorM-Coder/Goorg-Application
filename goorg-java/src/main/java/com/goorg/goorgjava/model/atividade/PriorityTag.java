@@ -11,7 +11,7 @@ public class PriorityTag {
     @JsonSerialize
     private Long id;
 
-    @Column(unique = true)
+    //@Column(unique = true) unicidade removida pois os valores serão constantes
     private String name;
 
     public PriorityTag(String name) {
