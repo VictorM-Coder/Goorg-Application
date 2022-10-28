@@ -1,6 +1,5 @@
 package com.goorg.goorgjava.service;
 
-import com.goorg.goorgjava.model.atividade.Activity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,4 +14,6 @@ public interface ServiceInterface<E> {
     Iterable<E> getAll();
 
     Optional<E> getById(Long id);
+
+    E update(Long id, E e);
 }

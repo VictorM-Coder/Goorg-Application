@@ -17,13 +17,18 @@ public class WorkspaceController {
     private WorkspaceService workspaceService;
    
     @PostMapping
-    public @ResponseBody void postWorkspace(@Valid @RequestBody Workspace workspace){
-        this.workspaceService.save(workspace);
+    public @ResponseBody Workspace postWorkspace(@Valid @RequestBody Workspace workspace){
+        return this.workspaceService.save(workspace);
     }
     
     @PostMapping(path = "/all")
     public @ResponseBody void postWorkspaces(@Valid @RequestBody List<Workspace> workspaces){
         this.workspaceService.saveAll(workspaces);
+    }
+
+    @PutMapping(path = "/update/{id}")
+    public @ResponseBody void updateWorkspace(@PathVariable Long id, @RequestBody Workspace workspace){
+        this.workspaceService.update(id, workspace);
     }
     
     @GetMapping(path = "/all")

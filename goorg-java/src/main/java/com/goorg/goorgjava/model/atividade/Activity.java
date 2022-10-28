@@ -1,7 +1,5 @@
 package com.goorg.goorgjava.model.atividade;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.enums.Phase;
@@ -157,5 +155,33 @@ public class Activity{
 
     public Long getWorkspaceId() {
         return this.workspace.getId();
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAnotations(List<String> anotations) {
+        this.anotations = anotations;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setPhase(Phase phase) {
+        this.phase = phase;
+    }
+
+    public void setPriorityTag(PriorityTag priorityTag) {
+        this.priorityTag = priorityTag;
     }
 }
