@@ -1,14 +1,17 @@
 package com.goorg.goorgjava.model.atividade;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import javax.persistence.*;
 
 @Entity
 public class PriorityTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonSerialize
     private Long id;
 
-    @Column(unique = true)
+    //@Column(unique = true) unicidade removida pois os valores serão constantes
     private String name;
 
     public PriorityTag(String name) {

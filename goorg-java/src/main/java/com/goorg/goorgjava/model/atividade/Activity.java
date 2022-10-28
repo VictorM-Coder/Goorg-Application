@@ -1,7 +1,10 @@
 package com.goorg.goorgjava.model.atividade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.enums.Phase;
-import com.goorg.goorgjava.model.atividade.gerenciador.TaskManager;
 import com.goorg.goorgjava.model.workspace.Workspace;
 
 import javax.persistence.*;
@@ -13,9 +16,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Entity
-public class Activity implements TaskManager {
+public class Activity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonSerialize
     private Long id;
 
     @NotNull
@@ -27,13 +31,16 @@ public class Activity implements TaskManager {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "activity")
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Task> tasks;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private PriorityTag priorityTag;
 
-    @ManyToOne()
+
+    @NotNull(message = "workspace é obrigatório")
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Workspace workspace;
 
     @Enumerated(value = EnumType.STRING)
@@ -85,29 +92,6 @@ public class Activity implements TaskManager {
         return Objects.hash(id, title, description, anotations, startDate, endDate, tasks, priorityTag, workspace, phase);
     }
 
-    @Override
-    public void addTask(Task task) {
-        if(task != null){
-            this.tasks.add(task);
-        }
-    }
-
-    @Override
-    public void removeTask(Task task) {
-        this.tasks.remove(task);
-    }
-
-    @Override
-    public void updateTask(Task task) throws IndexOutOfBoundsException {
-        Optional<Task> tarefaAntiga = this.getTarefaPorId(task.getId());
-        if (tarefaAntiga.isPresent()){
-            this.removeTask(tarefaAntiga.get());
-            this.addTask(task);
-        }else{
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
     public void iniciar(){
         this.phase = Phase.DOING;
     }
@@ -129,10 +113,6 @@ public class Activity implements TaskManager {
 
     public void completarTarefa(Task task){
 
-    }
-
-    public Phase getStatus(){
-        return this.phase;
     }
 
     public Long getId() {
@@ -173,5 +153,9 @@ public class Activity implements TaskManager {
 
     public Phase getPhase() {
         return phase;
+    }
+
+    public Long getWorkspaceId() {
+        return this.workspace.getId();
     }
 }
