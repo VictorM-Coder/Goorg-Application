@@ -25,6 +25,11 @@ public class WorkspaceController {
     public @ResponseBody void postWorkspaces(@Valid @RequestBody List<Workspace> workspaces){
         this.workspaceService.saveAll(workspaces);
     }
+
+    @PutMapping(path = "/update/{id}")
+    public @ResponseBody void updateWorkspace(@PathVariable Long id, @RequestBody Workspace workspace){
+        this.workspaceService.update(id, workspace);
+    }
     
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Workspace> getAllWorkspaces(){

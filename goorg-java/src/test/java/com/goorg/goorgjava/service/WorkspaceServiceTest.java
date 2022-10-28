@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.WorkspaceRepository;
 import com.goorg.goorgjava.util.WorkspaceCreator;
@@ -68,6 +69,31 @@ public class WorkspaceServiceTest implements ServiceTest{
         for (int cont = 0; cont < workspaces.size(); cont++){
             Assertions.assertEquals(workspacesGetteds.get(cont), workspaces.get(cont));
         }
+    }
+    @Override
+    @Test
+    @DisplayName("Retorna um workspace atualizado e válido quando executado com sucesso")
+    public void update_ReturnAUpdatedItem_When_Sucess() {
+        Workspace workspace = this.creator.createValidItem();
+        Workspace workspaceSaved = this.workspaceService.save(workspace);
+        String newName = "novo titulo";
+        workspaceSaved.setName(newName);
+        Mockito.when(this.repository.save(workspaceSaved)).thenReturn(workspaceSaved);
+        Workspace workspaceUpdated = this.workspaceService.update(workspaceSaved.getId(), workspaceSaved);
+
+        Assertions.assertEquals(workspaceUpdated.getId(), workspaceSaved.getId());
+        Assertions.assertTrue(workspaceSaved.equals(workspaceUpdated));
+        Assertions.assertEquals(workspaceUpdated.getName(), newName);
+    }
+
+    @Override
+    @Test
+    @DisplayName("Lança uma exceção quando um id que não existente é passado como parâmetro")
+    public void update_ThrowsBadRequestException_When_IdNotExists() {
+        Workspace workspace = this.creator.createValidItem();
+        Mockito.when(this.repository.findById(workspace.getId())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(BadRequestException.class , () -> this.workspaceService.update(workspace.getId(), workspace));
     }
 
     @Override

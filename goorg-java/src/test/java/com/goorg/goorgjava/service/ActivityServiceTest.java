@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.repositories.ActivityRepository;
 import com.goorg.goorgjava.util.ActivityCreator;
@@ -67,6 +68,32 @@ public class ActivityServiceTest implements ServiceTest{
         for (int cont = 0; cont < activities.size(); cont++){
             Assertions.assertEquals(activitiesGetteds.get(cont), activities.get(cont));
         }
+    }
+
+    @Override
+    @Test
+    @DisplayName("Retorna uma atividade atualizada e válida quando executado com sucesso")
+    public void update_ReturnAUpdatedItem_When_Sucess() {
+        Activity activity = this.creator.createValidItem();
+        Activity activitySaved = this.activityService.save(activity);
+        String newTitle = "novo titulo";
+        activitySaved.setTitle(newTitle);
+        Mockito.when(this.repository.save(activitySaved)).thenReturn(activitySaved);
+        Activity activityUpdated = this.activityService.update(activitySaved.getId(), activitySaved);
+
+        Assertions.assertEquals(activityUpdated.getId(), activitySaved.getId());
+        Assertions.assertTrue(activitySaved.equals(activityUpdated));
+        Assertions.assertEquals(activityUpdated.getTitle(), newTitle);
+    }
+
+    @Override
+    @Test
+    @DisplayName("Lança uma exceção quando um id que não existente é passado como parâmetro")
+    public void update_ThrowsBadRequestException_When_IdNotExists() {
+        Activity activity = this.creator.createValidItem();
+        Mockito.when(this.repository.findById(activity.getId())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.update(activity.getId(), activity));
     }
 
     @Override

@@ -11,4 +11,7 @@ public interface  ServiceTest{
 
     void findAll_ReturnItemList_When_Success();
 
+    void update_ReturnAUpdatedItem_When_Sucess();
+
+    void update_ThrowsBadRequestException_When_IdNotExists();
 }
