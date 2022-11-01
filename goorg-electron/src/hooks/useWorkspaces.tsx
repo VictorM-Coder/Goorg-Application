@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { NewWorkspace, Workspace, WorkspaceContextData, WorkspaceProviderProps } from '../interfaces/Workspace';
+import { NewWorkspace, Workspace, WorkspaceContextData, WorkspaceProviderProps } from '../@types/Workspace';
 import { api } from '../services/api';
 
 const WorkspacesContext = createContext<WorkspaceContextData>({ } as WorkspaceContextData);

@@ -2,6 +2,7 @@ import { Plus, ShareNetwork } from 'phosphor-react';
 import { useState } from 'react';
 import { WorkspaceModal } from '../../components/Modal/WorkspaceModal';
 import { Slide, Slider } from '../../components/Slider';
+import { CardWorkspaceAdd } from '../../components/Workspace/CardAddWorkspace';
 import { WorkspaceCard } from '../../components/Workspace/WorkspaceCard';
 import { useWorkspaces } from '../../hooks/useWorkspaces';
 import { settingsSlider } from '../../utils';
@@ -41,34 +42,25 @@ export function WorkspacesRecents() {
          <div className="w-full h-[2px] bg-blue-100"></div>
 
          <div className="mt-3 p-8 gap-4">
-            { 
-               workspaces.length === 0
-               ?  <button 
-                     onClick={() => handleOpenNewWorkspaceModal()}
-                     className="block w-full p-4 rounded border border-dashed border-gray-200 hover:bg-white transition-colors"
-                  >
-                     <span className="text-sm font-medium flex items-center justify-center gap-1 text-blue-primary">
-                        <Plus size={16} weight="bold"/>
-                        Adicionar Workspace
-                     </span>
-                   </button>
-               :  <Slider settings={settingsSlider}>
-                  {
-                     workspacesFilter.length > 0 
-                     ?  workspacesFilter.map(workspace => (
-                           <Slide key={workspace.name} className="z-0 w-auto">
-                              <WorkspaceCard
-                                 id={workspace.id}
-                                 name={workspace.name}
-                                 countActivities={workspace.countActivities}
-                                 description={workspace.description}
-                              />
-                           </Slide>
-                        ))
-                     : <li className='text-xs text-center text-gray-300 mx-auto list-none'>Nenhum workspace encontrado</li>
-                  }
-                  </Slider>
-            }
+            <Slider settings={settingsSlider}>
+               <Slide className='z-0 w-auto'>
+                  <CardWorkspaceAdd />
+               </Slide>
+               {
+                  workspacesFilter.length > 0 
+                  ?  workspacesFilter.map(workspace => (
+                        <Slide className='z-0 w-auto' key={workspace.id}>
+                           <WorkspaceCard
+                              id={workspace.id}
+                              name={workspace.name}
+                              countActivities={workspace.countActivities}
+                              description={workspace.description}
+                           />
+                        </Slide>  
+                     ))
+                  : <li className='text-xs text-center text-gray-300 mx-auto list-none'>Nenhum workspace encontrado</li>
+               }
+            </Slider>
          </div>
 
          <WorkspaceModal 
