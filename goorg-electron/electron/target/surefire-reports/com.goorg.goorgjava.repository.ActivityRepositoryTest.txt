@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.goorg.goorgjava.repository.ActivityRepositoryTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.928 s - in com.goorg.goorgjava.repository.ActivityRepositoryTest
