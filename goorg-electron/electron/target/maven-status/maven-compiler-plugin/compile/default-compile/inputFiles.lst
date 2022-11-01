@@ -8,9 +8,9 @@ D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\repositories\ActivityRepository.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\model\atividade\Task.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\service\ServiceInterface.java
-D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\model\atividade\gerenciador\TaskManager.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\model\atividade\PriorityTag.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\repositories\PriorityTagRepository.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\service\ActivityService.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\enums\Phase.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\exception\BadRequestException.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\main\java\com\goorg\goorgjava\GoorgJavaApplication.java

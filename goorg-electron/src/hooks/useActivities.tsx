@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Activity, ActivityContextData, NewActivity } from "../@types/Activity";
+import { Activity, ActivityContextData, ActivityReq, NewActivity } from "../@types/Activity";
 import { api } from "../services/api";
 
 export interface ActivityProviderProps {
@@ -25,17 +25,12 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       setActivitys(res.data.activities)
    }
 
-   async function fetchActivitysByWorkspace(name: string | undefined): Promise<Activity[]> {
-      const activitys = await api.get(`workspace/${name?.trim()}/activity`);
-      return activitys.data.activities;
-   }
-
    async function deleteActivityById(id: number): Promise<void> {
       await api.delete(`activity/${id}`);
       await fetchActivitys();
    }
 
-   async function createActivity(data: NewActivity): Promise<void> {
+   async function createActivity(data: ActivityReq): Promise<void> {
       const res = await api.post('activity', data);
       const { activity } = res.data;
 
@@ -50,7 +45,6 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
    return (
       <ActivityContext.Provider value={{  
          activitys, 
-         fetchActivitysByWorkspace, 
          deleteActivityById, 
          createActivity,
          finishActivityById

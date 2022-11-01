@@ -11,6 +11,6 @@ com\goorg\goorgjava\service\ActivityService.class
 com\goorg\goorgjava\repositories\TaskRepository.class
 com\goorg\goorgjava\repositories\WorkspaceRepository.class
 com\goorg\goorgjava\service\WorkspaceService.class
+com\goorg\goorgjava\exception\BadRequestException.class
 com\goorg\goorgjava\GoorgJavaApplication.class
-com\goorg\goorgjava\model\atividade\gerenciador\TaskManager.class
 com\goorg\goorgjava\model\atividade\Task.class
