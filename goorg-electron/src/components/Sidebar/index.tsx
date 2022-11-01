@@ -10,9 +10,9 @@ export function Sidebar() {
    
    return (
       <div 
-         className={`bg-white relative w-[270px] min-h-full flex flex-col justify-between px-6 py-5 gap-12 
+         className={`bg-white relative min-h-full flex flex-col justify-between px-6 py-5 gap-12 
          transition-all z-10 border-r border-r-gray-100 mdmax:-left-full mdmax:absolute 
-         ${(sidebarMinimizedIsActive) ? 'w-24 content-center' : ''}`}
+         ${(sidebarMinimizedIsActive) ? 'min-w-[96px] content-center' : 'min-w-[270px]'}`}
       >
 
          <div className='flex flex-col gap-12 fixed z-50'>

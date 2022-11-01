@@ -2,11 +2,11 @@ import { DotsThree, Pencil, Stack, Trash } from 'phosphor-react';
 import { MouseEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useWorkspaces } from '../../hooks/useWorkspaces';
-import { Header } from '../Header';
-import { WorkspaceModal } from '../Modal';
-import { PopoverItem, PopoverRoot } from '../Popover';
-import { Sidebar } from '../Sidebar';
+import { useWorkspaces } from '../../../hooks/useWorkspaces';
+import { Header } from '../../Header';
+import { WorkspaceModal } from '../../Modal';
+import { PopoverItem, PopoverRoot } from '../../Popover';
+import { Sidebar } from '../../Sidebar';
 
 export function WorkspaceSelected() {
    const [isOpenWorkspaceModal, setIsOpenWorkspaceModal] = useState(false);
@@ -31,14 +31,13 @@ export function WorkspaceSelected() {
    }
 
    return (
-      <div className="flex h-screen">
-         <Sidebar />
+      <>
 
          <div className="flex flex-1 flex-col rounded">
             <Header />
 
             <div className="m-5 flex flex-col gap-6 mt-24">
-               <div className="flex flex-col bg-white rounded overflow-hidden px-10 py-10  shadow-sm">
+               <div className="flex flex-col bg-white rounded overflow-hidden px-10 py-10 shadow-sm">
                   <span className={`text-blue-600 flex items-center gap-1 font-medium`}>
                      { workSelected?.name }
                   </span>
@@ -83,6 +82,6 @@ export function WorkspaceSelected() {
                <Trash size={18} />
             </PopoverItem>
          </PopoverRoot>
-      </div>
+      </>
    )
 }

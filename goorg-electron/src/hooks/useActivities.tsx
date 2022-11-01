@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Activity, ActivityContextData, NewActivity } from "../interfaces/Activity";
+import { Activity, ActivityContextData, NewActivity } from "../@types/Activity";
 import { api } from "../services/api";
 
 export interface ActivityProviderProps {
