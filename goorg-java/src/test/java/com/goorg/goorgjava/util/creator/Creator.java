@@ -1,4 +1,4 @@
-package com.goorg.goorgjava.util;
+package com.goorg.goorgjava.util.creator;
 
 import java.util.List;
 

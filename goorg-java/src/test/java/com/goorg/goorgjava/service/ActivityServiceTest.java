@@ -3,7 +3,7 @@ package com.goorg.goorgjava.service;
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.repositories.ActivityRepository;
-import com.goorg.goorgjava.util.ActivityCreator;
+import com.goorg.goorgjava.util.creator.creators.ActivityCreator;
 import org.junit.jupiter.api.*;
 
 import org.mockito.ArgumentMatchers;
