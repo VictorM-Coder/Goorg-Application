@@ -20,6 +20,9 @@ public class Task {
     @NotNull
     private boolean complete;
 
+    @ManyToOne()
+    private Activity activity;
+
     public Task(){
         this.complete = false;
     }
@@ -82,5 +85,9 @@ public class Task {
 
     public void setComplete(boolean complete) {
         this.complete = complete;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

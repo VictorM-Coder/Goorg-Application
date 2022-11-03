@@ -29,7 +29,7 @@ public class Activity{
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "activity")
     private List<Task> tasks;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
