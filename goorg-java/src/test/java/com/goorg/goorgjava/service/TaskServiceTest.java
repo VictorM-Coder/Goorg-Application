@@ -48,7 +48,7 @@ public class TaskServiceTest implements ServiceTest{
 
     @Override
     @Test
-    @DisplayName("Burcar o id de uma atividade retorna uma atividade quando é executado corretamente")
+    @DisplayName("Burcar o id de uma task retorna uma task quando é executado corretamente")
     public void findById_ReturnAItem_When_Success(){
         Long expectedID = 1L;
         Optional<Task> task = this.repository.findById(expectedID);
@@ -60,7 +60,7 @@ public class TaskServiceTest implements ServiceTest{
 
     @Override
     @Test
-    @DisplayName("Retorna uma lista de atividades válidas quando é executado com sucesso")
+    @DisplayName("Retorna uma lista de tasks válidas quando é executado com sucesso")
     public void findAll_ReturnItemList_When_Success() {
         List<Task> tasks = this.creator.createValidItemsList();
         List<Task> tasksGetteds = (List<Task>) this.taskService.getAll();
@@ -75,7 +75,7 @@ public class TaskServiceTest implements ServiceTest{
 
     @Override
     @Test
-    @DisplayName("Retorna uma atividade atualizada e válida quando executado com sucesso")
+    @DisplayName("Retorna uma task atualizada e válida quando executado com sucesso")
     public void update_ReturnAUpdatedItem_When_Sucess() {
         Task task = this.creator.createValidItem();
         Task taskSaved = this.taskService.save(task);
@@ -101,7 +101,7 @@ public class TaskServiceTest implements ServiceTest{
 
     @Override
     @Test
-    @DisplayName("Salva uma lista de Atividades quando é executada corretamente")
+    @DisplayName("Salva uma lista de tasks quando é executada corretamente")
     public void save_PersistItemsList_When_Success(){
         List<Task> taskList = creator.createValidItemsList();
         List<Task> tasksSaved = (List<Task>) this.taskService.saveAll(taskList);

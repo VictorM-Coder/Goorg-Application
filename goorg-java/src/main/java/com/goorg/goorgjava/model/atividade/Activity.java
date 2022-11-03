@@ -32,7 +32,7 @@ public class Activity{
     @OneToMany(mappedBy = "activity")
     private List<Task> tasks;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
     private PriorityTag priorityTag;
 
 

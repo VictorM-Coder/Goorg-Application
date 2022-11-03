@@ -3,6 +3,7 @@ package com.goorg.goorgjava.model.atividade;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class PriorityTag {
@@ -11,7 +12,7 @@ public class PriorityTag {
     @JsonSerialize
     private Long id;
 
-    //@Column(unique = true) unicidade removida pois os valores serão constantes
+    @Column(unique = true)
     private String name;
 
     public PriorityTag(String name) {
@@ -26,8 +27,26 @@ public class PriorityTag {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PriorityTag that = (PriorityTag) o;
+        return id.equals(that.id) && name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
     public PriorityTag() {
 
+    }
+
+    public PriorityTag(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public String getName() {
@@ -37,4 +56,10 @@ public class PriorityTag {
     public void setName(String nome) {
         this.name = nome;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+
 }

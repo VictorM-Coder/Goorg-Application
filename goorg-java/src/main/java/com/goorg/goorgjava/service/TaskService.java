@@ -2,7 +2,6 @@ package com.goorg.goorgjava.service;
 
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Task;
-import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
