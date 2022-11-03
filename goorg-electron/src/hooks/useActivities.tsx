@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Activity, ActivityContextData, ActivityReq, NewActivity } from "../@types/Activity";
+import { Activity, ActivityContextData, ActivityReq } from "../@types/Activity";
 import { api } from "../services/api";
 
 export interface ActivityProviderProps {
@@ -14,7 +14,7 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
 
    useEffect(() => {
       if (isFirst.current) {
-         fetchActivitys().then((res) => true);
+         fetchActivitys();
       } 
 
       return () => { isFirst.current = true }
