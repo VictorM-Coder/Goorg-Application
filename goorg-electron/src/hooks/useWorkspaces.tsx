@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { NewWorkspace, Workspace, WorkspaceContextData, WorkspaceProviderProps } from '../@types/Workspace';
+import { NewWorkspace, Workspace, WorkspaceContextData, WorkspaceProviderProps, WorkspaceReq } from '../@types/Workspace';
 import { api } from '../services/api';
 
 const WorkspacesContext = createContext<WorkspaceContextData>({ } as WorkspaceContextData);
@@ -17,7 +17,7 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
       setWorkspaces(workspaces);
    }
 
-   async function addNewWorkspace(data: NewWorkspace): Promise<void> {
+   async function addNewWorkspace(data: WorkspaceReq): Promise<void> {
       const workspaceCreated = await api.post('workspace', data);
       setWorkspaces([...workspaces, workspaceCreated.data]);
    }
@@ -27,7 +27,7 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
       fetchWorkspaces();
    }
 
-   async function editWorkspaceById(id: Number, data: NewWorkspace) {
+   async function editWorkspaceById(id: Number, data: WorkspaceReq): Promise<void> {
       await api.put(`workspace/${id}`, data);
       fetchWorkspaces();
    }

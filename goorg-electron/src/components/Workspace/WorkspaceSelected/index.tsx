@@ -6,7 +6,6 @@ import { useWorkspaces } from '../../../hooks/useWorkspaces';
 import { Header } from '../../Header';
 import { WorkspaceModal } from '../../Modal';
 import { PopoverItem, PopoverRoot } from '../../Popover';
-import { Sidebar } from '../../Sidebar';
 
 export function WorkspaceSelected() {
    const [isOpenWorkspaceModal, setIsOpenWorkspaceModal] = useState(false);
