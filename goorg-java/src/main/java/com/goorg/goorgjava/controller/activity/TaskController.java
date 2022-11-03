@@ -28,10 +28,8 @@ public class TaskController {
         this.taskService.save(task);
     }
 
-    @PutMapping(path = "/update/{activiyId}/{id}")
-    public @ResponseBody Task updateTask(@PathVariable Long id, @PathVariable Long activiyId, @Valid @RequestBody Task task){
-        Optional<Activity> activity = this.activityService.getById(activiyId);
-        task.setActivity(activity.orElseThrow( () -> new BadRequestException("Activity not found")));
+    @PutMapping(path = "/update/{id}")
+    public @ResponseBody Task updateTask(@PathVariable Long id, @Valid @RequestBody Task task){
         return this.taskService.update(id, task);
     }
 
