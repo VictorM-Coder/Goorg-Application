@@ -59,4 +59,11 @@ public class ActivityService implements ServiceInterface<Activity> {
         return activityRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Anime not Found"));
     }
+
+    @Override
+    public Activity delete(Long id) {
+        Activity deletedActivity = findByIdOrThrowBadRequestException(id);
+        this.activityRepository.deleteById(id);
+        return deletedActivity;
+    }
 }
