@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Activity, ActivityContextData, ActivityReq } from "../@types/Activity";
+import { Activity, ActivityContextData, ActivityEdit, ActivityReq } from "../@types/Activity";
 import { api } from "../services/api";
 
 export interface ActivityProviderProps {
@@ -22,7 +22,7 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
 
    async function fetchActivitys() {
       const res = await api.get(`activity/all`);
-      setActivitys(res.data.activities)
+      setActivitys(res.data)
    }
 
    async function deleteActivityById(id: number): Promise<void> {
@@ -32,9 +32,14 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
 
    async function createActivity(data: ActivityReq): Promise<void> {
       const res = await api.post('activity', data);
-      const { activity } = res.data;
+      //const { activity } = res.data;
 
-      setActivitys([...activitys, activity]);
+      //setActivitys([...activitys, activity]);
+   }
+
+   async function editActivityById(id: number, data: ActivityEdit): Promise<void> {
+      await api.put(`/activity/update/${id}`, data);
+      fetchActivitys();
    }
 
    async function finishActivityById(id: number): Promise<void> {
@@ -45,8 +50,9 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
    return (
       <ActivityContext.Provider value={{  
          activitys, 
-         deleteActivityById, 
          createActivity,
+         editActivityById,
+         deleteActivityById,   
          finishActivityById
       }}>
 

@@ -1,8 +1,8 @@
 import { DotsThree, Stack } from 'phosphor-react';
 import { Link } from 'react-router-dom';
-import { Workspace } from '../../@types/Workspace/Workspace';
+import { WorkspaceCardProps } from '../../@types/Workspace/WorkspaceCard';
 
-export function WorkspaceCard({ id, name, description, countActivities }: Workspace) {
+export function WorkspaceCard({ id, name, description, countActivities, color }: WorkspaceCardProps) {
    return (
       <div 
          className="bg-white shadow-sm border border-gray-100 px-6 py-5 w-[350px] min-h-[174px] rounded-md flex flex-col text-left gap-1"
@@ -13,7 +13,7 @@ export function WorkspaceCard({ id, name, description, countActivities }: Worksp
 
          <div>
             <Link to={`/inicio/workspace/${id}`} className="flex-none hover:scale-105 transition-all">
-               <span className={`text-sm font-semibold text-blue-primary`}>{name}</span>
+               <span className={`text-sm font-semibold text-${color}-500`}>{name}</span>
             </Link>
             <p className="text-[0.8rem] text-gray-500 w-4/5">{description}</p>
          </div>

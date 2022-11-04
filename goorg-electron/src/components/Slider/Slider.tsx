@@ -11,7 +11,7 @@ interface SliderProps {
 export function Slider({ settings, children }: SliderProps){
    return (
       <div>
-         <Swiper modules={[Navigation, Pagination, A11y]} { ...settings } className="z-0">
+         <Swiper { ...settings } className="z-0">
             { children }
          </Swiper>
       </div>

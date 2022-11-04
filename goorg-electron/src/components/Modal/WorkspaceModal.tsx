@@ -51,10 +51,10 @@ export function WorkspaceModal({
 
    function fetchDataWorkspace() {
       if (isEditWorkspace) {
-         api.get(`workspaces/${workspaceId}`)
+         api.get(`workspace/${workspaceId}`)
          .then(res => {
-            setValue('name', res.data.workspace.name);
-            setValue('description', res.data.workspace.description);
+            setValue('name', res.data.name);
+            setValue('description', res.data.description);
          });
       }
    }
