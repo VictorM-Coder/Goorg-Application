@@ -1,19 +1,15 @@
-import { Plus, ShareNetwork } from 'phosphor-react';
+import { ShareNetwork } from 'phosphor-react';
 import { useState } from 'react';
-import { WorkspaceModal } from '../../components/Modal/WorkspaceModal';
 import { Slide, Slider } from '../../components/Slider';
 import { CardWorkspaceAdd } from '../../components/Workspace/CardAddWorkspace';
 import { WorkspaceCard } from '../../components/Workspace/WorkspaceCard';
 import { useWorkspaces } from '../../hooks/useWorkspaces';
 import { settingsSlider } from '../../utils';
+import { getColor } from '../../utils/colorsRadom';
 
 export function WorkspacesRecents() {
-   const [isOpenWorkspaceModal, setIsOpenWorkspaceModal] = useState(false);
    const { workspaces } = useWorkspaces();
    const [searchWorkspaces, setSearchWorkspaces] = useState('');
-
-   const handleOpenNewWorkspaceModal = () => setIsOpenWorkspaceModal(true);
-   const handleCloseNewWorkspaceModal = () => setIsOpenWorkspaceModal(false);
 
    const workspacesFilter = (searchWorkspaces.length > 0) 
    ? workspaces.filter(workspace =>workspace.name.includes(searchWorkspaces)): workspaces;
@@ -55,19 +51,14 @@ export function WorkspacesRecents() {
                               name={workspace.name}
                               countActivities={workspace.countActivities}
                               description={workspace.description}
+                              color={getColor()}
                            />
                         </Slide>  
                      ))
-                  : <li className='text-xs text-center text-gray-300 mx-auto list-none'>Nenhum workspace encontrado</li>
+                  : <span></span>
                }
             </Slider>
          </div>
-
-         <WorkspaceModal 
-            isOpenWorkspaceModal={isOpenWorkspaceModal} 
-            onCloseWorkspaceModal={handleCloseNewWorkspaceModal}
-            isEditWorkspace={false}
-         />
       </div>
    )
 }

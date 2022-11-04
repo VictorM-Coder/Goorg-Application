@@ -1,3 +1,5 @@
 import { WorkspaceModal } from "./WorkspaceModal";
+import { DeleteConfirmModal } from "./DeleteConfirmModal";
+import { ActivityModal } from "./ActivityModal";
 
-export { WorkspaceModal }
+export { WorkspaceModal, DeleteConfirmModal, ActivityModal }

@@ -1,14 +1,11 @@
 export interface Activity {
    id: number;
-   name: string;
+   title: string;
    description: string;
    priorityTag: {
       name: string;
    },
    phase: string;
    endDate: string;
-   workspace: {
-      id: number;
-      name: string;
-   },
+   workspaceId: number;
 }

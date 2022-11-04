@@ -1,12 +1,8 @@
-export interface ActivityReq {
+export interface ActivityEdit {
    title: string;
    description: string;
    priorityTag: {
       name: string;
    },
-   phase: string;
    endDate: Date;
-   workspace: {
-      id: Number;
-   } 
 }
