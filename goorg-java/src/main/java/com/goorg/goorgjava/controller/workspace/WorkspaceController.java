@@ -40,4 +40,9 @@ public class WorkspaceController {
     public @ResponseBody Optional<Workspace> getWorkspaceById(@PathVariable Long id){
         return this.workspaceService.getById(id);
     }
+    
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody Workspace deleteWorkspace(@PathVariable Long id){
+        return this.workspaceService.delete(id);
+    }
 }

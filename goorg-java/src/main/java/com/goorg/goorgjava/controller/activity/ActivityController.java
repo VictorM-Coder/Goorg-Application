@@ -44,4 +44,10 @@ public class ActivityController {
     public @ResponseBody Optional<Activity> getActivityById(@PathVariable Long id){
         return this.activityService.getById(id);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody Activity deleteActivity(@PathVariable Long id){
+        return this.activityService.delete(id);
+    }
+
 }

@@ -49,4 +49,11 @@ public class WorkspaceService implements ServiceInterface<Workspace> {
         return this.workspaceRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Anime not Found"));
     }
+
+    @Override
+    public Workspace delete(Long id) {
+        Workspace deletedWorkspace = this.findByIdOrThrowBadRequestException(id);
+        this.workspaceRepository.deleteById(id);
+        return deletedWorkspace;
+    }
 }
