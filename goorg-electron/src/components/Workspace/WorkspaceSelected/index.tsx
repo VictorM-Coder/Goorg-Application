@@ -3,6 +3,7 @@ import { useActivities, useWorkspaces } from '../../../hooks';
 import { settingsSlider } from '../../../utils';
 import { ActivityCard } from '../../Activity/ActivityCard';
 import { Header } from '../../Header';
+import { Board } from '../../Kaban/Board';
 import { Slide, Slider } from '../../Slider';
 import { WorkspaceOptions } from './WorkspaceOptions';
 
@@ -49,9 +50,9 @@ export function WorkspaceSelected() {
                   ))
                }
             </Slider>
+
+            <Board activitys={activitiesFilter}/>
          </div>
-
-
 
          <WorkspaceOptions idWorkspace={id}/>
       </div>
