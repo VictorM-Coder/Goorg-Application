@@ -1,7 +1,7 @@
-package com.goorg.goorgjava.util;
+package com.goorg.goorgjava.util.creator.creators;
 
-import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.model.workspace.Workspace;
+import com.goorg.goorgjava.util.creator.Creator;
 
 import java.util.ArrayList;
 import java.util.List;

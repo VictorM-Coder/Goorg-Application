@@ -3,7 +3,7 @@ package com.goorg.goorgjava.service;
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.workspace.Workspace;
 import com.goorg.goorgjava.repositories.WorkspaceRepository;
-import com.goorg.goorgjava.util.WorkspaceCreator;
+import com.goorg.goorgjava.util.creator.creators.WorkspaceCreator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
