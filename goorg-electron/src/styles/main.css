@@ -8,3 +8,11 @@ body {
    -webkit-font-smoothing: antialiased;
    height: 100vh;
 }
+
+.scrollbar::-webkit-scrollbar {
+   width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+   @apply bg-gray-200 rounded-full hover:bg-gray-300 transition-colors
+}

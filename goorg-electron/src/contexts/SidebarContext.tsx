@@ -16,7 +16,6 @@ export function SidebarProvider({ children }: SidebarProviderProps) {
 
    function handleSidebarMinimezed() {
       setSidebarMinimizedIsActive(!sidebarMinimizedIsActive);
-      console.log(sidebarMinimizedIsActive)
    }
 
    return (
