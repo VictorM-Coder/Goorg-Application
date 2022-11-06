@@ -45,6 +45,11 @@ public class PriorityTagService implements ServiceInterface<PriorityTag>{
         return this.save(oldTag);
     }
 
+    @Override
+    public PriorityTag delete(Long id) {
+        return null;
+    }
+
     private void updateData(PriorityTag oldTag, PriorityTag newTag){
         oldTag.setName(newTag.getName());
     }

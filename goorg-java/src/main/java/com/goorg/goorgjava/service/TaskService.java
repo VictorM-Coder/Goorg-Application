@@ -41,6 +41,11 @@ public class TaskService implements ServiceInterface<Task>{
         return this.save(oldTask);
     }
 
+    @Override
+    public Task delete(Long id) {
+        return null;
+    }
+
     private void updateData(Task oldTask, Task newTask){
         oldTask.setTitle(newTask.getTitle());
         oldTask.setComplete(newTask.getStatus());
