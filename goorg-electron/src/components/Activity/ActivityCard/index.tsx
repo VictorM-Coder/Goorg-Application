@@ -37,7 +37,7 @@ export function ActivityCard({
             </Link>
          
             <div className="flex items-center gap-2 pt-1 pb-1">
-               <TagPriority name={priorityTag.name} size='xs'/>
+               <TagPriority name={priorityTag?.name} size='xs'/>
                <TagPhase name={phase} size='xs'/>
             </div>
 
@@ -46,11 +46,12 @@ export function ActivityCard({
 
          <div className="flex text-end items-end flex-1 mt-4 gap-1 text-gray-300 justify-self-end">
             <Calendar size={18} weight="fill" />
-            <span className="text-xs text-gray-300 font-medium">{endDate.toString()}</span>   
+            <span className="text-xs text-gray-300 font-medium">{endDate?.toString()}</span>   
          </div>   
 
          <ActivityCardOptions 
             idActivity={id}
+            phaseNow={phase.toLowerCase()}
             elementRef={elementRef}
             optionsIsOpen={optionsIsOpen}
             onCloseOptions={handleCloseOptions}    

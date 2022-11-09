@@ -1,8 +1,11 @@
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\service\WorkspaceServiceTest.java
-D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\ActivityCreator.java
-D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\WorkspaceCreator.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\creator\creators\WorkspaceCreator.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\creator\creators\ActivityCreator.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\service\PriorityTagServiceTest.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\creator\Creator.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\service\ActivityServiceTest.java
-D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\TaskCreator.java
-D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\Creator.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\service\TaskServiceTest.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\creator\creators\PriorityTagCreator.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\GoorgJavaApplicationTests.java
+D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\util\creator\creators\TaskCreator.java
 D:\Users\danie_ag851h8\Documents\faculdade\PII\Goorg-Application\goorg-java\src\test\java\com\goorg\goorgjava\service\ServiceTest.java

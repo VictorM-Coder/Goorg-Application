@@ -15,7 +15,7 @@ export function MainLayout({ page }: MainLayoutProps) {
          <Sidebar />
          <div 
             className={`${(sidebarMinimizedIsActive) ? "w-[calc(100vw-110px)]" : "w-[calc(100vw-270px)]"} 
-            flex flex-col transition-all mdmax:w-[calc(100vw-16px)]`}
+            flex flex-col transition-all mdmax:w-[calc(100vw-16px)] overflow-hidden`}
          >
             { page }
          </div>

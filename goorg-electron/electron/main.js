@@ -9,9 +9,9 @@ if (!app.requestSingleInstanceLock()) {
 
 let win = null;
 
-function createWindow () {
+async function createWindow () {
   win = new BrowserWindow({
-    title: 'Main window',
+    title: 'Goorg',
     width: 1024,
     height: 768,
     webPreferences: {
@@ -23,13 +23,13 @@ function createWindow () {
   })
 
   if (app.isPackaged) {
-    win.loadFile(join(__dirname, '../dist/index.html'))
     const jarPath = join(process.resourcesPath, "./app.asar.unpacked/electron/target/goorg-java-0.0.1-SNAPSHOT.jar")
     spawn('java', ['-jar', jarPath]);
-  } else {
-    win.loadURL('http://127.0.0.1:5173/')
+    win.loadFile(join(__dirname, '../dist/index.html'))
+  } else { 
     const jarPath = join(__dirname, "/target/goorg-java-0.0.1-SNAPSHOT.jar")
     spawn('java', ['-jar', jarPath]);
+    win.loadURL('http://127.0.0.1:5173/');
   }
 }
 
