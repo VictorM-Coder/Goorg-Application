@@ -46,8 +46,8 @@ public class PriorityTagService implements ServiceInterface<PriorityTag>{
     }
 
     @Override
-    public PriorityTag delete(Long id) {
-        return null;
+    public void delete(Long id) {
+
     }
 
     private void updateData(PriorityTag oldTag, PriorityTag newTag){

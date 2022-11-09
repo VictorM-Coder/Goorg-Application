@@ -22,13 +22,13 @@ public class WorkspaceController {
     }
     
     @PostMapping(path = "/all")
-    public @ResponseBody void postWorkspaces(@Valid @RequestBody List<Workspace> workspaces){
-        this.workspaceService.saveAll(workspaces);
+    public @ResponseBody Iterable<Workspace> postWorkspaces(@Valid @RequestBody List<Workspace> workspaces){
+        return this.workspaceService.saveAll(workspaces);
     }
 
     @PutMapping(path = "/update/{id}")
-    public @ResponseBody void updateWorkspace(@PathVariable Long id, @RequestBody Workspace workspace){
-        this.workspaceService.update(id, workspace);
+    public @ResponseBody Workspace updateWorkspace(@PathVariable Long id, @RequestBody Workspace workspace){
+        return this.workspaceService.update(id, workspace);
     }
     
     @GetMapping(path = "/all")
@@ -42,7 +42,7 @@ public class WorkspaceController {
     }
     
     @DeleteMapping(path = "/{id}")
-    public @ResponseBody Workspace deleteWorkspace(@PathVariable Long id){
-        return this.workspaceService.delete(id);
+    public @ResponseBody void deleteWorkspace(@PathVariable Long id){
+        this.workspaceService.delete(id);
     }
 }

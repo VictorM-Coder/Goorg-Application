@@ -2,12 +2,15 @@ package com.goorg.goorgjava.service;
 
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Activity;
+import com.goorg.goorgjava.model.atividade.PriorityTag;
 import com.goorg.goorgjava.repositories.ActivityRepository;
+import com.goorg.goorgjava.repositories.PriorityTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +19,9 @@ import java.util.Optional;
 public class ActivityService implements ServiceInterface<Activity> {
     @Autowired
     private ActivityRepository activityRepository;
+
+    @Autowired
+    private PriorityTagRepository priorityTagRepository;
 
     @Override
     @Transactional
@@ -57,13 +63,23 @@ public class ActivityService implements ServiceInterface<Activity> {
 
     public Activity findByIdOrThrowBadRequestException(long id) {
         return activityRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Anime not Found"));
+                .orElseThrow(() -> new BadRequestException("Activity not Found"));
     }
 
     @Override
-    public Activity delete(Long id) {
+    public void delete(Long id) {
         Activity deletedActivity = findByIdOrThrowBadRequestException(id);
         this.activityRepository.deleteById(id);
-        return deletedActivity;
+    }
+
+    @Transactional
+    public Activity changePriorityTag(Long idPriorityTag, Long idActivity){
+        PriorityTag priorityTag = this.priorityTagRepository.findById(idPriorityTag)
+                .orElseThrow(() -> new BadRequestException("Tag not found"));
+
+        Activity activity = this.findByIdOrThrowBadRequestException(idActivity);
+
+        activity.setPriorityTag(priorityTag);
+        return this.save(activity);
     }
 }
