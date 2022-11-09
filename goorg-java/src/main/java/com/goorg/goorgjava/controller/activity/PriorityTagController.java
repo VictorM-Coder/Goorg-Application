@@ -40,4 +40,9 @@ public class PriorityTagController {
     public @ResponseBody Optional<PriorityTag> getTaskById(@PathVariable Long id){
         return this.priorityTagService.getById(id);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody void deletePriorityTag(@PathVariable Long id){
+        this.priorityTagService.delete(id);
+    }
 }

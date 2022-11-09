@@ -55,4 +55,9 @@ public class TaskController {
     public @ResponseBody Optional<Task> getTaskById(@PathVariable Long id){
         return this.taskService.getById(id);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody void deleteTask(@PathVariable Long id){
+        this.taskService.delete(id);
+    }
 }

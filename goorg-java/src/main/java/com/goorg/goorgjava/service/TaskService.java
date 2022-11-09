@@ -43,7 +43,8 @@ public class TaskService implements ServiceInterface<Task>{
 
     @Override
     public void delete(Long id) {
-
+        Task deletedTask = findByIdOrThrowBadRequestException(id);
+        this.repository.delete(deletedTask);
     }
 
     private void updateData(Task oldTask, Task newTask){

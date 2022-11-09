@@ -69,7 +69,7 @@ public class ActivityService implements ServiceInterface<Activity> {
     @Override
     public void delete(Long id) {
         Activity deletedActivity = findByIdOrThrowBadRequestException(id);
-        this.activityRepository.deleteById(id);
+        this.activityRepository.delete(deletedActivity);
     }
 
     @Transactional
