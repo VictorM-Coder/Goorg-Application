@@ -51,9 +51,8 @@ public class WorkspaceService implements ServiceInterface<Workspace> {
     }
 
     @Override
-    public Workspace delete(Long id) {
+    public void delete(Long id) {
         Workspace deletedWorkspace = this.findByIdOrThrowBadRequestException(id);
         this.workspaceRepository.deleteById(id);
-        return deletedWorkspace;
     }
 }

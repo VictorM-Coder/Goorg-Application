@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,10 +23,22 @@ public class TaskController {
     private ActivityService activityService;
 
     @PostMapping(path = "/{activityId}")
-    public @ResponseBody void postTask(@Valid @RequestBody Task task, @PathVariable Long activityId){
+    public @ResponseBody Task postTask(@Valid @RequestBody Task task, @PathVariable Long activityId){
         Optional<Activity> activity = activityService.getById(activityId);
         task.setActivity(activity.orElseThrow( () -> new BadRequestException("Activity not found")));
-        this.taskService.save(task);
+        return this.taskService.save(task);
+    }
+
+    @PostMapping(path = "/saveall/{activityId}")
+    public @ResponseBody Iterable<Task> postTasks(@Valid @RequestBody List<Task> tasks, @PathVariable Long activityId){
+        Optional<Activity> activity = activityService.getById(activityId);
+        Activity activityFound = activity.orElseThrow(() -> new BadRequestException("Activity not found"));
+
+        for (Task task: tasks){
+            task.setActivity(activityFound);
+        }
+
+        return this.taskService.saveAll(tasks);
     }
 
     @PutMapping(path = "/update/{id}")

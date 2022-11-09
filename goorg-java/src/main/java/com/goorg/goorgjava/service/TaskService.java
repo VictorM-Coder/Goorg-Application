@@ -42,8 +42,8 @@ public class TaskService implements ServiceInterface<Task>{
     }
 
     @Override
-    public Task delete(Long id) {
-        return null;
+    public void delete(Long id) {
+
     }
 
     private void updateData(Task oldTask, Task newTask){

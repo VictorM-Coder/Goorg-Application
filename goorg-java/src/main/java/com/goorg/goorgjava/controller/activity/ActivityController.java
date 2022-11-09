@@ -21,18 +21,23 @@ public class ActivityController {
     private ActivityService activityService;
 
     @PostMapping
-    public @ResponseBody void postActivity(@Valid @RequestBody Activity activity){
-        this.activityService.save(activity);
+    public @ResponseBody Activity postActivity(@Valid @RequestBody Activity activity){
+        return this.activityService.save(activity);
     }
 
     @PostMapping(path = "/all")
-    public @ResponseBody void postActivities(@Valid @RequestBody List<Activity> activities){
-        this.activityService.saveAll(activities);
+    public @ResponseBody Iterable<Activity> postActivities(@Valid @RequestBody List<Activity> activities){
+        return this.activityService.saveAll(activities);
     }
 
     @PutMapping(path = "/update/{id}")
     public @ResponseBody Activity updateActivity(@PathVariable Long id, @Valid @RequestBody Activity activity){
         return this.activityService.update(id, activity);
+    }
+
+    @PutMapping(path = "/priorityTag")
+    public @ResponseBody Activity updatePriorityTag(@RequestParam(name = "idPriorityTag") Long idPriorityTag, @RequestParam(name = "idActivity") Long idActivity){
+        return this.activityService.changePriorityTag(idPriorityTag, idActivity);
     }
 
     @GetMapping(path = "/all")
@@ -46,8 +51,8 @@ public class ActivityController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public @ResponseBody Activity deleteActivity(@PathVariable Long id){
-        return this.activityService.delete(id);
+    public @ResponseBody void deleteActivity(@PathVariable Long id){
+        this.activityService.delete(id);
     }
 
 }
