@@ -1,4 +1,4 @@
-import { PopoverRoot } from "./PopoverRoot";
 import { PopoverItem } from "./PopoverItem";
+import { PopoverRoot } from "./PopoverRoot";
 
 export { PopoverRoot, PopoverItem }

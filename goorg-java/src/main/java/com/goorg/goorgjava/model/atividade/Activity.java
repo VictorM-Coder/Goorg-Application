@@ -47,15 +47,15 @@ public class Activity{
     public Activity(){
         this.phase = Phase.TO_DO;
         this.tasks = new ArrayList<>();
+        this.startDate = LocalDate.now();
     }
 
-    public Activity(Long id, String title, String description, List<String> anotations, LocalDate startDate, LocalDate endDate, PriorityTag priorityTag, Workspace workspace) {
+    public Activity(Long id, String title, String description, List<String> anotations, LocalDate endDate, PriorityTag priorityTag, Workspace workspace) {
         this();
         this.id = id;
         this.title = title;
         this.description = description;
         this.anotations = anotations;
-        this.startDate = startDate;
         this.endDate = endDate;
         this.priorityTag = priorityTag;
         this.workspace = workspace;

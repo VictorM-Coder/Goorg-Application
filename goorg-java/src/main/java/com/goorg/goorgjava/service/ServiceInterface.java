@@ -17,6 +17,6 @@ public interface ServiceInterface<E> {
 
     E update(Long id, E e);
 
-    E delete(Long id);
+    void delete(Long id);
 
 }

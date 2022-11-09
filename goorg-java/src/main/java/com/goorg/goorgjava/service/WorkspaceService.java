@@ -40,6 +40,12 @@ public class WorkspaceService implements ServiceInterface<Workspace> {
         return this.save(oldWorkspace);
     }
 
+    @Override
+    public void delete(Long id) {
+        Workspace deletedWorkspace = this.findByIdOrThrowBadRequestException(id);
+        this.workspaceRepository.delete(deletedWorkspace);
+    }
+    
     private void updateData(Workspace oldWorkspace, Workspace newWorkspace){
         oldWorkspace.setName(newWorkspace.getName());
         oldWorkspace.setDescription(newWorkspace.getDescription());
@@ -50,10 +56,5 @@ public class WorkspaceService implements ServiceInterface<Workspace> {
             .orElseThrow(() -> new BadRequestException("Anime not Found"));
     }
 
-    @Override
-    public Workspace delete(Long id) {
-        Workspace deletedWorkspace = this.findByIdOrThrowBadRequestException(id);
-        this.workspaceRepository.deleteById(id);
-        return deletedWorkspace;
-    }
+    
 }

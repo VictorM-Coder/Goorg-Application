@@ -4,13 +4,13 @@ import { ShareNetwork, X } from 'phosphor-react';
 import { useEffect, useRef } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { WorkspaceModalProps, WorkspaceReq } from '../../@types/Workspace';
+import { WorkspaceModalProps, WorkspaceReq } from '../../../@types/Workspace';
 
-import { useWorkspaces } from '../../hooks';
-import { api } from '../../services/api';
-import { styleModal } from '../../utils';
-import { Button } from '../Button';
-import { FormControl, Input, Label, Textarea } from '../Form';
+import { useWorkspaces } from '../../../hooks';
+import { api } from '../../../services/api';
+import { styleModal } from '../../../utils';
+import { Button } from '../../Button';
+import { FormControl, Input, Label, Textarea } from '../../Form';
 
 const WorkspaceSchema = yup.object({
    name: yup.string().required("O nome é obrigatório."),
@@ -60,11 +60,15 @@ export function WorkspaceModal({
    }
 
    useEffect(() => {
-      if (isFirst.current && isEditWorkspace && isOpenWorkspaceModal) {
-         fetchDataWorkspace();
-      } 
+      // if (isFirst.current && isEditWorkspace && isOpenWorkspaceModal) {
+      //    fetchDataWorkspace();
+      // } comenta no build
 
-      return () => { isFirst.current = true } 
+      if (isEditWorkspace && isOpenWorkspaceModal) {
+         fetchDataWorkspace();
+      }
+
+      // return () => { isFirst.current = true } comenta no build
    }, [isOpenWorkspaceModal])
 
    return (

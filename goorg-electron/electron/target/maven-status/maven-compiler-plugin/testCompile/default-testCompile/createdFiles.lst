@@ -1,8 +1,11 @@
-com\goorg\goorgjava\util\TaskCreator.class
-com\goorg\goorgjava\util\ActivityCreator.class
+com\goorg\goorgjava\util\creator\creators\ActivityCreator.class
 com\goorg\goorgjava\GoorgJavaApplicationTests.class
+com\goorg\goorgjava\service\TaskServiceTest.class
+com\goorg\goorgjava\util\creator\Creator.class
+com\goorg\goorgjava\util\creator\creators\TaskCreator.class
 com\goorg\goorgjava\service\ServiceTest.class
 com\goorg\goorgjava\service\WorkspaceServiceTest.class
-com\goorg\goorgjava\util\Creator.class
+com\goorg\goorgjava\util\creator\creators\WorkspaceCreator.class
+com\goorg\goorgjava\service\PriorityTagServiceTest.class
+com\goorg\goorgjava\util\creator\creators\PriorityTagCreator.class
 com\goorg\goorgjava\service\ActivityServiceTest.class
-com\goorg\goorgjava\util\WorkspaceCreator.class

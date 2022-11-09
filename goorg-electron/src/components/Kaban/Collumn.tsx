@@ -29,8 +29,10 @@ export function Column({ name, activitys }: CollumProps) {
                   description={activity.description} 
                   priorityTag={activity.priorityTag}
                   phase={activity.phase}
+                  startDate={activity.startDate}
                   endDate={activity.endDate}
                   workspaceId={activity.workspaceId}
+                  tasks={activity.tasks}
                   nameVisible={false}
                />
             ))}                 

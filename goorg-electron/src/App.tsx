@@ -6,7 +6,7 @@ import { Router } from './routers/Router'
 
 export function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
      <WorkspacesProvider>
       <ActivityProvider>
         <SidebarProvider>
@@ -14,6 +14,6 @@ export function App() {
         </SidebarProvider>
       </ActivityProvider>
      </WorkspacesProvider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

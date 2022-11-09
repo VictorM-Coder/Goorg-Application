@@ -17,13 +17,13 @@ public class PriorityTagController {
     private PriorityTagService priorityTagService;
 
     @PostMapping
-    public @ResponseBody void postTag(@Valid @RequestBody PriorityTag tag){
-        this.priorityTagService.save(tag);
+    public @ResponseBody PriorityTag postTag(@Valid @RequestBody PriorityTag tag){
+        return this.priorityTagService.save(tag);
     }
 
     @PostMapping(path = "/all")
-    public @ResponseBody void postTags(@Valid @RequestBody List<PriorityTag> tags){
-        this.priorityTagService.saveAll(tags);
+    public @ResponseBody Iterable<PriorityTag> postTags(@Valid @RequestBody List<PriorityTag> tags){
+       return  this.priorityTagService.saveAll(tags);
     }
 
     @PutMapping(path = "/update/{id}")
@@ -39,5 +39,10 @@ public class PriorityTagController {
     @GetMapping(path = "/{id}")
     public @ResponseBody Optional<PriorityTag> getTaskById(@PathVariable Long id){
         return this.priorityTagService.getById(id);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody void deletePriorityTag(@PathVariable Long id){
+        this.priorityTagService.delete(id);
     }
 }
