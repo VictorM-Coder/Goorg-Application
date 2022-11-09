@@ -53,4 +53,10 @@ public class PriorityTagService implements ServiceInterface<PriorityTag>{
         return priorityTagRepository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Tag not Found"));
     }
+
+    @Override
+    public PriorityTag delete(Long id) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
