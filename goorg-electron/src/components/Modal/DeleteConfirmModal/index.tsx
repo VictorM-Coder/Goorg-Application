@@ -1,9 +1,9 @@
 import { Box, Modal } from '@mui/material';
 import { Trash, X } from 'phosphor-react';
 
-import iluDeleteModal from '../../assets/ilu_delete_modal.svg';
-import { styleModal } from '../../utils';
-import { Button } from '../Button';
+import iluDeleteModal from '../../../assets/ilu_delete_modal.svg';
+import { styleModal } from '../../../utils';
+import { Button } from '../../Button';
 
 interface DeleteConfirmModalProps {
    isOpenDeleteConfirmModal: boolean;

@@ -13,11 +13,12 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
    const [activitys, setActivitys] = useState<Activity[]>([]);
 
    useEffect(() => {
-      if (isFirst.current) {
-         fetchActivitys();
-      } 
+      fetchActivitys();
+      // if (isFirst.current) { // comenta na hora do build
+      //    fetchActivitys();
+      // } 
 
-      return () => { isFirst.current = true }
+      // return () => { isFirst.current = true }
    }, [])
 
    async function fetchActivitys() {
@@ -27,11 +28,12 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
 
    async function deleteActivityById(id: number): Promise<void> {
       await api.delete(`activity/${id}`);
-      await fetchActivitys();
+      fetchActivitys();
    }
 
    async function createActivity(data: ActivityReq): Promise<void> {
-      const res = await api.post('activity', data);
+      await api.post('activity', data);
+      fetchActivitys();
       //const { activity } = res.data;
 
       //setActivitys([...activitys, activity]);

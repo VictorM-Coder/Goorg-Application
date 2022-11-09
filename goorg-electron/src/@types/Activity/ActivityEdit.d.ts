@@ -1,8 +1,9 @@
 export interface ActivityEdit {
-   title: string;
-   description: string;
-   priorityTag: {
-      name: string;
+   title?: string;
+   description?: string;
+   priorityTag?: {
+      id: number;
    },
-   endDate: Date;
+   endDate?: Date;
+   phase?: string;
 }
