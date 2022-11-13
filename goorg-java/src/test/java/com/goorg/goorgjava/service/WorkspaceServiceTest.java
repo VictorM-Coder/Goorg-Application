@@ -47,7 +47,7 @@ public class WorkspaceServiceTest implements ServiceTest{
         Optional<Workspace> workspace = this.workspaceRepository.findById(expectedID);
 
         Assertions.assertFalse(workspace.isEmpty());
-        Assertions.assertTrue(workspace.get().equals(creator.createValidItem()));
+        Assertions.assertEquals(workspace.get(), creator.createValidItem());
         Assertions.assertEquals(workspace.get().getId(), expectedID);
     }
 
@@ -83,7 +83,7 @@ public class WorkspaceServiceTest implements ServiceTest{
         Workspace workspaceUpdated = this.workspaceService.update(workspaceSaved.getId(), workspaceSaved);
 
         Assertions.assertEquals(workspaceUpdated.getId(), workspaceSaved.getId());
-        Assertions.assertTrue(workspaceSaved.equals(workspaceUpdated));
+        Assertions.assertEquals(workspaceSaved, workspaceUpdated);
         Assertions.assertEquals(workspaceUpdated.getName(), newName);
     }
 

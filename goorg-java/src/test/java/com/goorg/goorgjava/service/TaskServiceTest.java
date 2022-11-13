@@ -48,7 +48,7 @@ public class TaskServiceTest implements ServiceTest{
         Optional<Task> task = this.taskRepository.findById(expectedID);
 
         Assertions.assertFalse(task.isEmpty());
-        Assertions.assertTrue(task.get().equals(creator.createValidItem()));
+        Assertions.assertEquals(task.get(), creator.createValidItem());
         Assertions.assertEquals(task.get().getId(), expectedID);
     }
 
@@ -84,7 +84,7 @@ public class TaskServiceTest implements ServiceTest{
         Task TaskUpdated = this.taskService.update(taskSaved.getId(), taskSaved);
 
         Assertions.assertEquals(TaskUpdated.getId(), taskSaved.getId());
-        Assertions.assertTrue(taskSaved.equals(TaskUpdated));
+        Assertions.assertEquals(taskSaved, TaskUpdated);
         Assertions.assertEquals(TaskUpdated.getTitle(), newTitle);
     }
 

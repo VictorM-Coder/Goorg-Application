@@ -47,7 +47,7 @@ public class PriorityTagServiceTest implements ServiceTest{
         Optional<PriorityTag> tag = this.priorityTagRepository.findById(expectedID);
 
         Assertions.assertFalse(tag.isEmpty());
-        Assertions.assertTrue(tag.get().equals(creator.createValidItem()));
+        Assertions.assertEquals(tag.get(), creator.createValidItem());
         Assertions.assertEquals(tag.get().getId(), expectedID);
     }
 
@@ -82,7 +82,7 @@ public class PriorityTagServiceTest implements ServiceTest{
         PriorityTag TagUpdated = this.priorityTagService.update(tagSaved.getId(), tagSaved);
 
         Assertions.assertEquals(TagUpdated.getId(), tagSaved.getId());
-        Assertions.assertTrue(tagSaved.equals(TagUpdated));
+        Assertions.assertEquals(tagSaved, TagUpdated);
         Assertions.assertEquals(TagUpdated.getName(), newName);
     }
 
