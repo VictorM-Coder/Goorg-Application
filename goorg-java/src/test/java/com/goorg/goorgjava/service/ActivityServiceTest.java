@@ -25,18 +25,12 @@ public class ActivityServiceTest implements ServiceTest{
     @MockBean
     private ActivityRepository repository;
 
-    @BeforeEach
-    public void setUp(){
-        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
-        Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
-        Mockito.when(this.repository.saveAll(creator.createValidItemsList())).thenReturn(this.creator.createValidItemsList());
-        Mockito.when(this.repository.findAll()).thenReturn(this.creator.createValidItemsList());
-    }
-
     @Override
     @Test
     @DisplayName("Uma atividade é salva corretamente")
     public void save_PersistItem_When_Sucess(){
+        Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
+
         Activity activityCreated = this.activityService.save(this.creator.createValidItem());
 
         Assertions.assertNotNull(activityCreated);
@@ -47,6 +41,8 @@ public class ActivityServiceTest implements ServiceTest{
     @Test
     @DisplayName("Burcar o id de uma atividade retorna uma atividade quando é executado corretamente")
     public void findById_ReturnAItem_When_Success(){
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+
         Long expectedID = 1L;
         Optional<Activity> atividade = this.repository.findById(expectedID);
 
@@ -59,6 +55,8 @@ public class ActivityServiceTest implements ServiceTest{
     @Test
     @DisplayName("Retorna uma lista de atividades válidas quando é executado com sucesso")
     public void findAll_ReturnItemList_When_Success() {
+        Mockito.when(this.repository.findAll()).thenReturn(this.creator.createValidItemsList());
+
         List<Activity> activities = this.creator.createValidItemsList();
         List<Activity> activitiesGetteds = (List<Activity>) this.activityService.getAll();
 
@@ -74,6 +72,9 @@ public class ActivityServiceTest implements ServiceTest{
     @Test
     @DisplayName("Retorna uma atividade atualizada e válida quando executado com sucesso")
     public void update_ReturnAUpdatedItem_When_Sucess() {
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+        Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
+
         Activity activity = this.creator.createValidItem();
         Activity activitySaved = this.activityService.save(activity);
         String newTitle = "novo titulo";
@@ -98,8 +99,27 @@ public class ActivityServiceTest implements ServiceTest{
 
     @Override
     @Test
+    public void delete_executeDelete_When_Success() {
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+
+        this.activityService.delete(1L);
+        Mockito.verify(repository, Mockito.times(1)).delete(this.creator.createValidItem());
+    }
+
+    @Override
+    @Test
+    public void delete_ThrowsBadRequestException_When_IdNotExists() {
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.delete(1L));
+    }
+
+    @Override
+    @Test
     @DisplayName("Salva uma lista de Atividades quando é executada corretamente")
     public void save_PersistItemsList_When_Success(){
+        Mockito.when(this.repository.saveAll(creator.createValidItemsList())).thenReturn(this.creator.createValidItemsList());
+
         List<Activity> activityList = creator.createValidItemsList();
         List<Activity> activitiesSaved = (List<Activity>) this.activityService.saveAll(activityList);
 
