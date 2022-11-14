@@ -2,7 +2,9 @@ package com.goorg.goorgjava.service;
 
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Activity;
+import com.goorg.goorgjava.model.atividade.PriorityTag;
 import com.goorg.goorgjava.repositories.ActivityRepository;
+import com.goorg.goorgjava.repositories.PriorityTagRepository;
 import com.goorg.goorgjava.util.creator.creators.ActivityCreator;
 import org.junit.jupiter.api.*;
 
@@ -20,23 +22,20 @@ public class ActivityServiceTest implements ServiceTest{
     @Autowired
     private ActivityService activityService;
 
-    private ActivityCreator creator = new ActivityCreator();
+    private final ActivityCreator creator = new ActivityCreator();
 
     @MockBean
     private ActivityRepository repository;
 
-    @BeforeEach
-    public void setUp(){
-        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
-        Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
-        Mockito.when(this.repository.saveAll(creator.createValidItemsList())).thenReturn(this.creator.createValidItemsList());
-        Mockito.when(this.repository.findAll()).thenReturn(this.creator.createValidItemsList());
-    }
+    @MockBean
+    private PriorityTagRepository priorityTagRepository;
 
     @Override
     @Test
     @DisplayName("Uma atividade é salva corretamente")
     public void save_PersistItem_When_Sucess(){
+        Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
+
         Activity activityCreated = this.activityService.save(this.creator.createValidItem());
 
         Assertions.assertNotNull(activityCreated);
@@ -47,11 +46,13 @@ public class ActivityServiceTest implements ServiceTest{
     @Test
     @DisplayName("Burcar o id de uma atividade retorna uma atividade quando é executado corretamente")
     public void findById_ReturnAItem_When_Success(){
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+
         Long expectedID = 1L;
         Optional<Activity> atividade = this.repository.findById(expectedID);
 
         Assertions.assertFalse(atividade.isEmpty());
-        Assertions.assertTrue(atividade.get().equals(creator.createValidItem()));
+        Assertions.assertEquals(atividade.get(), creator.createValidItem());
         Assertions.assertEquals(atividade.get().getId(), expectedID);
     }
 
@@ -59,6 +60,8 @@ public class ActivityServiceTest implements ServiceTest{
     @Test
     @DisplayName("Retorna uma lista de atividades válidas quando é executado com sucesso")
     public void findAll_ReturnItemList_When_Success() {
+        Mockito.when(this.repository.findAll()).thenReturn(this.creator.createValidItemsList());
+
         List<Activity> activities = this.creator.createValidItemsList();
         List<Activity> activitiesGetteds = (List<Activity>) this.activityService.getAll();
 
@@ -74,6 +77,9 @@ public class ActivityServiceTest implements ServiceTest{
     @Test
     @DisplayName("Retorna uma atividade atualizada e válida quando executado com sucesso")
     public void update_ReturnAUpdatedItem_When_Sucess() {
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+        Mockito.when(this.repository.save(creator.createValidItem())).thenReturn(this.creator.createValidItem());
+
         Activity activity = this.creator.createValidItem();
         Activity activitySaved = this.activityService.save(activity);
         String newTitle = "novo titulo";
@@ -82,7 +88,7 @@ public class ActivityServiceTest implements ServiceTest{
         Activity activityUpdated = this.activityService.update(activitySaved.getId(), activitySaved);
 
         Assertions.assertEquals(activityUpdated.getId(), activitySaved.getId());
-        Assertions.assertTrue(activitySaved.equals(activityUpdated));
+        Assertions.assertEquals(activitySaved, activityUpdated);
         Assertions.assertEquals(activityUpdated.getTitle(), newTitle);
     }
 
@@ -98,8 +104,27 @@ public class ActivityServiceTest implements ServiceTest{
 
     @Override
     @Test
+    public void delete_executeDelete_When_Success() {
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+
+        this.activityService.delete(1L);
+        Mockito.verify(repository, Mockito.times(1)).delete(this.creator.createValidItem());
+    }
+
+    @Override
+    @Test
+    public void delete_ThrowsBadRequestException_When_IdNotExists() {
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.delete(1L));
+    }
+
+    @Override
+    @Test
     @DisplayName("Salva uma lista de Atividades quando é executada corretamente")
     public void save_PersistItemsList_When_Success(){
+        Mockito.when(this.repository.saveAll(creator.createValidItemsList())).thenReturn(this.creator.createValidItemsList());
+
         List<Activity> activityList = creator.createValidItemsList();
         List<Activity> activitiesSaved = (List<Activity>) this.activityService.saveAll(activityList);
 
@@ -109,5 +134,19 @@ public class ActivityServiceTest implements ServiceTest{
         for (int cont = 0; cont < activitiesSaved.size(); cont++){
             Assertions.assertEquals(activitiesSaved.get(cont), activityList.get(cont));
         }
+    }
+
+    @Test
+    void changePriorityTag_When_Success(){
+        Activity validActivity = this.creator.createValidItem();
+        PriorityTag newPriorityTag = new PriorityTag(1L,"nova tag");
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(validActivity));
+        Mockito.when(this.repository.save(ArgumentMatchers.any())).thenAnswer(invocation -> invocation.getArguments()[0]);
+        Mockito.when(this.priorityTagRepository.findById(1L)).thenReturn(Optional.of(newPriorityTag));
+
+        Activity updatedActivity = this.activityService.changePriorityTag(1L, 1L);
+
+        Assertions.assertEquals(validActivity, updatedActivity);
+        Assertions.assertEquals(updatedActivity.getPriorityTag(), newPriorityTag);
     }
 }
