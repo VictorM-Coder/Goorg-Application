@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.model.atividade.PriorityTag;
@@ -148,5 +149,28 @@ public class ActivityServiceTest implements ServiceTest{
 
         Assertions.assertEquals(validActivity, updatedActivity);
         Assertions.assertEquals(updatedActivity.getPriorityTag(), newPriorityTag);
+    }
+
+    @Test
+    void changePhase_ChangeActivityPhase_When_Success(){
+        Activity validActivity = this.creator.createValidItem();
+        Phase newPhase = Phase.DOING;
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+        Mockito.when(this.repository.save(ArgumentMatchers.any())).thenAnswer(invocation -> invocation.getArguments()[0]);
+
+        Activity activityUpdated = this.activityService.changePhase(newPhase, 1L);
+
+        Assertions.assertEquals(activityUpdated.getPhase(), newPhase);
+        Assertions.assertEquals(validActivity, activityUpdated);
+    }
+
+    @Test
+    void changePhase_ThrowsBadRequestException_When_OptionalEmpty(){
+        Activity validActivity = this.creator.createValidItem();
+        Phase newPhase = Phase.DOING;
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
+        Mockito.when(this.repository.save(ArgumentMatchers.any())).thenAnswer(invocation -> invocation.getArguments()[0]);
+
+        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.changePhase(newPhase, 1L));
     }
 }

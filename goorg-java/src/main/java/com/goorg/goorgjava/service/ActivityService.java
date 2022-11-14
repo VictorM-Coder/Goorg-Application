@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.model.atividade.PriorityTag;
@@ -81,5 +82,12 @@ public class ActivityService implements ServiceInterface<Activity> {
 
         activity.setPriorityTag(priorityTag);
         return this.save(activity);
+    }
+
+    @Transactional
+    public Activity changePhase(Phase phase, Long idActivity){
+        Activity activity = this.findByIdOrThrowBadRequestException(idActivity);
+        activity.setPhase(phase);
+        return this.activityRepository.save(activity);
     }
 }
