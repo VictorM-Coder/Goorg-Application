@@ -26,9 +26,9 @@ public class PriorityTagController {
        return  this.priorityTagService.saveAll(tags);
     }
 
-    @PutMapping(path = "/update/{id}")
-    public @ResponseBody PriorityTag updateTask(@PathVariable Long id, @Valid @RequestBody PriorityTag tag){
-        return this.priorityTagService.update(id, tag);
+    @PutMapping()
+    public @ResponseBody PriorityTag updateTask(@Valid @RequestBody PriorityTag tag){
+        return this.priorityTagService.update(tag);
     }
 
     @GetMapping(path = "/all")

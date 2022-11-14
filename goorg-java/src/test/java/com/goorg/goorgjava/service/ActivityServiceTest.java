@@ -85,7 +85,7 @@ public class ActivityServiceTest implements ServiceTest{
         String newTitle = "novo titulo";
         activitySaved.setTitle(newTitle);
         Mockito.when(this.repository.save(activitySaved)).thenReturn(activitySaved);
-        Activity activityUpdated = this.activityService.update(activitySaved.getId(), activitySaved);
+        Activity activityUpdated = this.activityService.update(activitySaved);
 
         Assertions.assertEquals(activityUpdated.getId(), activitySaved.getId());
         Assertions.assertEquals(activitySaved, activityUpdated);
@@ -99,7 +99,7 @@ public class ActivityServiceTest implements ServiceTest{
         Activity activity = this.creator.createValidItem();
         Mockito.when(this.repository.findById(activity.getId())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.update(activity.getId(), activity));
+        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.update(activity));
     }
 
     @Override

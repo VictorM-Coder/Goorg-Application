@@ -15,7 +15,7 @@ public interface ServiceInterface<E> {
 
     Optional<E> getById(Long id);
 
-    E update(Long id, E e);
+    E update(E e);
 
     void delete(Long id);
 

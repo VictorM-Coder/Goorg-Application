@@ -34,8 +34,8 @@ public class WorkspaceService implements ServiceInterface<Workspace> {
     }
 
     @Override
-    public Workspace update(Long id, Workspace workspace) {
-        Workspace oldWorkspace = this.findByIdOrThrowBadRequestException(id);
+    public Workspace update(Workspace workspace) {
+        Workspace oldWorkspace = this.findByIdOrThrowBadRequestException(workspace.getId());
         this.updateData(oldWorkspace, workspace);
         return this.save(oldWorkspace);
     }

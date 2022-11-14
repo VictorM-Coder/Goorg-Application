@@ -39,8 +39,8 @@ public class PriorityTagService implements ServiceInterface<PriorityTag>{
     }
 
     @Override
-    public PriorityTag update(Long id, PriorityTag priorityTag) {
-        PriorityTag oldTag = this.findByIdOrThrowBadRequestException(id);
+    public PriorityTag update(PriorityTag priorityTag) {
+        PriorityTag oldTag = this.findByIdOrThrowBadRequestException(priorityTag.getId());
         this.updateData(oldTag, priorityTag);
         return this.save(oldTag);
     }

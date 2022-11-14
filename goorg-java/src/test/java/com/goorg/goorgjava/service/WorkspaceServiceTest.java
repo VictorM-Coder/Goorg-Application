@@ -80,7 +80,7 @@ public class WorkspaceServiceTest implements ServiceTest{
         workspaceSaved.setName(newName);
 
         Mockito.when(this.workspaceRepository.save(workspaceSaved)).thenReturn(workspaceSaved);
-        Workspace workspaceUpdated = this.workspaceService.update(workspaceSaved.getId(), workspaceSaved);
+        Workspace workspaceUpdated = this.workspaceService.update(workspaceSaved);
 
         Assertions.assertEquals(workspaceUpdated.getId(), workspaceSaved.getId());
         Assertions.assertEquals(workspaceSaved, workspaceUpdated);
@@ -94,7 +94,7 @@ public class WorkspaceServiceTest implements ServiceTest{
         Workspace workspace = this.creator.createValidItem();
         Mockito.when(this.workspaceRepository.findById(workspace.getId())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(BadRequestException.class , () -> this.workspaceService.update(workspace.getId(), workspace));
+        Assertions.assertThrows(BadRequestException.class , () -> this.workspaceService.update(workspace));
     }
 
     @Override
