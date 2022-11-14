@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActivityRepository extends PagingAndSortingRepository<Activity, Long> {
-    Iterable<Activity> findActivitiesByWorkspaceName(String name);
+
 }
