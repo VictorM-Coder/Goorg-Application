@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.controller.activity;
 
+import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ActivityController {
     @PutMapping(path = "/priorityTag")
     public @ResponseBody Activity updatePriorityTag(@RequestParam(name = "idPriorityTag") Long idPriorityTag, @RequestParam(name = "idActivity") Long idActivity){
         return this.activityService.changePriorityTag(idPriorityTag, idActivity);
+    }
+
+    @PutMapping(path = "/phase")
+    public @ResponseBody Activity updatePhase(@RequestParam(name = "phase")Phase phase, @RequestParam(name = "idActivity") Long idActivity){
+        return this.activityService.changePhase(phase, idActivity);
     }
 
     @GetMapping(path = "/all")
