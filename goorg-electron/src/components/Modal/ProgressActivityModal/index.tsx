@@ -20,11 +20,12 @@ export function ProgressActivityModal({
    onCloseModal 
 } : ProgressActivityModalProps) {
    
-   const { editActivityById } = useActivities()
+   const { editActivityById, activitys } = useActivities();
    const [progressActive, setProgressActive] = useState(phaseNow);
+   const activitySearch = activitys.find(ac => ac.id === idActivity);
    
    const handleChangeProgressActive = (name: string) => setProgressActive(name)
-   const handleEditPhaseActivity = () => editActivityById(idActivity, { phase: progressActive });
+   const handleEditPhaseActivity = () => {};
    
    return (
       <Modal 
@@ -49,19 +50,19 @@ export function ProgressActivityModal({
 
                   <div className="flex items-center justify-center gap-4 mb-4">
                      <ButtonProgress 
-                        name="to_do" 
+                        name="TO_DO" 
                         bgColor="bg-gray-200" 
                         isActive={progressActive}
                         handleFunctionCalback={handleChangeProgressActive} 
                      />
                      <ButtonProgress 
-                        name="in_progress" 
+                        name="DONING" 
                         bgColor="bg-yellow-300" 
                         isActive={progressActive}
                         handleFunctionCalback={handleChangeProgressActive} 
                      />
                      <ButtonProgress 
-                        name="done" 
+                        name="DONE" 
                         bgColor="bg-green-400" 
                         isActive={progressActive}
                         handleFunctionCalback={handleChangeProgressActive} 

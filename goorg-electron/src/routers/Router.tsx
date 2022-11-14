@@ -13,7 +13,7 @@ export function Router() {
          <Route path="/" element={ <Login /> } />
          <Route path="/inicio" element={ <MainLayout page={ <Home /> } /> } />
          <Route path="/inicio/workspace/:id" element={ <MainLayout page={ <WorkspaceSelected /> } />} />
-         <Route path="/inicio/workspace/:id/atividade/:id" element={ <MainLayout page={ <ActivitySelected /> } />} />
+         <Route path="/inicio/workspace/:id/atividade/:idAc" element={ <MainLayout page={ <ActivitySelected /> } />} />
          <Route path="/atividades" element={ <MainLayout page={ <Activitys /> } />}/>
       </Routes>
    )

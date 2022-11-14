@@ -10,7 +10,7 @@ interface ButtonProgressProps {
 export function ButtonProgress({ bgColor, name, isActive, handleFunctionCalback }: ButtonProgressProps) {
    return (
       <button 
-         className={classNames(`w-28 ${bgColor} h-16 rounded font-medium border`, {
+         className={classNames(`w-28 ${bgColor} h-16 rounded font-medium border text-sm`, {
             'border-gray-700': isActive === name,
             'border-transparent': isActive != name
          })}

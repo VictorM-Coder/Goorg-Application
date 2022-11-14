@@ -15,8 +15,8 @@ export function Board({ activitys }: BoardProps) {
                activitys={activitys.filter(activity => activity.phase == 'TO_DO')}
             />
             <Column 
-               name='In progress'
-               activitys={activitys.filter(activity => activity.phase == 'IN_PROGRESS')}
+               name='Doing'
+               activitys={activitys.filter(activity => activity.phase == 'DOING')}
             />
             <Column 
                name='Done' 

@@ -1,6 +1,8 @@
-import { File } from "phosphor-react";
+import { File, Plus } from "phosphor-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { TaskModal } from "../../Modal/TaskModal";
 import { Task } from "./Task";
 
 interface CardTasks {
@@ -18,9 +20,16 @@ interface CardTasksProps {
 }
 
 export function CardTasks({ tasks }: CardTasksProps) {
+   const { idAc } = useParams();
+
    const { register, handleSubmit, formState } = useForm<CardTasks>();
    const [countActivitysMark, setCountActivitysMark] = useState(0);
- 
+
+   const [isOpenTaskModal, setIsOpenTaskModal] = useState(false);
+   
+   const handleOpenTaskModal = () => setIsOpenTaskModal(true);
+   const handleCloseTaskModal = () => setIsOpenTaskModal(false);
+   
    function handleChangeCountActivitysMarks(complete: boolean) {
       (complete) 
       ? setCountActivitysMark(countActivitysMark + 1) 
@@ -52,14 +61,33 @@ export function CardTasks({ tasks }: CardTasksProps) {
             <div className="flex flex-col px-8 py-5 gap-4">
                { tasks?.map(task => 
                   <Task 
+                     key={task.id}
                      id={task.id} 
                      title={task.title}
                      register={register} 
                      handleMarkTask={handleChangeCountActivitysMarks}
                   />
                )}
-            </div>    
+
+               <div
+                  className="block w-full p-4 mt-1 rounded border border-dashed border-blue-500
+                  hover:bg-white transition-colors"
+                  role="button"
+                  onClick={handleOpenTaskModal}
+               >
+                  <span className="text-sm font-medium flex items-center justify-center gap-1 text-blue-primary">
+                     <Plus size={16} weight="bold"/>
+                     Adicionar Tarefa
+                  </span>
+               </div>
+            </div>     
          </form>
+
+         <TaskModal 
+            idActivity={idAc as string}
+            isOpenTaskModal={isOpenTaskModal}
+            onCloseTaskModal={handleCloseTaskModal}
+         />
       </div>
    )
 }

@@ -4,6 +4,9 @@ export interface ActivityEdit {
    priorityTag?: {
       id: number;
    },
-   endDate?: Date;
+   workspace: {
+      id: Number;
+   }
+   endDate?: string;
    phase?: string;
 }

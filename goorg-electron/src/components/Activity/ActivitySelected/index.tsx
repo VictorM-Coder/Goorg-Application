@@ -1,17 +1,19 @@
 import { Notepad } from "phosphor-react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useActivities } from "../../../hooks";
 import { Backpage } from "../../Backpage";
 import { Header } from "../../Header";
+import { TaskModal } from "../../Modal/TaskModal";
 import { CardTasks } from "./CardTasks";
 import { HeaderActivitySelected } from "./Header";
 
 export function ActivitySelected() {
    const { activitys } = useActivities();
-   const { id } = useParams();
+   const { idAc } = useParams();
 
-   const activitySelected = activitys.find(ac => ac.id.toString() === id);
-   
+   const activitySelected = activitys.find(ac => ac.id.toString() === idAc);
+
    return (
       <div className="flex flex-1 flex-col rounded">
          <Header />
@@ -30,8 +32,9 @@ export function ActivitySelected() {
                />
                <CardTasks tasks={activitySelected?.tasks}/>
             </div>
-
          </div>
+
+         
       </div>
    )
 }

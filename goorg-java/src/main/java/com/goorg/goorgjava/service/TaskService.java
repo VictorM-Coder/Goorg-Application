@@ -56,10 +56,4 @@ public class TaskService implements ServiceInterface<Task>{
         return this.repository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Task not Found"));
     }
-
-    @Override
-    public Task delete(Long id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

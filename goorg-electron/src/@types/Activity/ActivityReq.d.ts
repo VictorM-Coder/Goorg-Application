@@ -5,7 +5,7 @@ export interface ActivityReq {
       id: number;
    },
    phase: string;
-   endDate: Date;
+   endDate: string;
    workspace: {
       id: Number;
    } 

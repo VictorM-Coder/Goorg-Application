@@ -23,7 +23,7 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
    }
 
    async function deleteWorkspaceById(id: Number): Promise<void> {
-      await api.delete(`worskpace/${id}`);
+      await api.delete(`workspace/${id}`);
       fetchWorkspaces();
    }
 

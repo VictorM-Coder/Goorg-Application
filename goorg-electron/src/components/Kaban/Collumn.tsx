@@ -13,7 +13,7 @@ export function Column({ name, activitys }: CollumProps) {
       <div>
          <span className={classNames('border-b-2  text-sm font-medium block', {
             'border-b-blue-600': name === 'To do',
-            'border-b-orange-400': name === 'In progress',
+            'border-b-orange-400': name === 'Doing',
             'border-b-green-500': name === 'Done',
          })}>
             { name }

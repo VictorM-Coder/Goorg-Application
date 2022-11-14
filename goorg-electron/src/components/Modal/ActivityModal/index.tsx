@@ -53,14 +53,12 @@ export function ActivityModal({
    } = useForm<ActivityModalFields>({ resolver: yupResolver(ActivitySchema) });
 
    const handleSubmitData: SubmitHandler<ActivityModalFields> = ({ title, date, description, priority }) => {
-      const dateEnd = new Date(date);
       const activity = { 
          title, description, 
          priorityTag: { 
-            id: priority, 
+            id: Number(priority), 
          }, 
-         startDate: new Date(),
-         endDate: dateEnd, 
+         endDate: date, 
          workspace: {
             id: Number(id),
          }
@@ -80,7 +78,7 @@ export function ActivityModal({
       const res = await api.get(`activity/${idActivity}`);
       setValue('title', res.data.title);
       setValue('description', res.data.description);
-      setValue('date', res.data.endDate.toString());
+      setValue('date', res.data.endDate);
       setValue('priority', res.data.priorityTag.id);
    }
 

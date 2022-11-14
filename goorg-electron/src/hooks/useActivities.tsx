@@ -44,6 +44,11 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       fetchActivitys();
    }
 
+   async function createTask(id: number, data: any): Promise<void> {
+      await api.post(`/task/${id}`, data);
+      fetchActivitys();
+   }
+
    async function finishActivityById(id: number): Promise<void> {
       await api.put(`activity/${id}`, { status: 'Concluida' });
       fetchActivitys();
@@ -55,7 +60,8 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
          createActivity,
          editActivityById,
          deleteActivityById,   
-         finishActivityById
+         finishActivityById,
+         createTask
       }}>
 
          { children }
