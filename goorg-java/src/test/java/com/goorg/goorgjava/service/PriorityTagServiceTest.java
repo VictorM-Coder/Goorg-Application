@@ -79,7 +79,7 @@ public class PriorityTagServiceTest implements ServiceTest{
         String newName = "novo titulo";
         tagSaved.setName(newName);
         Mockito.when(this.priorityTagRepository.save(tagSaved)).thenReturn(tagSaved);
-        PriorityTag TagUpdated = this.priorityTagService.update(tagSaved.getId(), tagSaved);
+        PriorityTag TagUpdated = this.priorityTagService.update(tagSaved);
 
         Assertions.assertEquals(TagUpdated.getId(), tagSaved.getId());
         Assertions.assertEquals(tagSaved, TagUpdated);
@@ -93,7 +93,7 @@ public class PriorityTagServiceTest implements ServiceTest{
         PriorityTag tag = this.creator.createValidItem();
         Mockito.when(this.priorityTagRepository.findById(tag.getId())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(BadRequestException.class , () -> this.priorityTagService.update(tag.getId(), tag));
+        Assertions.assertThrows(BadRequestException.class , () -> this.priorityTagService.update(tag));
     }
 
     @Override

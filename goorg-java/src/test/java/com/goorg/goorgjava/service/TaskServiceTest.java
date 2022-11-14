@@ -81,7 +81,7 @@ public class TaskServiceTest implements ServiceTest{
         String newTitle = "novo titulo";
         taskSaved.setTitle(newTitle);
         Mockito.when(this.taskRepository.save(taskSaved)).thenReturn(taskSaved);
-        Task TaskUpdated = this.taskService.update(taskSaved.getId(), taskSaved);
+        Task TaskUpdated = this.taskService.update(taskSaved);
 
         Assertions.assertEquals(TaskUpdated.getId(), taskSaved.getId());
         Assertions.assertEquals(taskSaved, TaskUpdated);
@@ -95,7 +95,7 @@ public class TaskServiceTest implements ServiceTest{
         Task task = this.creator.createValidItem();
         Mockito.when(this.taskRepository.findById(task.getId())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(BadRequestException.class , () -> this.taskService.update(task.getId(), task));
+        Assertions.assertThrows(BadRequestException.class , () -> this.taskService.update(task));
     }
 
     @Override
@@ -129,5 +129,21 @@ public class TaskServiceTest implements ServiceTest{
         for (int cont = 0; cont < tasksSaved.size(); cont++){
             Assertions.assertEquals(tasksSaved.get(cont), taskList.get(cont));
         }
+    }
+
+    @Test
+    public void updateAll_updateATaskList_When_Success(){
+        Task task = this.creator.createValidItem();
+        List<Task> tasks = List.of(task);
+        Mockito.when(this.taskRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(task));
+        Mockito.when(this.taskRepository.save(task)).thenReturn(task);
+
+        String newTitle = "novo titulo";
+        tasks.get(0).setTitle(newTitle);
+        List<Task> tasksUptadeds = this.taskService.updateAll(tasks);
+
+        Assertions.assertEquals(tasks.size(), tasksUptadeds.size());
+        Assertions.assertEquals(tasksUptadeds.get(0).getId(), tasks.get(0).getId());
+        Assertions.assertEquals(tasksUptadeds.get(0).getTitle(), newTitle);
     }
 }

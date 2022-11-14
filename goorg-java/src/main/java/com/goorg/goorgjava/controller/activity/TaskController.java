@@ -29,7 +29,7 @@ public class TaskController {
         return this.taskService.save(task);
     }
 
-    @PostMapping(path = "/saveall/{activityId}")
+    @PostMapping(path = "/all/{activityId}")
     public @ResponseBody Iterable<Task> postTasks(@Valid @RequestBody List<Task> tasks, @PathVariable Long activityId){
         Optional<Activity> activity = activityService.getById(activityId);
         Activity activityFound = activity.orElseThrow(() -> new BadRequestException("Activity not found"));
@@ -41,9 +41,14 @@ public class TaskController {
         return this.taskService.saveAll(tasks);
     }
 
-    @PutMapping(path = "/update/{id}")
-    public @ResponseBody Task updateTask(@PathVariable Long id, @Valid @RequestBody Task task){
-        return this.taskService.update(id, task);
+    @PutMapping
+    public @ResponseBody Task updateTask(@Valid @RequestBody Task task){
+        return this.taskService.update(task);
+    }
+
+    @PutMapping(path = "/all")
+    public @ResponseBody List<Task> updateTasks(@Valid @RequestBody List<Task> tasks){
+        return this.taskService.updateAll(tasks);
     }
 
     @GetMapping(path = "/all")

@@ -46,8 +46,8 @@ public class ActivityService implements ServiceInterface<Activity> {
     }
 
     @Override
-    public Activity update(Long id, Activity activity) {
-        Activity oldActivity = this.findByIdOrThrowBadRequestException(id);
+    public Activity update(Activity activity) {
+        Activity oldActivity = this.findByIdOrThrowBadRequestException(activity.getId());
         this.updateData(oldActivity, activity);
         return this.save(oldActivity);
     }

@@ -3,12 +3,8 @@ package com.goorg.goorgjava.controller.activity;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -30,9 +26,9 @@ public class ActivityController {
         return this.activityService.saveAll(activities);
     }
 
-    @PutMapping(path = "/update/{id}")
-    public @ResponseBody Activity updateActivity(@PathVariable Long id, @Valid @RequestBody Activity activity){
-        return this.activityService.update(id, activity);
+    @PutMapping()
+    public @ResponseBody Activity updateActivity(@Valid @RequestBody Activity activity){
+        return this.activityService.update(activity);
     }
 
     @PutMapping(path = "/priorityTag")

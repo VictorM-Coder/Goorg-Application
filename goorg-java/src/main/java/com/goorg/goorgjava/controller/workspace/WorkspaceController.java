@@ -26,9 +26,9 @@ public class WorkspaceController {
         return this.workspaceService.saveAll(workspaces);
     }
 
-    @PutMapping(path = "/update/{id}")
-    public @ResponseBody Workspace updateWorkspace(@PathVariable Long id, @RequestBody Workspace workspace){
-        return this.workspaceService.update(id, workspace);
+    @PutMapping
+    public @ResponseBody Workspace updateWorkspace(@RequestBody Workspace workspace){
+        return this.workspaceService.update(workspace);
     }
     
     @GetMapping(path = "/all")
