@@ -38,10 +38,8 @@ export function ActivityModal({
    onCloseActivityModal, 
    isEditActvity 
 }: ActivityModalProps) {
- 
-   const isFirst = useRef(false);
    const { id }  = useParams();
-   const { createActivity, editActivityById } = useActivities();
+   const { createActivity, updateActivity } = useActivities();
    
    const { 
       register, 
@@ -61,16 +59,15 @@ export function ActivityModal({
          endDate: date, 
          workspace: {
             id: Number(id),
-         }
+         },
       }
 
       if (!isEditActvity) {
-         const newActivity = Object.assign(activity, {
-            phase: "TO_DO",
-         })
+         const newActivity = Object.assign(activity, { phase: "TO_DO" })
          createActivity(newActivity).then(() => { onCloseActivityModal(), reset(), clearErrors() });
       } else {
-         editActivityById(Number(idActivity), activity).then(() => { onCloseActivityModal(), clearErrors() })
+         const activityEdit = Object.assign(activity, { id: idActivity })
+         updateActivity(activityEdit).then(() => { onCloseActivityModal(), clearErrors() })
       }
    }
 

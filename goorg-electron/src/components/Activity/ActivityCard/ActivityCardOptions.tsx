@@ -2,7 +2,7 @@ import { Pencil, Stack, Trash } from "phosphor-react";
 import { useState } from "react";
 import { useActivities } from "../../../hooks";
 import { ActivityModal, DeleteConfirmModal } from "../../Modal";
-import { ProgressActivityModal } from "../../Modal/ProgressActivityModal";
+import { ChangePhaseActivityModal } from "../../Modal/ChangePhaseActivityModal";
 import { PopoverItem, PopoverRoot } from "../../Popover";
 
 interface ActivityCardOptionsProps {
@@ -39,7 +39,6 @@ export function ActivityCardOptions({
    
    return (
       <> 
-
          <ActivityModal 
             idActivity={idActivity}
             isEditActvity={true}
@@ -47,9 +46,9 @@ export function ActivityCardOptions({
             onCloseActivityModal={handleCloseActivityModal}
          /> 
 
-         <ProgressActivityModal 
+         <ChangePhaseActivityModal 
             idActivity={idActivity}
-            phaseNow={phaseNow}
+            phaseNow={phaseNow.toUpperCase()}
             isOpenModal={isOpenProgressActivityModal}
             onCloseModal={handleCloseProgressActivityModal}
          />
@@ -66,7 +65,7 @@ export function ActivityCardOptions({
             elementAnchor={elementRef}
             handleClose={onCloseOptions}
          >
-            <PopoverItem name='Finalizar Atividade' onFunctionClick={handleOpenProgressActivityModal}>
+            <PopoverItem name='Alterar Estado' onFunctionClick={handleOpenProgressActivityModal}>
                <Stack size={18} />
             </PopoverItem>
             <PopoverItem name='Editar' onFunctionClick={handleOpenActivityModal}>
