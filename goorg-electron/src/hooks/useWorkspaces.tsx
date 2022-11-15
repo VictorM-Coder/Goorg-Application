@@ -27,8 +27,8 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
       fetchWorkspaces();
    }
 
-   async function editWorkspaceById(id: Number, data: WorkspaceReq): Promise<void> {
-      await api.put(`workspace/update/${id}`, data);
+   async function updateWorkspace(data: WorkspaceReq): Promise<void> {
+      await api.put(`workspace`, data);
       fetchWorkspaces();
    }
 
@@ -36,7 +36,7 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
       <WorkspacesContext.Provider value={{ 
          workspaces, 
          addNewWorkspace, 
-         editWorkspaceById, 
+         updateWorkspace, 
          deleteWorkspaceById 
       }}>
 
