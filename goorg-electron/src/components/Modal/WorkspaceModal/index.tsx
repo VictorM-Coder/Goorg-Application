@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Modal } from '@mui/material';
 import { ShareNetwork, X } from 'phosphor-react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { WorkspaceModalProps, WorkspaceReq } from '../../../@types/Workspace';
@@ -22,9 +22,7 @@ export function WorkspaceModal({
    isOpenWorkspaceModal, 
    onCloseWorkspaceModal 
 }: WorkspaceModalProps) {
-      
-   const isFirst = useRef(false);
-   const { addNewWorkspace, editWorkspaceById } = useWorkspaces()
+   const { addNewWorkspace, updateWorkspace } = useWorkspaces()
 
    const { 
       register, 
@@ -43,9 +41,8 @@ export function WorkspaceModal({
             clearErrors();
          });
       } else {
-         editWorkspaceById(Number(workspaceId), data).then(() => {
-            onCloseWorkspaceModal();
-         });
+         const workspacEdit = Object.assign(data, { id: workspaceId });
+         updateWorkspace(workspacEdit).then(() => onCloseWorkspaceModal());
       }  
    }
 
@@ -60,15 +57,9 @@ export function WorkspaceModal({
    }
 
    useEffect(() => {
-      // if (isFirst.current && isEditWorkspace && isOpenWorkspaceModal) {
-      //    fetchDataWorkspace();
-      // } comenta no build
-
       if (isEditWorkspace && isOpenWorkspaceModal) {
          fetchDataWorkspace();
       }
-
-      // return () => { isFirst.current = true } comenta no build
    }, [isOpenWorkspaceModal])
 
    return (
