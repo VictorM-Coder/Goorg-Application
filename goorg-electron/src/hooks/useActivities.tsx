@@ -39,8 +39,8 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       //setActivitys([...activitys, activity]);
    }
 
-   async function editActivityById(id: number, data: ActivityEdit): Promise<void> {
-      await api.put(`/activity/update/${id}`, data);
+   async function updateActivity(data: ActivityEdit): Promise<void> {
+      await api.put(`/activity`, data);
       fetchActivitys();
    }
 
@@ -49,8 +49,8 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       fetchActivitys();
    }
 
-   async function finishActivityById(id: number): Promise<void> {
-      await api.put(`activity/${id}`, { status: 'Concluida' });
+   async function updatePhase(id: number, phase: string): Promise<void> {
+      await api.put(`/activity/phase?phase=${phase}&idActivity=${id}`);
       fetchActivitys();
    }
 
@@ -58,9 +58,9 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       <ActivityContext.Provider value={{  
          activitys, 
          createActivity,
-         editActivityById,
+         updateActivity,
          deleteActivityById,   
-         finishActivityById,
+         updatePhase,
          createTask
       }}>
 
