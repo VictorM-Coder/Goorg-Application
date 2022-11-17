@@ -1,13 +1,13 @@
 import classNames from "classnames";
 
-interface ButtonProgressProps {
+interface ButtonChangePhaseProps {
    bgColor: string;
    name: string;
    isActive: string;
    handleFunctionCalback: (name: string) => void;
 }
 
-export function ButtonProgress({ bgColor, name, isActive, handleFunctionCalback }: ButtonProgressProps) {
+export function ButtonChangePhase({ bgColor, name, isActive, handleFunctionCalback }: ButtonChangePhaseProps) {
    return (
       <button 
          className={classNames(`w-28 ${bgColor} h-16 rounded font-medium border text-sm`, {

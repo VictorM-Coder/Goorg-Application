@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { Activity, ActivityContextData, ActivityEdit, ActivityReq } from "../@types/Activity";
+import { createContext, useContext, useEffect, useState } from "react";
+import { Activity, ActivityContextData, ActivityCrud } from "../@types/Activity";
 import { api } from "../services/api";
 
 export interface ActivityProviderProps {
@@ -9,7 +9,6 @@ export interface ActivityProviderProps {
 export const ActivityContext = createContext<ActivityContextData>({ } as ActivityContextData);
 
 export function ActivityProvider({ children }: ActivityProviderProps) {
-   const isFirst = useRef(false);
    const [activitys, setActivitys] = useState<Activity[]>([]);
 
    useEffect(() => {
@@ -31,7 +30,7 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       fetchActivitys();
    }
 
-   async function createActivity(data: ActivityReq): Promise<void> {
+   async function createActivity(data: ActivityCrud): Promise<void> {
       await api.post('activity', data);
       fetchActivitys();
       //const { activity } = res.data;
@@ -39,7 +38,7 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       //setActivitys([...activitys, activity]);
    }
 
-   async function updateActivity(data: ActivityEdit): Promise<void> {
+   async function updateActivity(data: ActivityCrud): Promise<void> {
       await api.put(`/activity`, data);
       fetchActivitys();
    }
@@ -59,7 +58,7 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
          activitys, 
          createActivity,
          updateActivity,
-         deleteActivityById,   
+         deleteActivity: deleteActivityById,   
          updatePhase,
          createTask
       }}>

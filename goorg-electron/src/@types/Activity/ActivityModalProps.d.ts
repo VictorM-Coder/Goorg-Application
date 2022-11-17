@@ -1,6 +1,5 @@
-export interface ActivityModalProps {
+import { ModalProps } from "../global/ModalProps";
+
+export interface ActivityModalProps extends ModalProps {
    idActivity?: number;
-   isOpenActivityModal: boolean;
-   isEditActvity?: boolean;
-   onCloseActivityModal: () => void;
 }

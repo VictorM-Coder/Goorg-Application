@@ -1,9 +1,10 @@
 import { Pencil, Stack, Trash } from "phosphor-react";
 import { useState } from "react";
 import { useActivities } from "../../../hooks";
-import { ActivityModal, DeleteConfirmModal } from "../../Modal";
-import { ChangePhaseActivityModal } from "../../Modal/ChangePhaseActivityModal";
+import { DeleteConfirmModal } from "../../Modal";
 import { PopoverItem, PopoverRoot } from "../../Popover";
+import { ActivityUpdate } from "../ActivityCrud/ActivityUpdate";
+import { ActivityUpdatePhase } from "../ActivityCrud/ActivityUpdatePhase";
 
 interface ActivityCardOptionsProps {
    idActivity: number;
@@ -25,7 +26,7 @@ export function ActivityCardOptions({
    const [isOpenActivityModal, setIsOpenActivityModal] = useState(false);
    const [isOpenProgressActivityModal, setIsOpenProgressActivityModal] = useState(false);
    
-   const { deleteActivityById } = useActivities();
+   const { deleteActivity: deleteActivityById } = useActivities();
    const idRef = optionsIsOpen ? 'simple-popover' : undefined;
    
    const handleOpenActivityModal = () => setIsOpenActivityModal(true);
@@ -39,14 +40,13 @@ export function ActivityCardOptions({
    
    return (
       <> 
-         <ActivityModal 
+         <ActivityUpdate
             idActivity={idActivity}
-            isEditActvity={true}
-            isOpenActivityModal={isOpenActivityModal}
-            onCloseActivityModal={handleCloseActivityModal}
+            isOpenModal={isOpenActivityModal}
+            onCloseModal={handleCloseActivityModal}
          /> 
 
-         <ChangePhaseActivityModal 
+         <ActivityUpdatePhase
             idActivity={idActivity}
             phaseNow={phaseNow.toUpperCase()}
             isOpenModal={isOpenProgressActivityModal}

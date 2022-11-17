@@ -2,15 +2,17 @@ import { DotsThree, Pencil, Stack, Trash } from "phosphor-react";
 import { useState, MouseEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWorkspaces } from "../../../hooks";
-import { WorkspaceModal, DeleteConfirmModal, ActivityModal } from "../../Modal";
+import { ActivityCreate } from "../../Activity/ActivityCrud/ActivityCreate";
+import { DeleteConfirmModal } from "../../Modal";
 import { PopoverItem, PopoverRoot } from "../../Popover";
+import { WorkspaceUpdate } from "../WorkspaceCrud/WorkspaceUpdate";
 
 interface WorkspaceOptionsProps {
    idWorkspace: string | undefined;
 }
 
 export function WorkspaceOptions({ idWorkspace }: WorkspaceOptionsProps) {
-   const { deleteWorkspaceById } = useWorkspaces();
+   const { deleteWorkspace: deleteWorkspaceById } = useWorkspaces();
    const navigate = useNavigate();
    
    const [isOpenNewAcitivityModal, setIsOpenNewActivityModal] = useState(false);
@@ -47,17 +49,15 @@ export function WorkspaceOptions({ idWorkspace }: WorkspaceOptionsProps) {
             <DotsThree size={24} weight="bold"/>
          </button>
 
-         <ActivityModal
-            isEditActvity={false} 
+         <ActivityCreate
             isOpenActivityModal={isOpenNewAcitivityModal} 
             onCloseActivityModal={handleCloseNewActivityModal}
          />
 
-         <WorkspaceModal 
-            isEditWorkspace={true}
-            workspaceId={idWorkspace}
-            isOpenWorkspaceModal={isOpenWorkspaceModal}
-            onCloseWorkspaceModal={handleCloseWorkspaceModal}
+         <WorkspaceUpdate 
+            idWorkspace={idWorkspace}
+            isOpenModal={isOpenWorkspaceModal}
+            onCloseModal={handleCloseWorkspaceModal}
          />
 
          <DeleteConfirmModal 

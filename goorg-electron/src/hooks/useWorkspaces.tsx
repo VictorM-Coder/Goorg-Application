@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { Workspace, WorkspaceContextData, WorkspaceProviderProps, WorkspaceReq } from '../@types/Workspace';
+import { Workspace, WorkspaceContextData, WorkspaceProviderProps } from '../@types/Workspace';
+import { WorkspaceCrud } from '../@types/Workspace/WorkspaceCrud';
 import { api } from '../services/api';
 
 const WorkspacesContext = createContext<WorkspaceContextData>({ } as WorkspaceContextData);
@@ -17,7 +18,7 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
       setWorkspaces(workspaces);
    }
 
-   async function addNewWorkspace(data: WorkspaceReq): Promise<void> {
+   async function addNewWorkspace(data: WorkspaceCrud): Promise<void> {
       const workspaceCreated = await api.post('workspace', data);
       setWorkspaces([...workspaces, workspaceCreated.data]);
    }
@@ -27,7 +28,7 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
       fetchWorkspaces();
    }
 
-   async function updateWorkspace(data: WorkspaceReq): Promise<void> {
+   async function updateWorkspace(data: WorkspaceCrud): Promise<void> {
       await api.put(`workspace`, data);
       fetchWorkspaces();
    }
@@ -35,9 +36,9 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
    return (
       <WorkspacesContext.Provider value={{ 
          workspaces, 
-         addNewWorkspace, 
+         reateWorkspace: addNewWorkspace, 
          updateWorkspace, 
-         deleteWorkspaceById 
+         deleteWorkspace: deleteWorkspaceById 
       }}>
 
          { children }
