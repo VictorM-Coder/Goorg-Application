@@ -1,9 +1,9 @@
 import { Workspace } from "./Workspace";
-import { WorkspaceReq } from "./WorkspaceReq";
+import { WorkspaceReq } from "./WorkspaceCrud";
 
 export interface WorkspaceContextData {
    workspaces: Workspace[];
-   addNewWorkspace: (data: WorkspaceReq) => Promise<void>;
-   updateWorkspace: (data: WorkspaceReq) => Promise<void>;
-   deleteWorkspaceById: (id: Number) => Promise<void>;
+   reateWorkspace: (data: WorkspaceCrud) => Promise<void>;
+   updateWorkspace: (data: WorkspaceCrud) => Promise<void>;
+   deleteWorkspace: (id: Number) => Promise<void>;
 }

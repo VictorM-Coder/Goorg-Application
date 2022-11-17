@@ -1,12 +1,10 @@
-import { Notepad } from "phosphor-react";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useActivities } from "../../../hooks";
 import { Backpage } from "../../Backpage";
 import { Header } from "../../Header";
-import { TaskModal } from "../../Modal/TaskModal";
 import { CardTasks } from "./CardTasks";
 import { HeaderActivitySelected } from "./Header";
+
 
 export function ActivitySelected() {
    const { activitys } = useActivities();

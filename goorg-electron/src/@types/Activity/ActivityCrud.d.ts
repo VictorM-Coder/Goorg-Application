@@ -1,10 +1,11 @@
-export interface ActivityReq {
+export interface ActivityCrud {
+   id?: number;
    title: string;
    description: string;
    priorityTag: {
       id: number;
    },
-   phase: string;
+   phase?: string;
    endDate: string;
    workspace: {
       id: Number;

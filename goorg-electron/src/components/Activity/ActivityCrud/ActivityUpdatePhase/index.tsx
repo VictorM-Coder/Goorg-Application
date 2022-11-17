@@ -1,19 +1,20 @@
-import { Box, Modal } from "@mui/material"
-import { Kanban } from "phosphor-react"
-import { useState } from "react";
-import { ModalProps } from "../../../@types/global/ModalProps";
-import { useActivities } from "../../../hooks";
-import { styleModal } from "../../../utils"
-import { Button } from "../../Button";
-import { HeaderModal } from "../Header";
-import { ButtonProgress } from "./ButtonProgress";
+import { Box, Modal } from '@mui/material';
+import { Kanban } from 'phosphor-react';
+import { useState } from 'react';
+
+import { ModalProps } from '../../../../@types/global/ModalProps';
+import { useActivities } from '../../../../hooks';
+import { styleModal } from '../../../../utils';
+import { Button } from '../../../Button';
+import { HeaderModal } from '../../../Modal';
+import { ButtonChangePhase } from './ButtonChangePhase';
 
 interface ProgressActivityModalProps extends ModalProps {
    idActivity: number;
    phaseNow: string;
 }
 
-export function ChangePhaseActivityModal({ 
+export function ActivityUpdatePhase({ 
    idActivity, 
    phaseNow, 
    isOpenModal, 
@@ -50,19 +51,19 @@ export function ChangePhaseActivityModal({
                   </span>
 
                   <div className="flex items-center justify-center gap-4 mb-4">
-                     <ButtonProgress 
+                     <ButtonChangePhase 
                         name="TO_DO" 
                         bgColor="bg-gray-200" 
                         isActive={phaseActive}
                         handleFunctionCalback={handleChangeProgressActive} 
                      />
-                     <ButtonProgress 
+                     <ButtonChangePhase
                         name="DOING" 
                         bgColor="bg-yellow-300" 
                         isActive={phaseActive}
                         handleFunctionCalback={handleChangeProgressActive} 
                      />
-                     <ButtonProgress 
+                     <ButtonChangePhase
                         name="DONE" 
                         bgColor="bg-green-400" 
                         isActive={phaseActive}

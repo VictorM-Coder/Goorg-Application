@@ -1,7 +1,7 @@
 import { ShareNetwork } from 'phosphor-react';
 import { useState } from 'react';
 import { Slide, Slider } from '../../components/Slider';
-import { CardWorkspaceAdd } from '../../components/Workspace/CardAddWorkspace';
+import { WorkspaceAddCard } from '../../components/Workspace';
 import { WorkspaceCard } from '../../components/Workspace/WorkspaceCard';
 import { useWorkspaces } from '../../hooks/useWorkspaces';
 import { settingsSlider } from '../../utils';
@@ -40,7 +40,7 @@ export function WorkspacesRecents() {
          <div className="mt-3 p-8 gap-4">
             <Slider settings={settingsSlider}>
                <Slide className='z-0 w-auto'>
-                  <CardWorkspaceAdd />
+                  <WorkspaceAddCard />
                </Slide>
                {
                   workspacesFilter.length > 0 

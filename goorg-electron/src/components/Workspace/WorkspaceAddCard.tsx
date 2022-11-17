@@ -1,9 +1,9 @@
 import { PlusCircle } from "phosphor-react";
 import { useState } from "react";
 import ilus_addWorkspace from '../../assets/add_workspace.svg'
-import { WorkspaceModal } from "../Modal";
+import { WorkspaceCreate } from "./WorkspaceCrud/WorkspaceCreate";
 
-export function CardWorkspaceAdd() {
+export function WorkspaceAddCard() {
    const [isOpenWorkspaceModal, setIsOpenWorkspaceModal] = useState(false);
    const handleOpenWorkspaceModal = () => setIsOpenWorkspaceModal(true);
    const handleCloseWorkspaceModal = () => setIsOpenWorkspaceModal(false);
@@ -25,10 +25,9 @@ export function CardWorkspaceAdd() {
             </div>
          </div>
          
-         <WorkspaceModal 
-            isOpenWorkspaceModal={isOpenWorkspaceModal} 
-            onCloseWorkspaceModal={handleCloseWorkspaceModal}
-            isEditWorkspace={false}
+         <WorkspaceCreate 
+            isOpenModal={isOpenWorkspaceModal} 
+            onCloseModal={handleCloseWorkspaceModal}
          />
       </>
       
