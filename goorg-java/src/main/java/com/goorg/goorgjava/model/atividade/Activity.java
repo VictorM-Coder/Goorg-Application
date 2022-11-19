@@ -29,7 +29,7 @@ public class Activity{
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "activity")
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.REMOVE)
     private List<Task> tasks;
 
     @ManyToOne()

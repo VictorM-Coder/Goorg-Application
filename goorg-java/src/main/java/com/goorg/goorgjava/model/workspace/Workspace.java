@@ -23,7 +23,7 @@ public class Workspace {
     private String description;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "workspace")
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.REMOVE)
     private List<Activity> activities;
 
     public Workspace() {
