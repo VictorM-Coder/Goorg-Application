@@ -5,7 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { WorkspaceCrud, WorkspaceModalProps } from '../../../@types/Workspace';
 import { useWorkspaces } from '../../../hooks';
-import { styleModal, WorkspaceSchemaYup } from '../../../utils';
+import { styleModal } from '../../../utils';
+import { WorkspaceSchemaYup } from '../../../validations';
 import { Button } from '../../Button';
 import { FormControl, Input, Label, Textarea } from '../../Form';
 import { HeaderModal } from '../../Modal';
