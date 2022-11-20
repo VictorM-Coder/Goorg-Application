@@ -2,6 +2,7 @@ import { File, Plus } from "phosphor-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { api } from "../../../services/api";
 import { TaskModal } from "../../Modal/TaskModal";
 import { Task } from "./Task";
 
@@ -37,7 +38,18 @@ export function CardTasks({ tasks }: CardTasksProps) {
    }
 
    function data(checkbox: any) {
-      console.log(checkbox)
+      const tasks = Object.keys(checkbox);
+      const data = tasks.map(id => {
+         return {
+            id,
+            complete: true
+         }
+      });
+      
+      console.log(data)
+
+      // api.put('task/all', data)
+      // .then(() => console.log(''));
    }
 
    return (
@@ -64,8 +76,8 @@ export function CardTasks({ tasks }: CardTasksProps) {
                      key={task.id}
                      id={task.id} 
                      title={task.title}
+                     status={task.status}
                      register={register} 
-                     handleMarkTask={handleChangeCountActivitysMarks}
                   />
                )}
 
