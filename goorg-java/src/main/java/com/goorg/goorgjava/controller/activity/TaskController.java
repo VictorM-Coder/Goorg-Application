@@ -47,7 +47,7 @@ public class TaskController {
     }
 
     @PutMapping(path = "/all")
-    public @ResponseBody List<Task> updateTasks(@Valid @RequestBody List<Task> tasks){
+    public @ResponseBody List<Task> updateTasks(@RequestBody List<Task> tasks){
         return this.taskService.updateAll(tasks);
     }
 
