@@ -62,7 +62,9 @@ public class TaskService implements ServiceInterface<Task>{
     }
 
     private void updateData(Task oldTask, Task newTask){
-        oldTask.setTitle(newTask.getTitle());
+        if (newTask.getTitle() != null) {
+            oldTask.setTitle(newTask.getTitle());
+        }
         oldTask.setComplete(newTask.getStatus());
     }
 }
