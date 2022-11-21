@@ -31,11 +31,10 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
    }
 
    async function createActivity(data: ActivityCrud): Promise<void> {
-      await api.post('activity', data);
-      fetchActivitys();
-      //const { activity } = res.data;
+      const res = await api.post('activity', data);
+      const { activity } = res.data;
 
-      //setActivitys([...activitys, activity]);
+      setActivitys([...activitys, activity]);
    }
 
    async function updateActivity(data: ActivityCrud): Promise<void> {

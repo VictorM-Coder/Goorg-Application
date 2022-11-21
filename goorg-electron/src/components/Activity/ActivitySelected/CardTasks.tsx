@@ -6,12 +6,6 @@ import { api } from "../../../services/api";
 import { TaskModal } from "../../Modal/TaskModal";
 import { Task } from "./Task";
 
-interface CardTasks {
-   checkbox: {
-      id: boolean;
-   }[]
-}
-
 interface CardTasksProps {
    tasks: {
       id: number;
@@ -23,33 +17,23 @@ interface CardTasksProps {
 export function CardTasks({ tasks }: CardTasksProps) {
    const { idAc } = useParams();
 
-   const { register, handleSubmit, formState } = useForm<CardTasks>();
-   const [countActivitysMark, setCountActivitysMark] = useState(0);
-
+   const { register, handleSubmit } = useForm();
    const [isOpenTaskModal, setIsOpenTaskModal] = useState(false);
    
    const handleOpenTaskModal = () => setIsOpenTaskModal(true);
    const handleCloseTaskModal = () => setIsOpenTaskModal(false);
-   
-   function handleChangeCountActivitysMarks(complete: boolean) {
-      (complete) 
-      ? setCountActivitysMark(countActivitysMark + 1) 
-      : setCountActivitysMark(countActivitysMark - 1)
-   }
 
    function data(checkbox: any) {
-      const tasks = Object.keys(checkbox);
-      const data = tasks.map(id => {
+      const checkboxValues = Object.entries(checkbox);
+      const tasks = checkboxValues.map(task => {
          return {
-            id,
-            complete: true
+            id: Number(task[0]),
+            complete: task[1]
          }
       });
-      
-      console.log(data)
-
-      // api.put('task/all', data)
-      // .then(() => console.log(''));
+ 
+      api.put('task/all', tasks)
+      .then(() => console.log(''));
    }
 
    return (
