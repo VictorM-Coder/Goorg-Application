@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
+@CrossOrigin
 @RequestMapping(path = "/task")
 public class TaskController {
     @Autowired
