@@ -50,8 +50,8 @@ export function WorkspaceOptions({ idWorkspace }: WorkspaceOptionsProps) {
          </button>
 
          <ActivityCreate
-            isOpenActivityModal={isOpenNewAcitivityModal} 
-            onCloseActivityModal={handleCloseNewActivityModal}
+            isOpenModal={isOpenNewAcitivityModal} 
+            onCloseModal={handleCloseNewActivityModal}
          />
 
          <WorkspaceUpdate 

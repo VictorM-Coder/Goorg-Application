@@ -1,6 +1,6 @@
 import { PlusCircle } from "phosphor-react";
 import { useState } from "react";
-import ilus_addWorkspace from '../../assets/add_workspace.svg'
+import ilus_addWorkspace from "../../assets/add_workspace.svg"
 import { WorkspaceCreate } from "./WorkspaceCrud/WorkspaceCreate";
 
 export function WorkspaceAddCard() {
