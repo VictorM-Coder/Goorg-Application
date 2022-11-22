@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Activity, ActivityContextData, ActivityCrud } from "../@types/Activity";
+import { TasksComplete } from "../@types/Tasks/TasksComplete";
 import { api } from "../services/api";
 
 export interface ActivityProviderProps {
@@ -13,11 +14,6 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
 
    useEffect(() => {
       fetchActivitys();
-      // if (isFirst.current) { // comenta na hora do build
-      //    fetchActivitys();
-      // } 
-
-      // return () => { isFirst.current = true }
    }, [])
 
    async function fetchActivitys() {
@@ -25,31 +21,33 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       setActivitys(res.data)
    }
 
-   async function deleteActivityById(id: number): Promise<void> {
+   async function deleteActivity(id: number): Promise<void> {
       await api.delete(`activity/${id}`);
       fetchActivitys();
    }
 
    async function createActivity(data: ActivityCrud): Promise<void> {
-      await api.post('activity', data);
-      fetchActivitys();
-      //const { activity } = res.data;
-
-      //setActivitys([...activitys, activity]);
+      const activity = await api.post('activity', data);
+      setActivitys([...activitys, activity.data]);
    }
 
    async function updateActivity(data: ActivityCrud): Promise<void> {
-      await api.put(`/activity`, data);
-      fetchActivitys();
-   }
-
-   async function createTask(id: number, data: any): Promise<void> {
-      await api.post(`/task/${id}`, data);
+      await api.put(`activity`, data);
       fetchActivitys();
    }
 
    async function updatePhase(id: number, phase: string): Promise<void> {
-      await api.put(`/activity/phase?phase=${phase}&idActivity=${id}`);
+      await api.put(`activity/phase?phase=${phase}&idActivity=${id}`);
+      fetchActivitys();
+   }
+
+   async function createTask(id: number, data: any): Promise<void> {
+      await api.post(`task/${id}`, data);
+      fetchActivitys();
+   }
+   
+   async function completeTasks(tasks: TasksComplete[]): Promise<void> {
+      await api.put(`task/all`, tasks);
       fetchActivitys();
    }
 
@@ -58,11 +56,11 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
          activitys, 
          createActivity,
          updateActivity,
-         deleteActivity: deleteActivityById,   
+         deleteActivity, 
          updatePhase,
-         createTask
+         createTask,
+         completeTasks
       }}>
-
          { children }
       </ActivityContext.Provider>
    )

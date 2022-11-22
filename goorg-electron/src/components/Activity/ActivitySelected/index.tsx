@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useActivities } from "../../../hooks";
 import { Backpage } from "../../Backpage";
 import { Header } from "../../Header";
-import { CardTasks } from "./CardTasks";
+import { CardTasks } from "./Tasks/TasksCard";
 import { HeaderActivitySelected } from "./Header";
 
 

@@ -1,6 +1,6 @@
+import { LinearProgress } from "@mui/material";
 import { Notepad } from "phosphor-react";
 import { TagPhase, TagPriority } from "../Badges";
-
 
 interface HeaderProps {
    title: string | undefined;
@@ -23,6 +23,7 @@ export function HeaderActivitySelected({ title, description, priorityTagName, ph
                <TagPriority name={priorityTagName} size='xs'/>
                <TagPhase name={phaseName} size='xs'/>
             </div>
+            
          </header>
          <div className="px-10 py-6 flex justify-start gap-4">
             <div 
@@ -57,6 +58,7 @@ export function HeaderActivitySelected({ title, description, priorityTagName, ph
                </div>
             </div>  
          </div>
+
       </div>
    )
 }

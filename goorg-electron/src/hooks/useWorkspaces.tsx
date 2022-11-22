@@ -19,8 +19,8 @@ export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
    }
 
    async function addNewWorkspace(data: WorkspaceCrud): Promise<void> {
-      const workspaceCreated = await api.post('workspace', data);
-      setWorkspaces([...workspaces, workspaceCreated.data]);
+      const workspace = await api.post('workspace', data);
+      setWorkspaces([...workspaces, workspace.data]);
    }
 
    async function deleteWorkspaceById(id: Number): Promise<void> {
