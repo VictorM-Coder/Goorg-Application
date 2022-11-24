@@ -1,19 +1,14 @@
 package com.goorg.goorgjava.model.atividade;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.goorg.goorgjava.model.BaseEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonSerialize
-    private Long id;
-
+public class Task extends BaseEntity {
     @NotNull
     private String title;
 

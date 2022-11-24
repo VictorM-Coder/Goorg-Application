@@ -1,8 +1,8 @@
 package com.goorg.goorgjava.model.atividade;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.enums.Phase;
+import com.goorg.goorgjava.model.BaseEntity;
 import com.goorg.goorgjava.model.workspace.Workspace;
 
 import javax.persistence.*;
@@ -14,12 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Entity
-public class Activity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonSerialize
-    private Long id;
-
+public class Activity extends BaseEntity{
     @NotNull
     private String title;
     private String description;
@@ -90,27 +85,11 @@ public class Activity{
         return Objects.hash(id, title, description, anotations, startDate, endDate, tasks, priorityTag, workspace, phase);
     }
 
-    public void iniciar(){
-        this.phase = Phase.DOING;
-    }
-
-    public void completar(){
-        this.phase = Phase.DONE;
-    }
-
-    public void reiniciar(){
-        this.phase = Phase.TO_DO;
-    }
-
     public Optional<Task> getTarefaPorId(Long id){
         for(Task task : this.tasks){
             if (task.getId().equals(id)) return Optional.of(task);
         }
         return Optional.empty();
-    }
-
-    public void completarTarefa(Task task){
-
     }
 
     public Long getId() {

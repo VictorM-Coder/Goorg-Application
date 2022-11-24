@@ -1,17 +1,13 @@
 package com.goorg.goorgjava.model.atividade;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.goorg.goorgjava.model.BaseEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class PriorityTag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonSerialize
-    private Long id;
-
+public class PriorityTag extends BaseEntity {
     @Column(unique = true)
     private String name;
 
