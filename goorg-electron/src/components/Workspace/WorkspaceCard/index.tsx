@@ -17,7 +17,9 @@ export function WorkspaceCard({ id, name, description, countActivities, color }:
                   {name}
                </span>
             </Link>
-            <p className="text-[0.8rem] text-gray-500 w-4/5">{description}</p>
+            <p className="text-[0.8rem] text-gray-500 w-4/5 break-words">
+               {description}
+            </p>
          </div>
 
          <div className="flex items-end flex-1 gap-1 mt-4">

@@ -41,7 +41,9 @@ export function ActivityCard({
                <TagPhase name={phase} size='xs'/>
             </div>
 
-            <p className="text-[0.8rem] text-gray-500 w-[50px]">{description}</p>
+            <p className="text-[0.8rem] text-gray-500 break-words">
+               {description}
+            </p>
          </div>
 
          <div className="flex text-end items-end flex-1 mt-4 gap-1 text-gray-300 justify-self-end">
