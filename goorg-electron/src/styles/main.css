@@ -16,3 +16,10 @@ body {
 .scrollbar::-webkit-scrollbar-thumb {
    @apply bg-gray-200 rounded-full hover:bg-gray-300 transition-colors
 }
+
+.MuiLinearProgress-barColorPrimary {
+   @apply bg-green-400 !important 
+}
+.MuiLinearProgress-determinate {
+   @apply bg-gray-200 !important 
+}

@@ -27,6 +27,8 @@ export function ActivitySelected() {
                  phaseName={activitySelected?.phase}
                  startDate={activitySelected?.startDate}
                  endDate={activitySelected?.endDate}
+                 tasksTotal={activitySelected?.tasks.length}
+                 tasksComplete={activitySelected?.tasks.filter(t => t.status === true).length}
                />
                <CardTasks tasks={activitySelected?.tasks}/>
             </div>
