@@ -1,6 +1,6 @@
-import { LinearProgress } from "@mui/material";
 import { Notepad } from "phosphor-react";
 import { TagPhase, TagPriority } from "../Badges";
+import { ProgressBar } from "./Tasks/ProgressBar";
 
 interface HeaderProps {
    title: string | undefined;
@@ -9,9 +9,21 @@ interface HeaderProps {
    phaseName: string | undefined;
    startDate: string | undefined;
    endDate: string | undefined;
+   tasksComplete: number | undefined;
+   tasksTotal: number | undefined;
 }
 
-export function HeaderActivitySelected({ title, description, priorityTagName, phaseName, startDate, endDate }: HeaderProps) {
+export function HeaderActivitySelected({ 
+   title, 
+   description, 
+   priorityTagName, 
+   phaseName, 
+   startDate, 
+   endDate,
+   tasksComplete,
+   tasksTotal
+}: HeaderProps) {
+
    return (
       <div className="bg-white rounded overflow-hidden h-full shadow-sm w-full flex flex-col">
          <header className="px-10 pt-6 pb-5 flex flex-col gap-2 border-b-[1px] border-b-gray-200">
@@ -22,9 +34,10 @@ export function HeaderActivitySelected({ title, description, priorityTagName, ph
             <div className="flex items-center gap-2">
                <TagPriority name={priorityTagName} size='xs'/>
                <TagPhase name={phaseName} size='xs'/>
+               <ProgressBar valueCurrent={tasksComplete} valueMax={tasksTotal}/>
             </div>
-            
          </header>
+
          <div className="px-10 py-6 flex justify-start gap-4">
             <div 
                className="flex flex-col bg-white shadow justify-center 
