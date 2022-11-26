@@ -11,13 +11,13 @@ export function WorkspaceAddCard() {
    return (
       <>
          <div 
-            className='w-[300px] bg-blue-100 flex items-center justify-between 
+            className='w-[350px] bg-blue-100 flex items-center justify-between 
             px-5 pt-2 rounded min-h-[172px]'
             role="button"
             onClick={handleOpenWorkspaceModal}
          >
             <div className='flex flex-col gap-3 text-blue-primary'>
-               <span className='font-semibold'>Adcionar Workspace</span>
+               <span className='font-semibold'>Adicionar Workspace</span>
                <PlusCircle size={44}/>
             </div>
             <div className='self-end'>
