@@ -18,6 +18,10 @@ public class Task extends BaseEntity {
     @ManyToOne()
     private Activity activity;
 
+    public Activity getActivity() {
+        return activity;
+    }
+
     public Task(){
         this.complete = false;
     }

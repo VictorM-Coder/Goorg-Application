@@ -32,6 +32,14 @@ public class Workspace extends BaseEntity {
         this.description = description;
     }
 
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
+
     @Override
     public String toString() {
         return "Workspace{" +

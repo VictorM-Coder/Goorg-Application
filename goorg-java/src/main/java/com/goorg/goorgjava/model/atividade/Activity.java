@@ -39,6 +39,14 @@ public class Activity extends BaseEntity{
     @Enumerated(value = EnumType.STRING)
     private Phase phase;
 
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void setWorkspace(Workspace workspace) {
+        this.workspace = workspace;
+    }
+
     public Activity(){
         this.phase = Phase.TO_DO;
         this.tasks = new ArrayList<>();
