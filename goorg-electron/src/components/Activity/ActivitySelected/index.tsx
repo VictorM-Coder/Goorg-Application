@@ -4,7 +4,7 @@ import { Backpage } from "../../Backpage";
 import { Header } from "../../Header";
 import { CardTasks } from "./Tasks/TasksCard";
 import { HeaderActivitySelected } from "./Header";
-
+import { Pomodoro } from "./Pomodoro";
 
 export function ActivitySelected() {
    const { activitys } = useActivities();
@@ -31,10 +31,10 @@ export function ActivitySelected() {
                  tasksComplete={activitySelected?.tasks.filter(t => t.status === true).length}
                />
                <CardTasks tasks={activitySelected?.tasks}/>
+               <Pomodoro tasks={activitySelected?.tasks}/>
             </div>
          </div>
 
-         
       </div>
    )
 }
