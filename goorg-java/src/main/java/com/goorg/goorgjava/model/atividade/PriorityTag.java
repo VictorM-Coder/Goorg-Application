@@ -2,13 +2,17 @@ package com.goorg.goorgjava.model.atividade;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.model.BaseEntity;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 public class PriorityTag extends BaseEntity {
     @Column(unique = true)
+    @NotNull
+    @UniqueElements
     private String name;
 
     public PriorityTag(String name) {
