@@ -12,7 +12,6 @@ import java.util.Objects;
 public class PriorityTag extends BaseEntity {
     @Column(unique = true)
     @NotNull
-    @UniqueElements
     private String name;
 
     public PriorityTag(String name) {

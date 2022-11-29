@@ -3,11 +3,12 @@ package com.goorg.goorgjava.dto.activity;
 import com.goorg.goorgjava.dto.BaseEntityDto;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 public class PriorityTagDto extends BaseEntityDto {
     @NotNull
-    @UniqueElements
+    @Column(unique = true)
     private String name;
 
     public String getName() {

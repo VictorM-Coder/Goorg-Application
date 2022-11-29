@@ -5,10 +5,11 @@ import com.goorg.goorgjava.dto.BaseEntityDto;
 import com.goorg.goorgjava.model.atividade.Activity;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import javax.persistence.Column;
 import java.util.List;
 
 public class WorkspaceDto extends BaseEntityDto {
-    @UniqueElements
+    @Column(unique = true)
     private String name;
 
     private String description;

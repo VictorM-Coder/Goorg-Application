@@ -1,24 +1,16 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.dto.activity.TaskDto;
+import com.goorg.goorgjava.mapper.TaskMapper;
 import com.goorg.goorgjava.model.atividade.Task;
 import com.goorg.goorgjava.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
-public class TaskService extends CrudService<Task, TaskRepository> {
-    public TaskService(TaskRepository repository) {
-        super(repository);
-    }
+public class TaskService extends CrudService<Task, TaskDto, TaskRepository, TaskMapper> {
 
-    @Transactional
-    public List<Task> updateAll(List<Task> tasks){
-        for (Task task: tasks){
-            this.update(task);
-        }
-        return tasks;
+    public TaskService(TaskRepository repository, TaskMapper mapper) {
+        super(repository, mapper);
     }
 
     @Override

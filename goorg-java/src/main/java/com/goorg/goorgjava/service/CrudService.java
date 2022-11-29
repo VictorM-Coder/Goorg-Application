@@ -1,39 +1,55 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.dto.BaseEntityDto;
 import com.goorg.goorgjava.exception.BadRequestException;
+import com.goorg.goorgjava.mapper.ICrudMapper;
 import com.goorg.goorgjava.model.BaseEntity;
-import com.goorg.goorgjava.model.atividade.Activity;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public abstract class CrudService <E extends BaseEntity, R extends CrudRepository<E, Long>> implements ICrudService<E>{
+public abstract class CrudService <E extends BaseEntity, D extends BaseEntityDto, R extends CrudRepository<E, Long>, M extends ICrudMapper<E, D>> implements ICrudService<D>{
     protected R repository;
+    protected M mapper;
 
 
     @Override
-    public E save(E e) {
-        return this.repository.save(e);
+    public D save(D d) {
+        E entity = this.mapper.toEntity(d);
+        return this.mapper.toDto(this.repository.save(entity));
     }
 
     @Override
-    public Iterable<E> saveAll(List<E> eList) {
-        return this.repository.saveAll(eList);
+    public Iterable<D> saveAll(List<D> dList) {
+        List<E> entities = new ArrayList<>();
+        List<D> dtoSaveds = new ArrayList<>();
+
+        for (D dto: dList) entities.add(this.mapper.toEntity(dto));
+        entities = (List<E>) this.repository.saveAll(entities);
+        for (E entity: entities) dtoSaveds.add(this.mapper.toDto(entity));
+
+        return  dtoSaveds;
     }
 
     @Override
-    public Iterable<E> getAll() {
-        return this.repository.findAll();
+    public Iterable<D> getAll() {
+        List<E> eList = (List<E>) this.repository.findAll();
+        List<D> dtoFound = new ArrayList<>();
+
+        for (E entity: eList) dtoFound.add(this.mapper.toDto(entity));
+
+        return dtoFound;
     }
 
     @Override
-    public Optional<E> getById(Long id) {
-        return this.repository.findById(id);
+    public Optional<D> getById(Long id) {
+        Optional<E> entity = this.repository.findById(id);
+        return entity.map(e -> this.mapper.toDto(e));
     }
 
     @Override
@@ -43,14 +59,25 @@ public abstract class CrudService <E extends BaseEntity, R extends CrudRepositor
     }
 
     @Override
-    public E update(E e) {
-        E oldE = this.findByIdOrThrowBadRequestException(e.getId());
-        this.updateData(oldE, e);
-        return this.save(oldE);
+    @Transactional
+    public void updateAll(List<D> dList) {
+        for (D dto: dList){
+            this.update(dto);
+        }
     }
 
     @Override
-    public E findByIdOrThrowBadRequestException(long id) {
+    @Transactional
+    public void update(D d) {
+        E entity = this.mapper.toEntity(d);
+        E oldE = this.findByIdOrThrowBadRequestException(entity.getId());
+        this.updateData(oldE, entity);
+        this.save(this.mapper.toDto(oldE));
+    }
+
+
+
+    protected E findByIdOrThrowBadRequestException(long id) {
         return this.repository.findById(id)
                 .orElseThrow(() -> new BadRequestException("Entity not Found"));
     }

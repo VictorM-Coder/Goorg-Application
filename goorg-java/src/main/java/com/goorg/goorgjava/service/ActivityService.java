@@ -1,7 +1,9 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.dto.activity.ActivityDto;
 import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.exception.BadRequestException;
+import com.goorg.goorgjava.mapper.ActivityMapper;
 import com.goorg.goorgjava.model.atividade.Activity;
 import com.goorg.goorgjava.model.atividade.PriorityTag;
 import com.goorg.goorgjava.repositories.ActivityRepository;
@@ -11,12 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class ActivityService extends CrudService<Activity, ActivityRepository> {
+public class ActivityService extends CrudService<Activity, ActivityDto, ActivityRepository, ActivityMapper> {
     @Autowired
     private PriorityTagRepository priorityTagRepository;
 
-    public ActivityService(ActivityRepository repository){
-        super(repository);
+    public ActivityService(ActivityRepository repository, ActivityMapper mapper) {
+        super(repository, mapper);
     }
 
     @Override
@@ -30,20 +32,20 @@ public class ActivityService extends CrudService<Activity, ActivityRepository> {
     }
 
     @Transactional
-    public Activity changePriorityTag(Long idPriorityTag, Long idActivity){
+    public ActivityDto changePriorityTag(Long idPriorityTag, Long idActivity){
         PriorityTag priorityTag = this.priorityTagRepository.findById(idPriorityTag)
                 .orElseThrow(() -> new BadRequestException("Tag not found"));
 
         Activity activity = this.findByIdOrThrowBadRequestException(idActivity);
 
         activity.setPriorityTag(priorityTag);
-        return this.save(activity);
+        return this.save(this.mapper.toDto(activity));
     }
 
     @Transactional
-    public Activity changePhase(Phase phase, Long idActivity){
+    public ActivityDto changePhase(Phase phase, Long idActivity){
         Activity activity = this.findByIdOrThrowBadRequestException(idActivity);
         activity.setPhase(phase);
-        return this.save(activity);
+        return this.save(this.mapper.toDto(activity));
     }
 }

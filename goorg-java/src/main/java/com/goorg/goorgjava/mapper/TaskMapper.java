@@ -2,7 +2,9 @@ package com.goorg.goorgjava.mapper;
 
 import com.goorg.goorgjava.dto.activity.TaskDto;
 import com.goorg.goorgjava.model.atividade.Task;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TaskMapper implements ICrudMapper<Task, TaskDto>{
     @Override
     public Task toEntity(TaskDto taskDto) {

@@ -2,7 +2,9 @@ package com.goorg.goorgjava.mapper;
 
 import com.goorg.goorgjava.dto.activity.ActivityDto;
 import com.goorg.goorgjava.model.atividade.Activity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ActivityMapper implements ICrudMapper<Activity, ActivityDto>{
     @Override
     public Activity toEntity(ActivityDto activityDto) {
