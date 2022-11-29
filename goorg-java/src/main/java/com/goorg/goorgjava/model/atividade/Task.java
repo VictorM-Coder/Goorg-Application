@@ -1,12 +1,16 @@
 package com.goorg.goorgjava.model.atividade;
 
 import com.goorg.goorgjava.model.BaseEntity;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
 public class Task extends BaseEntity {
     @NotNull
@@ -56,37 +60,5 @@ public class Task extends BaseEntity {
                 ", title='" + title + '\'' +
                 ", complete=" + complete +
                 '}';
-    }
-
-    public void completar(){
-        this.complete = true;
-    }
-
-    public void voltarEstado(){
-        this.complete = false;
-    }
-
-    public boolean getStatus(){
-        return this.complete;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setTitle(String titulo) {
-        this.title = titulo;
-    }
-
-    public void setComplete(boolean complete) {
-        this.complete = complete;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
     }
 }

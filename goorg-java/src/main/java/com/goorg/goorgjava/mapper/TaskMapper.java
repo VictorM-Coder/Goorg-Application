@@ -23,7 +23,7 @@ public class TaskMapper implements ICrudMapper<Task, TaskDto>{
         taskDto.setActivity(task.getActivity());
         taskDto.setTitle(task.getTitle());
         taskDto.setId(task.getId());
-        taskDto.setComplete(task.getStatus());
+        taskDto.setComplete(task.isComplete());
 
         return taskDto;
     }

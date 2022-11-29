@@ -3,11 +3,17 @@ package com.goorg.goorgjava.dto.workspace;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.goorg.goorgjava.dto.BaseEntityDto;
 import com.goorg.goorgjava.model.atividade.Activity;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class WorkspaceDto extends BaseEntityDto {
     @Column(unique = true)
     private String name;
@@ -17,27 +23,11 @@ public class WorkspaceDto extends BaseEntityDto {
     @JsonIgnore
     private List<Activity> activities;
 
-    public String getName() {
-        return name;
+    public WorkspaceDto() {
+        this.activities = new ArrayList<>();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Activity> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
+    public int getCountActivities(){
+        return this.activities.size();
     }
 }

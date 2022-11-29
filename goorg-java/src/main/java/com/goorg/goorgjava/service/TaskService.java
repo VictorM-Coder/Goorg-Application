@@ -18,6 +18,6 @@ public class TaskService extends CrudService<Task, TaskDto, TaskRepository, Task
         if (newTask.getTitle() != null) {
             oldTask.setTitle(newTask.getTitle());
         }
-        oldTask.setComplete(newTask.getStatus());
+        oldTask.setComplete(newTask.isComplete());
     }
 }

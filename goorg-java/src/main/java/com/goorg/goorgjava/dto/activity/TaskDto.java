@@ -2,9 +2,17 @@ package com.goorg.goorgjava.dto.activity;
 
 import com.goorg.goorgjava.dto.BaseEntityDto;
 import com.goorg.goorgjava.model.atividade.Activity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskDto extends BaseEntityDto {
     @NotNull
     private String title;
@@ -13,28 +21,4 @@ public class TaskDto extends BaseEntityDto {
     private boolean complete;
 
     private Activity activity;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isComplete() {
-        return complete;
-    }
-
-    public void setComplete(boolean complete) {
-        this.complete = complete;
-    }
-
-    public Activity getActivity() {
-        return activity;
-    }
-
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
 }

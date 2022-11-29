@@ -1,14 +1,17 @@
 package com.goorg.goorgjava.model.atividade;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.goorg.goorgjava.model.BaseEntity;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class PriorityTag extends BaseEntity {
     @Column(unique = true)
     @NotNull
@@ -47,18 +50,4 @@ public class PriorityTag extends BaseEntity {
         this.id = id;
         this.name = name;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String nome) {
-        this.name = nome;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-
 }

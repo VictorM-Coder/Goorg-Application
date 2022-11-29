@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.model.BaseEntity;
 import com.goorg.goorgjava.model.workspace.Workspace;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +15,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Getter
+@Setter
 @Entity
 public class Activity extends BaseEntity{
     @NotNull
@@ -38,14 +42,6 @@ public class Activity extends BaseEntity{
 
     @Enumerated(value = EnumType.STRING)
     private Phase phase;
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public void setWorkspace(Workspace workspace) {
-        this.workspace = workspace;
-    }
 
     public Activity(){
         this.phase = Phase.TO_DO;
@@ -98,77 +94,5 @@ public class Activity extends BaseEntity{
             if (task.getId().equals(id)) return Optional.of(task);
         }
         return Optional.empty();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public List<String> getAnotations() {
-        return anotations;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public PriorityTag getPriorityTag() {
-        return priorityTag;
-    }
-
-    public Workspace getWorkspace() {
-        return this.workspace;
-    }
-
-    public Phase getPhase() {
-        return phase;
-    }
-
-    public Long getWorkspaceId() {
-        return this.workspace.getId();
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setAnotations(List<String> anotations) {
-        this.anotations = anotations;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setPhase(Phase phase) {
-        this.phase = phase;
-    }
-
-    public void setPriorityTag(PriorityTag priorityTag) {
-        this.priorityTag = priorityTag;
     }
 }
