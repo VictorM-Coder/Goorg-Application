@@ -12,14 +12,15 @@ interface CardTasksProps {
 }
  
 export function Pomodoro({ tasks }: CardTasksProps) {
-    const tasksNotCompleted = tasks?.filter(task => {
-        if (!task.status) return task
-    })
+    const tasksNotCompleted = tasks?.filter(task => task.status == false)
+
     return (
         <div className="bg-white flex flex-col justify-center rounded shadow">
-            <header className="flex items-center gap-2 p-3 px-6">
-                <Clock className="bg-green-300 text-gray-500 p-2 rounded-full" size={36} />
-                <h1 className="font-medium text-base">Pomodoro</h1> 
+            <header className="flex items-center gap-2 px-8 py-5 pb-4">
+                <span className="bg-green-300 p-2 rounded-full">
+                    <Clock className=" text-green-500" size={20} />
+                </span>
+                <span className="text-sm text-gray-700 font-medium">Pomodoro</span> 
             </header>
             <hr className="mb-4"/>
             <Timer />

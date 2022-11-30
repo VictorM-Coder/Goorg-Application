@@ -28,7 +28,7 @@ export function ProgressBarTasks({totalTasks, totalTasksDone}: ProgressBarTasksP
     const absoluteTotalTasks = totalTasksPending + totalTasksDone;
 
     return (
-        <div className='flex flex-col my-10 text-xs gap-5'>
+        <div className='flex flex-col my-6 text-xs gap-5'>
             <div className='flex justify-center items-center gap-2 font-semibold'>
                 <div>0</div>
                 <LinearProgress className="w-96 p-1 rounded-md" variant="determinate" color="primary" value={progress} />

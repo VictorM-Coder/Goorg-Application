@@ -3,6 +3,7 @@ import { ActivitiesRecents } from "../../components/Activity/ActivitiesRecents";
 import { Header } from "../../components/Header";
 import { Board } from "../../components/Kaban/Board";
 import { useActivities } from "../../hooks"
+import { ActivityOptions } from "./ActivityOptions";
 
 export function Activitys() {
    const { activitys } = useActivities();
@@ -30,6 +31,8 @@ export function Activitys() {
             <ActivitiesRecents activities={activitys}/>
             <Board activitys={activitys}/>
          </div>
+
+         <ActivityOptions />
       </div>
    )
 }

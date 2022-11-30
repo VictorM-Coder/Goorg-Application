@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
 import { ActivityModalFields, ActivityModalProps } from '../../../@types/Activity';
-import { useActivities } from '../../../hooks';
+import { useActivities, useWorkspaces } from '../../../hooks';
 import { styleModal } from '../../../utils';
 import { ActivitySchemaYup } from '../../../validations';
 import { Button } from '../../Button';
@@ -18,14 +18,15 @@ export const optionsSelect = [
    { name: "Urgente", value: 1 },
 ]
 
-export function ActivityCreate({ isOpenModal, onCloseModal }: ActivityModalProps) {
+export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }: ActivityModalProps) {
    const { id }  = useParams();
    const { createActivity } = useActivities();
+   const { workspaces } = useWorkspaces();
    
    const { register, handleSubmit, reset, clearErrors, formState: { errors } } = 
    useForm<ActivityModalFields>({ resolver: yupResolver(ActivitySchemaYup) });
 
-   const handleSubmitData: SubmitHandler<ActivityModalFields> = ({ title, date, description, priority }) => {
+   const handleSubmitData: SubmitHandler<ActivityModalFields> = ({ title, date, description, priority, workspace }) => {
       const activity = { 
          title, description, 
          priorityTag: { 
@@ -33,7 +34,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal }: ActivityModalProps
          }, 
          endDate: date, 
          workspace: {
-            id: Number(id),
+            id: (isSelectWorkspace) ? Number(workspace) : Number(id),
          },
          phase: "TO_DO"
       }
@@ -57,6 +58,20 @@ export function ActivityCreate({ isOpenModal, onCloseModal }: ActivityModalProps
                   handleFunctionCalback={onCloseModal}
                />
                <form className="flex flex-col gap-3 px-8 pb-8" onSubmit={handleSubmit(handleSubmitData)}>
+                  {
+                     isSelectWorkspace ?
+                     <FormControl>
+                        <Label name="Workspace" htmlFor="workspace"/>
+                        <Select 
+                           name="workspace" 
+                           options={workspaces.map(w => { return { name: w.name, value: w.id } } )} 
+                           errorMessage={errors.workspace?.message}
+                           register={register}
+                        />
+                     </FormControl>
+                     : <></>
+                  }
+                  
                   <FormControl>
                      <Label name="Nome" htmlFor="name"/>
                      <Input 
