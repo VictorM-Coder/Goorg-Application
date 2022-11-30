@@ -3,4 +3,5 @@ export interface ActivityModalFields {
    description: string;
    date: string;
    priority: number;
+   workspace?: number;
 }

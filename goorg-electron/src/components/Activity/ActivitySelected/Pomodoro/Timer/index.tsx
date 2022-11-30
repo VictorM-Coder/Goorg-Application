@@ -45,7 +45,7 @@ export function Timer() {
                 <div className=" bg-gray-100 flex flex-col items-center g-1 rounded-full p-7 py-16">
                     <div className="text-2xl">00:00</div>
                     <div className="flex gap-0.5">
-                        <Play size={18} weight="fill"/>
+                        <Play size={16} weight="fill"/>
                         <button className="text-xs" onClick={() => startTimer()}>Iniciar pomodoro</button> 
                     </div>        
                 </div>

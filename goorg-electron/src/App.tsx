@@ -1,4 +1,4 @@
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { SidebarProvider } from './contexts/SidebarContext';
 import { ActivityProvider } from './hooks/useActivities';
 import { WorkspacesProvider } from './hooks/useWorkspaces';

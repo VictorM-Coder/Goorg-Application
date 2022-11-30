@@ -25,11 +25,11 @@ export function ActivitiesRecents({ activities }: ActivitiesRecentsProps) {
 
          <div className="mt-3 p-8 gap-4">
             <Slider settings={settingsSlider}>
-               <Slide>
-                  <ActivityAddCard  />
+               <Slide className="w-auto z-0">
+                  <ActivityAddCard />
                </Slide>
                { activities.map(activity => (
-                  <Slide>
+                  <Slide className="w-auto z-0" key={activity.id}>
                      <ActivityCard
                         id={activity.id}
                         title={activity.title}

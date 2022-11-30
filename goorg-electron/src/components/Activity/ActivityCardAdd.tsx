@@ -1,12 +1,13 @@
-import { PlusCircle } from "phosphor-react";
-import { useState } from "react";
-import ilus_addActivity from "../../assets/add_activity.svg"
+import { PlusCircle } from 'phosphor-react';
+import { useState } from 'react';
 
+import ilus_addActivity from '../../assets/add_activity.svg';
+import { ActivityCreate } from './ActivityCrud/ActivityCreate';
 
 export function ActivityAddCard() {
-   const [isOpenWorkspaceModal, setIsOpenWorkspaceModal] = useState(false);
-   const handleOpenWorkspaceModal = () => setIsOpenWorkspaceModal(true);
-   const handleCloseWorkspaceModal = () => setIsOpenWorkspaceModal(false);
+   const [isOpenActivityModal, setIsOpenActivityModal] = useState(false);
+   const handleOpenActivityModal = () => setIsOpenActivityModal(true);
+   const handleCloseActivityModal = () => setIsOpenActivityModal(false);
 
    return (
       <>
@@ -14,7 +15,7 @@ export function ActivityAddCard() {
             className='w-[350px] bg-orange-200 flex items-center justify-between 
             px-5 pt-2 rounded min-h-[172px]'
             role="button"
-            onClick={handleOpenWorkspaceModal}
+            onClick={handleOpenActivityModal}
          >
             <div className='flex flex-col gap-3 text-orange-500'>
                <span className='font-semibold'>Adicionar Atividade</span>
@@ -24,6 +25,12 @@ export function ActivityAddCard() {
                <img src={ilus_addActivity} alt="" className='w-full'/>
             </div>
          </div>
+
+         <ActivityCreate 
+            isOpenModal={isOpenActivityModal} 
+            onCloseModal={handleCloseActivityModal}
+            isSelectWorkspace={true}
+         />
       </>
    )
 }
