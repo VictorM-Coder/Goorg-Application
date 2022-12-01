@@ -6,8 +6,8 @@ interface SelectProps {
    errorMessage?: string | undefined;
    register: UseFormRegister<any>
    options: {
+      id: number;
       name: string;
-      value: string | number;
    }[]
 }
 
@@ -22,7 +22,7 @@ export function Select({ name, options, errorMessage, register }: SelectProps) {
             {...register(name)}         
          >
             <option value="">Selecione</option>
-            { options.map(option => <option key={option.value} value={option.value}>{option.name}</option>) }
+            { options.map(option => <option key={option.id} value={option.id}>{option.name}</option>) }
          </select>
          <span className="text-xs text-red-500">{errorMessage}</span>
       </>

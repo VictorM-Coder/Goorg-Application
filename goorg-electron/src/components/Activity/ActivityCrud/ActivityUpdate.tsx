@@ -1,11 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Modal } from '@mui/material';
 import { Notepad } from 'phosphor-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 
-import { ActivityModalFields, ActivityModalProps } from '../../../@types/Activity';
+import { ActivityModalFields, ActivityModalProps, ActvityOptionsSelect } from '../../../@types/Activity';
 import { useActivities } from '../../../hooks';
 import { api } from '../../../services/api';
 import { styleModal } from '../../../utils';
@@ -14,13 +14,9 @@ import { Button } from '../../Button';
 import { FormControl, Input, Label, Select, Textarea } from '../../Form';
 import { HeaderModal } from '../../Modal';
 
-export const optionsSelect = [
-   { name: "Importante", value: 3 },
-   { name: "Relevante", value: 2 },
-   { name: "Urgente", value: 1 },
-]
-
 export function ActivityUpdate({ idActivity, isOpenModal, onCloseModal }: ActivityModalProps) {
+   const [prioritiesTags, setPrioritiesTags] = useState<ActvityOptionsSelect[]>([]);
+
    const { id }  = useParams();
    const { updateActivity } = useActivities();
    
@@ -47,9 +43,14 @@ export function ActivityUpdate({ idActivity, isOpenModal, onCloseModal }: Activi
       setValue('priority', res.data.priorityTag.id);
    }
 
+   function getTagsPriority() {
+      api.get("priorityTag/all").then(res => setPrioritiesTags(res.data));
+   }
+
    useEffect(() => {
       if (isOpenModal) {
          fetchDataActivity(); 
+         getTagsPriority();
       }
    }, [isOpenModal])
 
@@ -97,7 +98,7 @@ export function ActivityUpdate({ idActivity, isOpenModal, onCloseModal }: Activi
                      <Label name="Prioridade" htmlFor="priority"/>
                      <Select 
                         name="priority" 
-                        options={optionsSelect} 
+                        options={prioritiesTags} 
                         errorMessage={errors.priority?.message}
                         register={register}
                      />
@@ -107,6 +108,7 @@ export function ActivityUpdate({ idActivity, isOpenModal, onCloseModal }: Activi
                      bg='bg-orange-500'
                      textColor='text-white'
                      text='Editar Atividade'
+                     icon={<Notepad size={20} />}
                   />
                </form>
             </div>

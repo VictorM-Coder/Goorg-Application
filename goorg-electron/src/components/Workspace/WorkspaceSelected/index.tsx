@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useActivities, useWorkspaces } from '../../../hooks';
 import { settingsSlider } from '../../../utils';
 import { ActivityCard } from '../../Activity/ActivityCard';
@@ -48,6 +48,7 @@ export function WorkspaceSelected() {
                               endDate={activity.endDate}
                               phase={activity.phase}
                               tasks={activity.tasks}
+                              link={`/inicio/workspace/${activity.workspaceId}/atividade/${activity.id}`}
                               nameVisible={true}
                               minWidth={true}
                            />

@@ -1,4 +1,5 @@
 import { NotePencil } from "phosphor-react";
+import { Link } from "react-router-dom";
 import { ActivityCardProps } from "../../../@types/Activity";
 import { settingsSlider } from "../../../utils";
 import { Slide, Slider } from "../../Slider";
@@ -40,9 +41,10 @@ export function ActivitiesRecents({ activities }: ActivitiesRecentsProps) {
                         endDate={activity.endDate}
                         phase={activity.phase}
                         tasks={activity.tasks}
+                        link={`/atividades/workspace/${activity.id}/atividade/${activity.id}`}
                         nameVisible={true}
                         minWidth={true}
-                     />
+                     />  
                   </Slide>
                ))}
             </Slider>

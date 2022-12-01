@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Activity, ActivityContextData, ActivityCrud } from "../@types/Activity";
+import { Activity, ActivityContextData, ActivityCrud, ActivityTag } from "../@types/Activity";
 import { TasksComplete } from "../@types/Tasks/TasksComplete";
 import { api } from "../services/api";
 
@@ -51,6 +51,10 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       fetchActivitys();
    }
 
+   async function createTag(tag: ActivityTag) {
+      await api.post(`priorityTag`, tag);
+   }
+
    return (
       <ActivityContext.Provider value={{  
          activitys, 
@@ -59,7 +63,8 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
          deleteActivity, 
          updatePhase,
          createTask,
-         completeTasks
+         completeTasks,
+         createTag
       }}>
          { children }
       </ActivityContext.Provider>

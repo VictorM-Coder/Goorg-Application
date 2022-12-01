@@ -1,24 +1,21 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Modal } from '@mui/material';
 import { Notepad } from 'phosphor-react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-
-import { ActivityModalFields, ActivityModalProps } from '../../../@types/Activity';
+import { ActivityModalFields, ActivityModalProps, ActvityOptionsSelect } from '../../../@types/Activity';
 import { useActivities, useWorkspaces } from '../../../hooks';
+import { api } from '../../../services/api';
 import { styleModal } from '../../../utils';
 import { ActivitySchemaYup } from '../../../validations';
 import { Button } from '../../Button';
 import { FormControl, Input, Label, Select, Textarea } from '../../Form';
 import { HeaderModal } from '../../Modal';
 
-export const optionsSelect = [
-   { name: "Importante", value: 3 },
-   { name: "Relevante", value: 2 },
-   { name: "Urgente", value: 1 },
-]
-
 export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }: ActivityModalProps) {
+   const [prioritiesTags, setPrioritiesTags] = useState<ActvityOptionsSelect[]>([]);
+
    const { id }  = useParams();
    const { createActivity } = useActivities();
    const { workspaces } = useWorkspaces();
@@ -29,18 +26,24 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }:
    const handleSubmitData: SubmitHandler<ActivityModalFields> = ({ title, date, description, priority, workspace }) => {
       const activity = { 
          title, description, 
-         priorityTag: { 
-            id: Number(priority), 
-         }, 
+         priorityTag: { id: Number(priority) }, 
          endDate: date, 
-         workspace: {
-            id: (isSelectWorkspace) ? Number(workspace) : Number(id),
-         },
+         workspace: { id: (isSelectWorkspace) ? Number(workspace) : Number(id)},
          phase: "TO_DO"
       }
 
       createActivity(activity).then(() => { onCloseModal(), reset(), clearErrors() });
    }
+
+   function getTagsPriority() {
+      api.get("priorityTag/all").then(res => setPrioritiesTags(res.data));
+   }
+
+   useEffect(() => {
+      if (isOpenModal) {
+         getTagsPriority();
+      }
+   }, [isOpenModal])
 
    return (
       <Modal 
@@ -64,7 +67,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }:
                         <Label name="Workspace" htmlFor="workspace"/>
                         <Select 
                            name="workspace" 
-                           options={workspaces.map(w => { return { name: w.name, value: w.id } } )} 
+                           options={workspaces.map(w => { return { name: w.name, id: w.id } } )} 
                            errorMessage={errors.workspace?.message}
                            register={register}
                         />
@@ -100,7 +103,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }:
                      <Label name="Prioridade" htmlFor="priority"/>
                      <Select 
                         name="priority" 
-                        options={optionsSelect} 
+                        options={prioritiesTags} 
                         errorMessage={errors.priority?.message}
                         register={register}
                      />
@@ -110,6 +113,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }:
                      bg='bg-orange-500'
                      textColor='text-white'
                      text='Nova Atividade'
+                     icon={<Notepad size={20}/>}
                   />
                </form>
             </div>

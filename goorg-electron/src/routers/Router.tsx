@@ -15,6 +15,7 @@ export function Router() {
          <Route path="/inicio/workspace/:id" element={ <MainLayout page={ <WorkspaceSelected /> } />} />
          <Route path="/inicio/workspace/:id/atividade/:idAc" element={ <MainLayout page={ <ActivitySelected /> } />} />
          <Route path="/atividades" element={ <MainLayout page={ <Activitys /> } />}/>
+         <Route path="/atividades/workspace/:id/atividade/:idAc" element={ <MainLayout page={ <ActivitySelected /> } />}/>
       </Routes>
    )
 }

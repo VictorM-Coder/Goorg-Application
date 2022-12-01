@@ -5,6 +5,8 @@ import { ActivityCrud } from './ActivityCrud';
 import { ActivityContextData } from "./ActivityContextData";
 import { ActivityModalFields } from './ActivityModalFields';
 import { ActivityModalProps } from './ActivityModalProps';
+import { ActivityTag } from './ActivityTag';
+import { ActvityOptionsSelect } from './ActivityOptionsSelect';
 
 export type { 
    Activity, 
@@ -13,5 +15,7 @@ export type {
    ActivityCardProps, 
    ActivityCrud, 
    ActivityModalFields,
-   ActivityModalProps 
+   ActivityModalProps,
+   ActivityTag,
+   ActvityOptionsSelect
 };
