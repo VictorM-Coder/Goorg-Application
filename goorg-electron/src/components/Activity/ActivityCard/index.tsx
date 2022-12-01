@@ -12,7 +12,7 @@ export function ActivityCard({
    endDate,
    phase,
    priorityTag,
-   workspaceId,
+   link,
    minWidth = false }: ActivityCardProps) {
       
    const [elementRef, setElementRef] = useState<HTMLButtonElement | null>(null);
@@ -32,7 +32,7 @@ export function ActivityCard({
          </header>
          
          <div>
-            <Link to={`/inicio/workspace/${workspaceId}/atividade/${id}`}>
+            <Link to={link}>
                <span className={`text-sm font-medium`}>{title}</span>
             </Link>
          

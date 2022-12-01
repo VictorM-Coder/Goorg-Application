@@ -1,4 +1,4 @@
-import { DotsThree, Pencil, Stack } from "phosphor-react";
+import { DotsThree, BookmarkSimple, Stack } from "phosphor-react";
 import { useState, MouseEvent } from "react";
 import { ActivityCreate } from "../../components/Activity";
 import { PopoverItem, PopoverRoot } from "../../components/Popover";
@@ -53,7 +53,7 @@ export function ActivityOptions() {
                <Stack size={18} />
             </PopoverItem>
             <PopoverItem name='Criar Tag' onFunctionClick={handleOpenActivityTagModal}>
-               <Pencil size={18} />
+               <BookmarkSimple size={18} />
             </PopoverItem>
          </PopoverRoot>
       </div>

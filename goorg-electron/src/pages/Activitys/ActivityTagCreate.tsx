@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Modal } from '@mui/material';
-import { IdentificationCard } from 'phosphor-react';
-import { useForm } from 'react-hook-form';
+import { BookmarkSimple } from 'phosphor-react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { ModalProps } from '../../@types/global/ModalProps';
 import { Button } from '../../components/Button';
@@ -11,14 +11,29 @@ import { styleModal } from '../../utils';
 import { ActivityTagSchemaYup } from '../../validations';
 
 import colorpicker from '../../assets/colorpicker.png'
+import { useActivities } from '../../hooks';
 
 interface ActivityTagModalFields {
    name: string;
+   color: string;
 }
 
 export function ActivityTagCreate({ isOpenModal, onCloseModal }: ModalProps) {
-   const { register, handleSubmit, formState: { errors } } = 
+   const { register, reset, handleSubmit, watch, clearErrors, getValues, formState: { errors } } = 
    useForm<ActivityTagModalFields>({ resolver: yupResolver(ActivityTagSchemaYup) })
+
+   const { createTag } = useActivities();
+
+   console.log(watch('color'))
+
+   const handleSubmitData:SubmitHandler<ActivityTagModalFields> = (data) => {
+      createTag({ name: data.name }).then(() => { onCloseModal(), reset() })
+   }
+
+   function getColorTag(): string {
+      if (watch('color')) return watch('color')
+      else return '#FFF'
+   }
 
    return (
       <Modal 
@@ -32,39 +47,51 @@ export function ActivityTagCreate({ isOpenModal, onCloseModal }: ModalProps) {
                <HeaderModal 
                   title='Nova TAG'
                   textColor="text-blue-400"
-                  icon={<IdentificationCard size={24} weight="fill" />}
-                  handleFunctionCalback={onCloseModal}
+                  icon={<BookmarkSimple size={22} />}
+                  handleFunctionCalback={() => { reset(), clearErrors(), onCloseModal()}}
                />
 
                <div className='px-8 py-4 pb-8 flex flex-col justify-center items-center gap-4'>
-                  <form className='w-full flex flex-col gap-3'>
+                  <form className='w-full flex flex-col gap-3' onSubmit={handleSubmit(handleSubmitData)}>
                      <FormControl>
                         <Label name="Nome" htmlFor="name"/>
                         <Input 
                            type="text" 
-                           name="title" 
+                           name="name" 
                            errorMensage={errors.name?.message}
                            register={register}
                         />
                      </FormControl>
                      <FormControl>
+                        <Label name="Cor da Badge" htmlFor="color"/>
                         <div className='flex items-center gap-2 relative'>
                            <label htmlFor="color" className='border border-gray-200 px-3 py-2 rounded'>
                               <img src={colorpicker} alt="" className='w-6' />
                            </label>
-                           <input type="color" id='color' name='color' className='w-0 invisible absolute top-2 left-0'/>
-                           <span className='border border-gray-200 w-full text-xs p-3 rounded'>
-                              Pré visualização
-                           </span>
+                           <input 
+                              type="color" 
+                              id='color' 
+                              className='w-0 invisible absolute top-2 left-0 text-sm'
+                              {...register('color')}
+                           />
+                           <div className='flex items-center justify-between border border-gray-200 w-full text-xs p-2 rounded'>
+                              <span>Pré visualização</span>
+                              <span 
+                                 style={{ backgroundColor: watch('color')}} 
+                                 className="py-1 px-3 rounded-full text-xs text-white"
+                              >
+                                 { watch('name') }
+                              </span>
+                           </div>
                         </div>     
                      </FormControl>
-                  </form>
-                  <Button
-                     bg='bg-blue-400'
-                     textColor='text-white'
-                     text='Criar Nova TAG'
-                     onClickFunction={onCloseModal}
-                  />
+                     <Button
+                        bg='bg-blue-400'
+                        textColor='text-white'
+                        text='Criar Nova TAG'
+                        icon={<BookmarkSimple size={20} />}
+                     />
+                  </form>             
                </div>
             </div>
          </Box>

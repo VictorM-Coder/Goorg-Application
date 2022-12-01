@@ -19,7 +19,7 @@ export function Backpage({ title }: BackpageProps) {
          onClick={handleNavigateForPage}
       >
          <ArrowLeft size={18} />
-         { title }
+         voltar
       </button>
    )
 }
