@@ -17,7 +17,7 @@ export function ActivitiesRecents({ activities }: ActivitiesRecentsProps) {
                <span className="bg-orange-200 p-2 inline-block rounded-full text-orange-500">
                   <NotePencil weight="fill" size={22} />
                </span>
-               <span className="text-sm text-gray-700 font-medium">Atividades mais Recentes</span>
+               <span className="text-sm text-gray-700 font-medium">Atividades</span>
             </div>
          </header>
 
