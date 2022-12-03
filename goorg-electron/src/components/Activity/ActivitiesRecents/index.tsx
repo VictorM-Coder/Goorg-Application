@@ -1,5 +1,4 @@
 import { NotePencil } from "phosphor-react";
-import { Link } from "react-router-dom";
 import { ActivityCardProps } from "../../../@types/Activity";
 import { settingsSlider } from "../../../utils";
 import { Slide, Slider } from "../../Slider";

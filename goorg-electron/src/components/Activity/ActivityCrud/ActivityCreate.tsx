@@ -13,7 +13,7 @@ import { Button } from '../../Button';
 import { FormControl, Input, Label, Select, Textarea } from '../../Form';
 import { HeaderModal } from '../../Modal';
 
-export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }: ActivityModalProps) {
+export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace, phase }: ActivityModalProps) {
    const [prioritiesTags, setPrioritiesTags] = useState<ActvityOptionsSelect[]>([]);
 
    const { id }  = useParams();
@@ -29,7 +29,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace }:
          priorityTag: { id: Number(priority) }, 
          endDate: date, 
          workspace: { id: (isSelectWorkspace) ? Number(workspace) : Number(id)},
-         phase: "TO_DO"
+         phase: phase ? phase : "TO_DO"
       }
 
       createActivity(activity).then(() => { onCloseModal(), reset(), clearErrors() });

@@ -29,7 +29,7 @@ export function Activitys() {
             </div>
             
             <ActivitiesRecents activities={activitys}/>
-            <Board activitys={activitys}/>
+            <Board activitys={activitys} linkRedirectActivity={`/atividades`}/>
          </div>
 
          <ActivityOptions />

@@ -5,10 +5,13 @@ import { ActivityCard } from "../Activity/ActivityCard";
 
 interface CollumProps {
    name: string;
+   refPhase: string;
    activitys: Activity[];
+   linkRedirectActivity: string;
+   onOpenActivityModal: (phase: string) => void;
 }
 
-export function Column({ name, activitys }: CollumProps) {
+export function Column({ name, refPhase, activitys, linkRedirectActivity, onOpenActivityModal }: CollumProps) {
    return (
       <div>
          <span className={classNames('border-b-2  text-sm font-medium block', {
@@ -34,10 +37,13 @@ export function Column({ name, activitys }: CollumProps) {
                   workspaceId={activity.workspaceId}
                   tasks={activity.tasks}
                   nameVisible={false}
+                  link={`${linkRedirectActivity}/workspace/${activity.workspaceId}/atividade/${activity.id}`}
                />
             ))}                 
          </div>
-         <button className="block w-full p-4 mt-6 rounded border border-dashed border-gray-200 hover:bg-white transition-colors">
+         <button 
+            onClick={() => onOpenActivityModal(refPhase)}
+            className="block w-full p-4 mt-6 rounded border border-dashed border-gray-200 hover:bg-white transition-colors">
             <span className="text-sm font-medium flex items-center justify-center gap-1 text-blue-primary">
                <Plus size={16} weight="bold"/>
                Adicionar Atividade

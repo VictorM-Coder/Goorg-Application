@@ -56,7 +56,7 @@ export function WorkspaceSelected() {
                      ))
                   }
                </Slider>
-               <Board activitys={activitiesFilter}/>
+               <Board activitys={activitiesFilter} linkRedirectActivity={`/inicio`}/>
             </div>
             <WorkspaceOptions idWorkspace={id}/>
          </div>
