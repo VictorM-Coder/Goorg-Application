@@ -1,7 +1,11 @@
+import { ActivitiesRecents } from "../../components/Activity/ActivitiesRecents";
 import { Header } from "../../components/Header";
+import { useActivities } from "../../hooks";
 import { WorkspacesRecents } from "./WorkspacesRecents";
 
 export function Home() { 
+   const { activitys } = useActivities()
+
    return (
       <div >
          <Header />
@@ -20,6 +24,7 @@ export function Home() {
             </div>
 
             <WorkspacesRecents />
+            <ActivitiesRecents activities={activitys}/>
          </div>
       </div>
    )

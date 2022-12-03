@@ -19,20 +19,13 @@ interface ActivityTagModalFields {
 }
 
 export function ActivityTagCreate({ isOpenModal, onCloseModal }: ModalProps) {
-   const { register, reset, handleSubmit, watch, clearErrors, getValues, formState: { errors } } = 
+   const { register, reset, handleSubmit, watch, clearErrors, formState: { errors } } = 
    useForm<ActivityTagModalFields>({ resolver: yupResolver(ActivityTagSchemaYup) })
 
    const { createTag } = useActivities();
 
-   console.log(watch('color'))
-
    const handleSubmitData:SubmitHandler<ActivityTagModalFields> = (data) => {
       createTag({ name: data.name }).then(() => { onCloseModal(), reset() })
-   }
-
-   function getColorTag(): string {
-      if (watch('color')) return watch('color')
-      else return '#FFF'
    }
 
    return (
