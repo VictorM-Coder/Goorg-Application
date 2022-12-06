@@ -1,9 +1,12 @@
 package com.goorg.goorgjava.service;
 
 import com.goorg.goorgjava.dto.activity.ActivityDto;
+import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.mapper.ActivityMapper;
+import com.goorg.goorgjava.mapper.PriorityTagMapper;
 import com.goorg.goorgjava.model.activity.Activity;
+import com.goorg.goorgjava.model.activity.PriorityTag;
 import com.goorg.goorgjava.repositories.ActivityRepository;
 import com.goorg.goorgjava.repositories.PriorityTagRepository;
 import com.goorg.goorgjava.util.creator.creators.ActivityCreator;
@@ -28,6 +31,8 @@ public class ActivityServiceTest implements ServiceTest{
 
     @Autowired
     private ActivityMapper activityMapper;
+    @Autowired
+    private PriorityTagMapper priorityTagMapper;
 
     private final ActivityCreator creator = new ActivityCreator();
 
@@ -141,16 +146,37 @@ public class ActivityServiceTest implements ServiceTest{
 
     @Test
     void changePriorityTag_When_Success(){
+        Activity validActivity = this.creator.createValidItem();
+        PriorityTag newPriorityTag = new PriorityTag(1L,"nova tag");
+        when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(validActivity));
+        when(this.repository.save(ArgumentMatchers.any())).thenAnswer(invocation -> invocation.getArguments()[0]);
+        when(this.priorityTagRepository.findById(1L)).thenReturn(Optional.of(newPriorityTag));
 
+        ActivityDto updatedActivityDto = this.activityService.changePriorityTag(1L, 1L);
+
+        Assertions.assertEquals(validActivity, activityMapper.toEntity(updatedActivityDto));
+        Assertions.assertEquals(updatedActivityDto.getPriorityTag(), priorityTagMapper.toDto(newPriorityTag));
     }
 
     @Test
     void changePhase_ChangeActivityPhase_When_Success(){
+        Activity validActivity = this.creator.createValidItem();
+        Phase newPhase = Phase.DOING;
+        when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+        when(this.repository.save(ArgumentMatchers.any())).thenAnswer(invocation -> invocation.getArguments()[0]);
 
+        ActivityDto activityDtoUpdated = this.activityService.changePhase(newPhase, 1L);
+
+        Assertions.assertEquals(activityDtoUpdated.getPhase(), newPhase);
+        Assertions.assertEquals(validActivity, activityMapper.toEntity(activityDtoUpdated));
     }
 
     @Test
     void changePhase_ThrowsBadRequestException_When_OptionalEmpty(){
+        Phase newPhase = Phase.DOING;
+        Mockito.when(this.repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
+        Mockito.when(this.repository.save(ArgumentMatchers.any())).thenAnswer(invocation -> invocation.getArguments()[0]);
 
+        Assertions.assertThrows(BadRequestException.class , () -> this.activityService.changePhase(newPhase, 1L));
     }
 }
