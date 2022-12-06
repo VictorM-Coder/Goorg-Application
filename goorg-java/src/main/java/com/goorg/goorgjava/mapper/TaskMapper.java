@@ -13,6 +13,7 @@ public class TaskMapper implements ICrudMapper<Task, TaskDto>{
         task.setTitle(taskDto.getTitle());
         task.setId(taskDto.getId());
         task.setComplete(taskDto.isComplete());
+        task.setFromPomodoro(taskDto.isFromPomodoro());
 
         return task;
     }
@@ -24,6 +25,7 @@ public class TaskMapper implements ICrudMapper<Task, TaskDto>{
         taskDto.setTitle(task.getTitle());
         taskDto.setId(task.getId());
         taskDto.setComplete(task.isComplete());
+        taskDto.setFromPomodoro(task.isFromPomodoro());
 
         return taskDto;
     }
