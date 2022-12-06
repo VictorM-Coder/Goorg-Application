@@ -25,12 +25,15 @@ public class Task extends BaseEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Activity activity;
 
+    private boolean isFromPomodoro;
+
     public Activity getActivity() {
         return activity;
     }
 
     public Task(){
         this.complete = false;
+        this.isFromPomodoro = false;
     }
 
     public Task(String title){
