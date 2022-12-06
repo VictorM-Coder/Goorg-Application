@@ -9,6 +9,7 @@ export interface Activity {
    }[]
    priorityTag: {
       name: string;
+      color: string;
    },
    phase: string;
    endDate: string;
