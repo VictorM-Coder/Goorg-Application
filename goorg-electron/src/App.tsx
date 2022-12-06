@@ -1,5 +1,4 @@
 import { HashRouter } from 'react-router-dom';
-import { LatestDatasContext, LatestDatasProvider } from './contexts/LatestDatas';
 import { SidebarProvider } from './contexts/SidebarContext';
 import { ActivityProvider } from './hooks/useActivities';
 import { WorkspacesProvider } from './hooks/useWorkspaces';
@@ -10,11 +9,9 @@ export function App() {
     <HashRouter>
      <WorkspacesProvider>
       <ActivityProvider>
-        <LatestDatasProvider>
-          <SidebarProvider>
-            <Router />
-          </SidebarProvider>
-        </LatestDatasProvider>
+        <SidebarProvider>
+          <Router />
+        </SidebarProvider>
       </ActivityProvider>
      </WorkspacesProvider>
     </HashRouter>
