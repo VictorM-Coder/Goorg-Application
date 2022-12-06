@@ -12,6 +12,7 @@ public class WorkspaceCreator implements Creator<Workspace> {
         return new Workspace(1L, "workspace", "descrição");
     }
 
+    
     @Override
     public List<Workspace> createValidItemsList(){
         List<Workspace> workspaces = new ArrayList<>();
