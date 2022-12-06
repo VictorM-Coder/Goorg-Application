@@ -7,7 +7,7 @@ interface CardTasksProps {
     tasks: {
        id: number;
        title: string;
-       status: boolean;
+    complete: boolean;
     }[] | undefined;
  }
 
@@ -23,7 +23,7 @@ export function TasksPomodoro({ tasks }: CardTasksProps) {
             <form>
                 <div className="flex flex-col gap-4">
                     { tasks?.map(task => 
-                        <Task key={task.id} id={task.id} title={task.title} status={task.status} register={register} />
+                        <Task key={task.id} id={task.id} title={task.title} complete={task.complete} register={register} />
                     )}
 
                     <div

@@ -30,8 +30,10 @@ export function TaskCreate({
    const { register, handleSubmit } = useForm<ActivityModalFields>({ resolver: yupResolver(TaskSchemaYup)});
 
    const handleSubmitData: SubmitHandler<ActivityModalFields> =  ({ title }) => {
-      createTask(Number(idActivity), { title: title })
-      .then(() => onCloseTaskModal());
+      createTask({
+         title, 
+         activity: { id: idActivity }
+      }).then(onCloseTaskModal);
    }
 
    return (

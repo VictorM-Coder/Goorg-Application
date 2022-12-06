@@ -7,12 +7,12 @@ interface CardTasksProps {
     tasks: {
        id: number;
        title: string;
-       status: boolean;
+       complete: boolean;
     }[] | undefined;
 }
  
 export function Pomodoro({ tasks }: CardTasksProps) {
-    const tasksNotCompleted = tasks?.filter(task => task.status == false)
+    const tasksNotCompleted = tasks?.filter(task => task.complete == false)
 
     return (
         <div className="bg-white flex flex-col justify-center rounded shadow">

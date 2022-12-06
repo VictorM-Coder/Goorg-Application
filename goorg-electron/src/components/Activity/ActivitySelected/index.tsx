@@ -28,7 +28,7 @@ export function ActivitySelected() {
                  startDate={activitySelected?.startDate}
                  endDate={activitySelected?.endDate}
                  tasksTotal={activitySelected?.tasks.length}
-                 tasksComplete={activitySelected?.tasks.filter(t => t.status === true).length}
+                 tasksComplete={activitySelected?.tasks.filter(t => t.complete === true).length}
                />
                <CardTasks tasks={activitySelected?.tasks}/>
                <Pomodoro tasks={activitySelected?.tasks}/>

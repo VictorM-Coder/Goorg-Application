@@ -5,21 +5,23 @@ import { useActivities } from "../../../../../hooks";
 interface TaskProps {
    id: number;
    title: string;
-   status: boolean;
+   complete: boolean;
    register: UseFormRegister<any>
 }
 
-export function Task({ register, id, title, status }: TaskProps) {
-   const [complete, setComplete] = useState(status);
+export function Task({ register, id, title, complete }: TaskProps) {
+   const [checked, setChecked] = useState(complete);
    const { completeTasks } = useActivities();
 
    async function handleClickTask() {
-      if (status) {
+      if (complete) {
          await completeTasks([{ id, complete: false }]);
       }
          
-      setComplete(!complete);
+      setChecked(!complete);
    }
+
+   console.log(complete)
 
    return (
       <div className="bg-gray-100 p-4 rounded shadow relative after:content-[''] 
@@ -29,7 +31,7 @@ export function Task({ register, id, title, status }: TaskProps) {
             <input 
                type="checkbox" 
                id={id.toString()} 
-               checked={complete}
+               checked={checked}
                onClick={handleClickTask}
                {...register(id.toString())}
                className="w-4 h-4 accent-cyan-300"

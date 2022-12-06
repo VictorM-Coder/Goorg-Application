@@ -6,15 +6,15 @@ import { useParams } from 'react-router-dom';
 import { TasksComplete } from '../../../../../@types/Tasks/TasksComplete';
 
 import { useActivities } from '../../../../../hooks';
-import { TaskModal } from '../../../../Modal/TaskModal';
 import { CompleteTasks } from '../CompleteTasks';
+import { TaskCreate } from '../TaskCrud/TaskCreate';
 import { Task } from './Task';
 
 interface CardTasksProps {
    tasks: {
       id: number;
       title: string;
-      status: boolean;
+      complete: boolean;
    }[] | undefined;
 }
 
@@ -25,7 +25,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
 
    useEffect(() => {
       let count = 0;
-      tasks?.filter(item => item.status === true).forEach(item => count++)
+      tasks?.filter(item => item.complete === true).forEach(item => count++)
       setCountTasksComplete(count);
    }, [tasks])
 
@@ -79,7 +79,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
 
             <div className="flex flex-col px-8 py-5 gap-4">
                { tasks?.map(task => 
-                  <Task key={task.id} id={task.id} title={task.title} status={task.status} register={register} />
+                  <Task key={task.id} id={task.id} title={task.title} complete={task.complete} register={register} />
                )}
 
                <div
@@ -97,7 +97,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
             </div>     
          </form>
 
-         <TaskModal 
+         <TaskCreate 
             idActivity={idAc as string}
             isOpenTaskModal={isOpenTaskModal}
             onCloseTaskModal={handleCloseTaskModal}
