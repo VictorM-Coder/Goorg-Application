@@ -1,59 +1,28 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.dto.activity.ActivityDto;
 import com.goorg.goorgjava.enums.Phase;
 import com.goorg.goorgjava.exception.BadRequestException;
-import com.goorg.goorgjava.model.atividade.Activity;
-import com.goorg.goorgjava.model.atividade.PriorityTag;
+import com.goorg.goorgjava.mapper.ActivityMapper;
+import com.goorg.goorgjava.model.activity.Activity;
+import com.goorg.goorgjava.model.activity.PriorityTag;
 import com.goorg.goorgjava.repositories.ActivityRepository;
 import com.goorg.goorgjava.repositories.PriorityTagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
 @Service
-@Component("ActivityService")
-public class ActivityService implements ServiceInterface<Activity> {
-    @Autowired
-    private ActivityRepository activityRepository;
-
+public class ActivityService extends CrudService<Activity, ActivityDto, ActivityRepository, ActivityMapper> {
     @Autowired
     private PriorityTagRepository priorityTagRepository;
 
-    @Override
-    @Transactional
-    public Activity save(Activity activity){
-        return this.activityRepository.save(activity);
+    public ActivityService(ActivityRepository repository, ActivityMapper mapper) {
+        super(repository, mapper);
     }
 
     @Override
-    @Transactional
-    public Iterable<Activity> saveAll(List<Activity> activities){
-        return this.activityRepository.saveAll(activities);
-    }
-
-    @Override
-    public Iterable<Activity> getAll(){
-        return this.activityRepository.findAll();
-    }
-
-    @Override
-    public Optional<Activity> getById(Long id) {
-        return this.activityRepository.findById(id);
-    }
-
-    @Override
-    public Activity update(Activity activity) {
-        Activity oldActivity = this.findByIdOrThrowBadRequestException(activity.getId());
-        this.updateData(oldActivity, activity);
-        return this.save(oldActivity);
-    }
-
-    private void updateData(Activity oldActivity, Activity newActivity){
+    protected void updateData(Activity oldActivity, Activity newActivity){
         oldActivity.setTitle(newActivity.getTitle());
         oldActivity.setDescription(newActivity.getDescription());
         oldActivity.setPhase(newActivity.getPhase());
@@ -62,32 +31,21 @@ public class ActivityService implements ServiceInterface<Activity> {
         oldActivity.setAnotations(newActivity.getAnotations());
     }
 
-    public Activity findByIdOrThrowBadRequestException(long id) {
-        return activityRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Activity not Found"));
-    }
-
-    @Override
-    public void delete(Long id) {
-        Activity deletedActivity = findByIdOrThrowBadRequestException(id);
-        this.activityRepository.delete(deletedActivity);
-    }
-
     @Transactional
-    public Activity changePriorityTag(Long idPriorityTag, Long idActivity){
+    public ActivityDto changePriorityTag(Long idPriorityTag, Long idActivity){
         PriorityTag priorityTag = this.priorityTagRepository.findById(idPriorityTag)
                 .orElseThrow(() -> new BadRequestException("Tag not found"));
 
         Activity activity = this.findByIdOrThrowBadRequestException(idActivity);
 
         activity.setPriorityTag(priorityTag);
-        return this.save(activity);
+        return this.save(this.mapper.toDto(activity));
     }
 
     @Transactional
-    public Activity changePhase(Phase phase, Long idActivity){
+    public ActivityDto changePhase(Phase phase, Long idActivity){
         Activity activity = this.findByIdOrThrowBadRequestException(idActivity);
         activity.setPhase(phase);
-        return this.activityRepository.save(activity);
+        return this.save(this.mapper.toDto(activity));
     }
 }

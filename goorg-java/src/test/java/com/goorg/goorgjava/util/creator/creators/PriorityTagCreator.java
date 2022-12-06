@@ -1,6 +1,6 @@
 package com.goorg.goorgjava.util.creator.creators;
 
-import com.goorg.goorgjava.model.atividade.PriorityTag;
+import com.goorg.goorgjava.model.activity.PriorityTag;
 import com.goorg.goorgjava.util.creator.Creator;
 
 import java.util.ArrayList;

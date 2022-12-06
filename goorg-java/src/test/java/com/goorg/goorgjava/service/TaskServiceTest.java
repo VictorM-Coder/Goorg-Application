@@ -1,7 +1,9 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.dto.activity.TaskDto;
 import com.goorg.goorgjava.exception.BadRequestException;
-import com.goorg.goorgjava.model.atividade.Task;
+import com.goorg.goorgjava.mapper.TaskMapper;
+import com.goorg.goorgjava.model.activity.Task;
 import com.goorg.goorgjava.repositories.TaskRepository;
 import com.goorg.goorgjava.util.creator.creators.TaskCreator;
 import org.junit.jupiter.api.Assertions;
@@ -16,134 +18,119 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
 public class TaskServiceTest implements ServiceTest{
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private TaskMapper taskMapper;
+
     private final TaskCreator creator = new TaskCreator();
 
     @MockBean
-    private TaskRepository taskRepository;
+    private TaskRepository repository;
 
     @Override
     @Test
     @DisplayName("Uma tarefa é salva corretamente")
     public void save_PersistItem_When_Sucess(){
-        Mockito.when(this.taskRepository.save(this.creator.createValidItem())).thenReturn(this.creator.createValidItem());
+        Task task = creator.createValidItem();
+        TaskDto taskDto = taskMapper.toDto(task);
 
-        Task taskCreated = this.taskService.save(this.creator.createValidItem());
+        when(repository.save(task)).thenReturn(task);
+        TaskDto taskDtoSaved = taskService.save(taskDto);
 
-        System.out.println(this.creator.createValidItem());
-        Assertions.assertNotNull(taskCreated);
-        Assertions.assertEquals(taskCreated, this.creator.createValidItem());
+        Assertions.assertNotNull(taskDtoSaved);
+        Assertions.assertEquals(taskDtoSaved, taskDto);
     }
 
     @Override
     @Test
     @DisplayName("Burcar o id de uma task retorna uma task quando é executado corretamente")
     public void findById_ReturnAItem_When_Success(){
-        Mockito.when(this.taskRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
-        Long expectedID = 1L;
-        Optional<Task> task = this.taskRepository.findById(expectedID);
+        Task task = creator.createValidItem();
+        when(repository.findById(1L)).thenReturn(Optional.of(task));
 
-        Assertions.assertFalse(task.isEmpty());
-        Assertions.assertEquals(task.get(), creator.createValidItem());
-        Assertions.assertEquals(task.get().getId(), expectedID);
+        Optional<TaskDto> foundTaskDto = taskService.getById(1L);
+
+        Assertions.assertTrue(foundTaskDto.isPresent());
+        Assertions.assertEquals(taskMapper.toDto(task), foundTaskDto.get());
     }
 
     @Override
     @Test
     @DisplayName("Retorna uma lista de tasks válidas quando é executado com sucesso")
     public void findAll_ReturnItemList_When_Success() {
-        Mockito.when(this.taskRepository.findAll()).thenReturn(this.creator.createValidItemsList());
+        List<Task> taskList = creator.createValidItemsList();
 
-        List<Task> tasks = this.creator.createValidItemsList();
-        List<Task> tasksGetteds = (List<Task>) this.taskService.getAll();
+        when(repository.findAll()).thenReturn(taskList);
+        List<TaskDto> foundTasksDto = (List<TaskDto>) taskService.getAll();
 
-        Assertions.assertNotNull(tasksGetteds);
-        Assertions.assertEquals(tasksGetteds.size(), tasks.size());
+        Assertions.assertNotNull(foundTasksDto);
+        Assertions.assertEquals(foundTasksDto.size(), taskList.size());
 
-        for (int cont = 0; cont < tasks.size(); cont++){
-            Assertions.assertEquals(tasksGetteds.get(cont), tasks.get(cont));
+        for (int cont  = 0; cont  < taskList.size(); cont++){
+            Assertions.assertEquals(foundTasksDto.get(cont), taskMapper.toDto(taskList.get(cont)));
         }
     }
 
     @Override
     @Test
     @DisplayName("Retorna uma task atualizada e válida quando executado com sucesso")
-    public void update_ReturnAUpdatedItem_When_Sucess() {
-        Mockito.when(this.taskRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
-        Mockito.when(this.taskRepository.save(this.creator.createValidItem())).thenReturn(this.creator.createValidItem());
+    public void update_executesSaveOnce_When_Sucess() {
+        Task task = creator.createValidItem();
 
-        Task task = this.creator.createValidItem();
-        Task taskSaved = this.taskService.save(task);
-        String newTitle = "novo titulo";
-        taskSaved.setTitle(newTitle);
-        Mockito.when(this.taskRepository.save(taskSaved)).thenReturn(taskSaved);
-        Task TaskUpdated = this.taskService.update(taskSaved);
+        when(repository.findById(1L)).thenReturn(Optional.of(task));
+        when(repository.save(task)).thenReturn(task);
 
-        Assertions.assertEquals(TaskUpdated.getId(), taskSaved.getId());
-        Assertions.assertEquals(taskSaved, TaskUpdated);
-        Assertions.assertEquals(TaskUpdated.getTitle(), newTitle);
+        taskService.update(taskMapper.toDto(task));
+
+        Mockito.verify(repository, Mockito.times(1)).save(task);
     }
 
     @Override
     @Test
     @DisplayName("Lança uma exceção quando um id que não existente é passado como parâmetro")
     public void update_ThrowsBadRequestException_When_IdNotExists() {
-        Task task = this.creator.createValidItem();
-        Mockito.when(this.taskRepository.findById(task.getId())).thenReturn(Optional.empty());
+        Task task = (creator.createValidItem());
 
-        Assertions.assertThrows(BadRequestException.class , () -> this.taskService.update(task));
+        when(repository.findById(task.getId())).thenReturn(Optional.empty());
+
+        Assertions.assertThrows(BadRequestException.class , () -> taskService.update(taskMapper.toDto(task)));
     }
 
     @Override
     @Test
     public void delete_executeDelete_When_Success() {
-        Mockito.when(this.taskRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(this.creator.createValidItem()));
+        Task task = this.creator.createValidItem();
+        when(repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(task));
 
         this.taskService.delete(1L);
-        Mockito.verify(this.taskRepository, Mockito.times(1)).delete(this.creator.createValidItem());
+        Mockito.verify(repository, Mockito.times(1)).delete(task);
     }
 
     @Override
     @Test
     public void delete_ThrowsBadRequestException_When_IdNotExists() {
-        Mockito.when(this.taskRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
+        when(repository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.empty());
 
-        Assertions.assertThrows(BadRequestException.class , () -> this.taskService.delete(1L));
+        Assertions.assertThrows(BadRequestException.class, ()-> this.taskService.delete(1L));
     }
     @Override
     @Test
     @DisplayName("Salva uma lista de tasks quando é executada corretamente")
     public void save_PersistItemsList_When_Success(){
-        Mockito.when(this.taskRepository.saveAll(creator.createValidItemsList())).thenReturn(this.creator.createValidItemsList());
+        Task task = creator.createValidItem();
 
-        List<Task> taskList = creator.createValidItemsList();
-        List<Task> tasksSaved = (List<Task>) this.taskService.saveAll(taskList);
+        when(this.repository.saveAll(List.of(task))).thenReturn(List.of(task));
+
+        List<TaskDto> tasksSaved = (List<TaskDto>) this.taskService.saveAll(List.of(taskMapper.toDto(task)));
 
         Assertions.assertNotNull(tasksSaved);
-        Assertions.assertEquals(tasksSaved.size(), taskList.size());
-
-        for (int cont = 0; cont < tasksSaved.size(); cont++){
-            Assertions.assertEquals(tasksSaved.get(cont), taskList.get(cont));
-        }
-    }
-
-    @Test
-    public void updateAll_updateATaskList_When_Success(){
-        Task task = this.creator.createValidItem();
-        List<Task> tasks = List.of(task);
-        Mockito.when(this.taskRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(task));
-        Mockito.when(this.taskRepository.save(task)).thenReturn(task);
-
-        String newTitle = "novo titulo";
-        tasks.get(0).setTitle(newTitle);
-        List<Task> tasksUptadeds = this.taskService.updateAll(tasks);
-
-        Assertions.assertEquals(tasks.size(), tasksUptadeds.size());
-        Assertions.assertEquals(tasksUptadeds.get(0).getId(), tasks.get(0).getId());
-        Assertions.assertEquals(tasksUptadeds.get(0).getTitle(), newTitle);
+        Assertions.assertEquals(tasksSaved.size(), 1);
+        Assertions.assertEquals(tasksSaved.get(0), taskMapper.toDto(task));
     }
 }

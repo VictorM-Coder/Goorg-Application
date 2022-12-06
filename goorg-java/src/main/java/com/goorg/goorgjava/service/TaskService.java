@@ -1,70 +1,35 @@
 package com.goorg.goorgjava.service;
 
+import com.goorg.goorgjava.dto.activity.TaskDto;
 import com.goorg.goorgjava.exception.BadRequestException;
-import com.goorg.goorgjava.model.atividade.Task;
+import com.goorg.goorgjava.mapper.TaskMapper;
+import com.goorg.goorgjava.model.activity.Activity;
+import com.goorg.goorgjava.model.activity.Task;
 import com.goorg.goorgjava.repositories.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
-public class TaskService implements ServiceInterface<Task>{
+public class TaskService extends CrudService<Task, TaskDto, TaskRepository, TaskMapper> {
 
-    @Autowired
-    private TaskRepository repository;
-    @Override
-    public Task save(Task task) {
-        return this.repository.save(task);
+    public TaskService(TaskRepository repository, TaskMapper mapper) {
+        super(repository, mapper);
     }
 
     @Override
-    public Iterable<Task> saveAll(List<Task> tasks) {
-        return this.repository.saveAll(tasks);
-    }
-
-    @Override
-    public Iterable<Task> getAll() {
-        return this.repository.findAll();
-    }
-
-    @Override
-    public Optional<Task> getById(Long id) {
-        return this.repository.findById(id);
-    }
-
-    @Override
-    public Task update(Task task) {
-        Task oldTask = this.findByIdOrThrowBadRequestException(task.getId());
-        this.updateData(oldTask, task);
-        return this.save(oldTask);
-    }
-
-    @Override
-    public void delete(Long id) {
-        Task deletedTask = findByIdOrThrowBadRequestException(id);
-        this.repository.delete(deletedTask);
-    }
-
-    @Transactional
-    public List<Task> updateAll(List<Task> tasks){
-        for (Task task: tasks){
-            this.update(task);
-        }
-        return tasks;
-    }
-
-    public Task findByIdOrThrowBadRequestException(Long id){
-        return this.repository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Task not Found"));
-    }
-
-    private void updateData(Task oldTask, Task newTask){
+    protected void updateData(Task oldTask, Task newTask){
         if (newTask.getTitle() != null) {
             oldTask.setTitle(newTask.getTitle());
         }
-        oldTask.setComplete(newTask.getStatus());
+        oldTask.setComplete(newTask.isComplete());
+    }
+
+    @Override
+    public TaskDto save(TaskDto taskDto){
+        Task enTask = this.mapper.toEntity(taskDto);
+        Activity enActivity = enTask.getActivity();
+        if(enActivity.getId() != null)
+            return this.mapper.toDto(this.repository.save(enTask));
+        else 
+            throw new BadRequestException("Entity not Found");
     }
 }

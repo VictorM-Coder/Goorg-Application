@@ -1,22 +1,23 @@
 package com.goorg.goorgjava.model.workspace;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.goorg.goorgjava.model.atividade.Activity;
+import com.goorg.goorgjava.model.BaseEntity;
+import com.goorg.goorgjava.model.activity.Activity;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Entity
-public class Workspace {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonSerialize
-    private Long id;
-
+public class Workspace extends BaseEntity {
     @Column(unique = true)
     private String name;
 
@@ -35,6 +36,14 @@ public class Workspace {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 
     @Override
@@ -58,29 +67,5 @@ public class Workspace {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getCountActivities(){
-        return this.activities.size();
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
