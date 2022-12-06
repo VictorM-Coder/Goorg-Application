@@ -1,7 +1,7 @@
 package com.goorg.goorgjava.mapper;
 
 import com.goorg.goorgjava.dto.activity.TaskDto;
-import com.goorg.goorgjava.model.atividade.Task;
+import com.goorg.goorgjava.model.activity.Task;
 import org.springframework.stereotype.Component;
 
 @Component

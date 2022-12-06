@@ -1,6 +1,6 @@
 package com.goorg.goorgjava.util.creator.creators;
 
-import com.goorg.goorgjava.model.atividade.Task;
+import com.goorg.goorgjava.model.activity.Task;
 import com.goorg.goorgjava.util.creator.Creator;
 
 import java.util.ArrayList;

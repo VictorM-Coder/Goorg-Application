@@ -1,13 +1,14 @@
 package com.goorg.goorgjava.dto.activity;
 
 import com.goorg.goorgjava.dto.BaseEntityDto;
-import com.goorg.goorgjava.model.atividade.Activity;
+import com.goorg.goorgjava.model.activity.Activity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -21,4 +22,17 @@ public class TaskDto extends BaseEntityDto {
     private boolean complete;
 
     private Activity activity;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskDto taskDto = (TaskDto) o;
+        return Objects.equals(this.getId(), taskDto.getId()) && complete == taskDto.complete && Objects.equals(title, taskDto.title) && Objects.equals(activity, taskDto.activity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, complete, activity);
+    }
 }

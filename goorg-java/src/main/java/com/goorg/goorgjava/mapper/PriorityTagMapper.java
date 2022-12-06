@@ -1,7 +1,7 @@
 package com.goorg.goorgjava.mapper;
 
 import com.goorg.goorgjava.dto.activity.PriorityTagDto;
-import com.goorg.goorgjava.model.atividade.PriorityTag;
+import com.goorg.goorgjava.model.activity.PriorityTag;
 import org.springframework.stereotype.Component;
 
 @Component

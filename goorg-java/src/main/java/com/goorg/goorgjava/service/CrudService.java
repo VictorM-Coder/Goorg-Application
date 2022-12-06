@@ -19,12 +19,14 @@ public abstract class CrudService <E extends BaseEntity, D extends BaseEntityDto
 
 
     @Override
+    @Transactional
     public D save(D d) {
         E entity = this.mapper.toEntity(d);
         return this.mapper.toDto(this.repository.save(entity));
     }
 
     @Override
+    @Transactional
     public Iterable<D> saveAll(List<D> dList) {
         List<E> entities = new ArrayList<>();
         List<D> dtoSaveds = new ArrayList<>();
@@ -53,6 +55,7 @@ public abstract class CrudService <E extends BaseEntity, D extends BaseEntityDto
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         E deletedE = findByIdOrThrowBadRequestException(id);
         this.repository.delete(deletedE);

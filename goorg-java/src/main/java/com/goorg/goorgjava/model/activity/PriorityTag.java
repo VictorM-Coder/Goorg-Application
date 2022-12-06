@@ -1,4 +1,4 @@
-package com.goorg.goorgjava.model.atividade;
+package com.goorg.goorgjava.model.activity;
 
 import com.goorg.goorgjava.model.BaseEntity;
 import lombok.Getter;
