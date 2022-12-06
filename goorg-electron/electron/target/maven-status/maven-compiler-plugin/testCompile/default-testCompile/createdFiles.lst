@@ -1,5 +1,4 @@
 com\goorg\goorgjava\util\creator\creators\ActivityCreator.class
-com\goorg\goorgjava\GoorgJavaApplicationTests.class
 com\goorg\goorgjava\service\TaskServiceTest.class
 com\goorg\goorgjava\util\creator\Creator.class
 com\goorg\goorgjava\util\creator\creators\TaskCreator.class
