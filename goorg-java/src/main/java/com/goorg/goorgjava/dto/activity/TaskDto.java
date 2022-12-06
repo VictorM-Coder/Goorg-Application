@@ -26,6 +26,8 @@ public class TaskDto extends BaseEntityDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Activity activity;
 
+    private boolean isFromPomodoro;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

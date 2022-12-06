@@ -11,6 +11,7 @@ public class PriorityTagMapper implements ICrudMapper<PriorityTag, PriorityTagDt
         PriorityTag priorityTag = new PriorityTag();
         priorityTag.setName(priorityTagDto.getName());
         priorityTag.setId(priorityTagDto.getId());
+        priorityTag.setColor(priorityTagDto.getColor());
 
         return priorityTag;
     }
@@ -20,6 +21,7 @@ public class PriorityTagMapper implements ICrudMapper<PriorityTag, PriorityTagDt
         PriorityTagDto priorityTagDto = new PriorityTagDto();
         priorityTagDto.setName(priorityTag.getName());
         priorityTagDto.setId(priorityTag.getId());
+        priorityTagDto.setColor(priorityTag.getColor());
 
         return priorityTagDto;
     }
