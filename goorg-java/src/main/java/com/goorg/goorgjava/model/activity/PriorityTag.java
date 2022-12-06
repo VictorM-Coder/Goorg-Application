@@ -1,25 +1,37 @@
 package com.goorg.goorgjava.model.activity;
 
 import com.goorg.goorgjava.model.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class PriorityTag extends BaseEntity {
     @Column(unique = true)
     @NotNull
     private String name;
 
+    @NotNull
+    @NotBlank
+    @Length(min = 6, max = 6)
+    private String color;
+
     public PriorityTag(String name) {
         this.name = name;
     }
+
 
     @Override
     public String toString() {
@@ -42,12 +54,14 @@ public class PriorityTag extends BaseEntity {
         return Objects.hash(id, name);
     }
 
-    public PriorityTag() {
-
-    }
-
     public PriorityTag(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public PriorityTag(Long id, String name, String color) {
+        this.id = id;
+        this.name = name;
+        this.color = color;
     }
 }
