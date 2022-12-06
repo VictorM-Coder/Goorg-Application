@@ -48,7 +48,7 @@ export function WorkspaceSelected() {
                               endDate={activity.endDate}
                               phase={activity.phase}
                               tasks={activity.tasks}
-                              link={`/inicio/workspace/${activity.workspaceId}/atividade/${activity.id}`}
+                              link={`${activity.workspaceId}/atividade/${activity.id}`}
                               nameVisible={true}
                               minWidth={true}
                            />
@@ -56,7 +56,7 @@ export function WorkspaceSelected() {
                      ))
                   }
                </Slider>
-               <Board activitys={activitiesFilter} linkRedirectActivity={`/inicio`}/>
+               <Board activitys={activitiesFilter} />
             </div>
             <WorkspaceOptions idWorkspace={id}/>
          </div>

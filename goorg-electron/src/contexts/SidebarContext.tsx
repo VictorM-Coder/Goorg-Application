@@ -13,13 +13,12 @@ export const SidebarContex = createContext<SidebarContextData>({} as SidebarCont
 
 export function SidebarProvider({ children }: SidebarProviderProps) {
    const [sidebarMinimizedIsActive, setSidebarMinimizedIsActive] = useState(true);
-
    function handleSidebarMinimezed() {
       setSidebarMinimizedIsActive(!sidebarMinimizedIsActive);
    }
 
    return (
-      <SidebarContex.Provider value={{ sidebarMinimizedIsActive, handleSidebarMinimezed }}>
+      <SidebarContex.Provider value={{ sidebarMinimizedIsActive, handleSidebarMinimezed}}>
         { children }
       </SidebarContex.Provider>
    )

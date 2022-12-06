@@ -21,6 +21,8 @@ export function ActivityCard({
    const handleOpenOptions = (event: MouseEvent<HTMLButtonElement>) => setElementRef(event.currentTarget);
    const handleCloseOptions = () => setElementRef(null);
 
+   const urlCurrent = window.location.href.split("/").find(item => ['inicio', 'atividades', 'workspaces'].includes(item));
+
    return (
       <div className={`bg-white shadow-sm border border-gray-100 px-6 py-3 w-full
          ${(minWidth) ? 'min-w-[350px]' : ''} max-w-[350px] min-h-[174px] rounded-md flex flex-col`
@@ -32,7 +34,7 @@ export function ActivityCard({
          </header>
          
          <div>
-            <Link to={link}>
+            <Link to={`/${urlCurrent}/workspace/${link}`}>
                <span className={`text-sm font-medium`}>{title}</span>
             </Link>
          

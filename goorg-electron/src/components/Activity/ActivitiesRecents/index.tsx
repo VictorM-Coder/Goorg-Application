@@ -40,7 +40,7 @@ export function ActivitiesRecents({ activities }: ActivitiesRecentsProps) {
                         endDate={activity.endDate}
                         phase={activity.phase}
                         tasks={activity.tasks}
-                        link={`/atividades/workspace/${activity.id}/atividade/${activity.id}`}
+                        link={`${activity.id}/atividade/${activity.id}`}
                         nameVisible={true}
                         minWidth={true}
                      />  
