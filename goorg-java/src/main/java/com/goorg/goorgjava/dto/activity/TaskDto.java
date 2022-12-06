@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.dto.activity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.goorg.goorgjava.dto.BaseEntityDto;
 import com.goorg.goorgjava.model.atividade.Activity;
 import lombok.AllArgsConstructor;
@@ -20,5 +21,8 @@ public class TaskDto extends BaseEntityDto {
     @NotNull
     private boolean complete;
 
+    @NotNull(message = "atividade é obrigatória")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Activity activity;
+    
 }

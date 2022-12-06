@@ -1,5 +1,6 @@
 package com.goorg.goorgjava.model.atividade;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.goorg.goorgjava.model.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,9 @@ public class Task extends BaseEntity {
     @NotNull
     private boolean complete;
 
+    @NotNull(message = "atividade é obrigatória")
     @ManyToOne()
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Activity activity;
 
     public Activity getActivity() {
