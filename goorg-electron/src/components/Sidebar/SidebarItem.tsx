@@ -12,7 +12,7 @@ export function SidebarItem({ children, name, minemized, link }: SidebarItemProp
    const res = urlCurrent.some(item => item.includes(name));
    
    return (
-      <li className={`p-3 ${(res) ? 'bg-gray-400 rounded-full text-gray-600' : '' }`} >
+      <li className={`p-3 ${(res) ? 'bg-gray-400 rounded-full text-gray-600' : '' }`} role="button">
          <Link 
             to={link} 
             className={`text-sm flex items-center overflow-hidden transition-all ${(minemized) ? 'gap-0 ' : 'gap-2'}`}

@@ -7,11 +7,10 @@ interface CollumProps {
    name: string;
    refPhase: string;
    activitys: Activity[];
-   linkRedirectActivity: string;
    onOpenActivityModal: (phase: string) => void;
 }
 
-export function Column({ name, refPhase, activitys, linkRedirectActivity, onOpenActivityModal }: CollumProps) {
+export function Column({ name, refPhase, activitys, onOpenActivityModal }: CollumProps) {
    return (
       <div>
          <span className={classNames('border-b-2  text-sm font-medium block', {
@@ -37,7 +36,7 @@ export function Column({ name, refPhase, activitys, linkRedirectActivity, onOpen
                   workspaceId={activity.workspaceId}
                   tasks={activity.tasks}
                   nameVisible={false}
-                  link={`${linkRedirectActivity}/workspace/${activity.workspaceId}/atividade/${activity.id}`}
+                  link={`${activity.workspaceId}/atividade/${activity.id}`}
                />
             ))}                 
          </div>

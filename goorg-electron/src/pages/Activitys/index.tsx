@@ -15,7 +15,7 @@ export function Activitys() {
          <div className="m-5 flex flex-col gap-6 mt-20">
             <div className="bg-white rounded flex overflow-hidden px-10 py-10 ">
                <div>
-                  <h2 className="text-lg font-semibold text-gray-700 mb-[2px] flex items-center gap-1">
+                  <h2 className="text-md font-semibold text-gray-700 mb-[2px] flex items-center gap-1">
                      <NotePencil weight="fill" size={22} />
                      <span>Atividades</span>
                   </h2>
@@ -29,7 +29,7 @@ export function Activitys() {
             </div>
             
             <ActivitiesRecents activities={activitys}/>
-            <Board activitys={activitys} linkRedirectActivity={`/atividades`}/>
+            <Board activitys={activitys} />
          </div>
 
          <ActivityOptions />
