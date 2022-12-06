@@ -3,8 +3,8 @@ package com.goorg.goorgjava.service;
 import com.goorg.goorgjava.dto.activity.TaskDto;
 import com.goorg.goorgjava.exception.BadRequestException;
 import com.goorg.goorgjava.mapper.TaskMapper;
-import com.goorg.goorgjava.model.atividade.Activity;
-import com.goorg.goorgjava.model.atividade.Task;
+import com.goorg.goorgjava.model.activity.Activity;
+import com.goorg.goorgjava.model.activity.Task;
 import com.goorg.goorgjava.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 

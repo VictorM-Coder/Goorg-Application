@@ -1,4 +1,4 @@
-package com.goorg.goorgjava.model.atividade;
+package com.goorg.goorgjava.model.activity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.goorg.goorgjava.enums.Phase;
@@ -36,7 +36,7 @@ public class Activity extends BaseEntity{
 
 
     @NotNull(message = "workspace é obrigatório")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Workspace workspace;
 

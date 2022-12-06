@@ -2,7 +2,7 @@ package com.goorg.goorgjava.model.workspace;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.goorg.goorgjava.model.BaseEntity;
-import com.goorg.goorgjava.model.atividade.Activity;
+import com.goorg.goorgjava.model.activity.Activity;
 import lombok.Getter;
 import lombok.Setter;
 
