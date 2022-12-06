@@ -27,8 +27,8 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
    }
 
    async function createActivity(data: ActivityCrud): Promise<void> {
-      const activity = await api.post('activity', data);
-      setActivitys([...activitys, activity.data]);
+      await api.post('activity', data);
+      fetchActivitys();
    }
 
    async function updateActivity(data: ActivityCrud): Promise<void> {

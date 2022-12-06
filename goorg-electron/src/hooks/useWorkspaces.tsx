@@ -2,13 +2,11 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { Workspace, WorkspaceContextData, WorkspaceProviderProps } from '../@types/Workspace';
 import { WorkspaceCrud } from '../@types/Workspace/WorkspaceCrud';
 import { api } from '../services/api';
-import { useLatestDatas } from './useLatestDatas';
 
 const WorkspacesContext = createContext<WorkspaceContextData>({ } as WorkspaceContextData);
 
 export function WorkspacesProvider({ children } : WorkspaceProviderProps) {
    const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
-   const { addWorkspaceRecents } = useLatestDatas();
 
    useEffect(() => {
       fetchWorkspaces();

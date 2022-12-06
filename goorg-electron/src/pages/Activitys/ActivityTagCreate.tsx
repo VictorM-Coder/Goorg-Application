@@ -12,6 +12,7 @@ import { ActivityTagSchemaYup } from '../../validations';
 
 import colorpicker from '../../assets/colorpicker.png'
 import { useActivities } from '../../hooks';
+import { dark } from '@mui/material/styles/createPalette';
 
 interface ActivityTagModalFields {
    name: string;
@@ -25,7 +26,11 @@ export function ActivityTagCreate({ isOpenModal, onCloseModal }: ModalProps) {
    const { createTag } = useActivities();
 
    const handleSubmitData:SubmitHandler<ActivityTagModalFields> = (data) => {
-      createTag({ name: data.name }).then(() => { onCloseModal(), reset() })
+      createTag({ 
+         name: data.name,
+         color: data.color.split('#')[1]
+      })
+      .then(() => { onCloseModal(), reset() })
    }
 
    return (
@@ -56,7 +61,7 @@ export function ActivityTagCreate({ isOpenModal, onCloseModal }: ModalProps) {
                         />
                      </FormControl>
                      <FormControl>
-                        <Label name="Cor da Badge" htmlFor="color"/>
+                        <Label name="Cor da Badge" htmlFor=""/>
                         <div className='flex items-center gap-2 relative'>
                            <label htmlFor="color" className='border border-gray-200 px-3 py-2 rounded'>
                               <img src={colorpicker} alt="" className='w-6' />

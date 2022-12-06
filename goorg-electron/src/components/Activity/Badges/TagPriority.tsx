@@ -1,17 +1,17 @@
-import classNames from "classnames";
+import { darken } from "polished";
+
 
 interface TagPriorityProps {
    name: string | undefined;
    size?: 'xs' | 'sm' | 'md';
+   color?: string;
 }
 
-export function TagPriority({ name, size }: TagPriorityProps) {
+export function TagPriority({ name, size, color }: TagPriorityProps) {
    return (
-      <span className={classNames(`py-0.5 px-3 rounded-full font-medium text-${size}`, {
-         'bg-red-200 text-red-500': name === 'Urgente',
-         'bg-yellow-200 text-yellow-500': name === 'Relevante',
-         'bg-blue-200 text-blue-600': name === 'Importante',
-      })}>
+      <span 
+         style={{ backgroundColor: `#${color}`, color: darken(0.4, `#${color}`) }}
+         className={`py-0.5 px-3 rounded-full font-medium text-${size}`}>
          {name}
       </span> 
    )
