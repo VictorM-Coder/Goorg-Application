@@ -5,7 +5,8 @@ export interface Activity {
    tasks: {
       id: number;
       title: string;
-      status: boolean;
+      complete: boolean;
+      fromPomodoro: boolean;
    }[]
    priorityTag: {
       name: string;

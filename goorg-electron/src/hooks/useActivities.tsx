@@ -41,8 +41,8 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       fetchActivitys();
    }
 
-   async function createTask(id: number, data: any): Promise<void> {
-      await api.post(`task/${id}`, data);
+   async function createTask(data: any): Promise<void> {
+      await api.post(`task`, data);
       fetchActivitys();
    }
    

@@ -39,7 +39,7 @@ export function ActivityCard({
             </Link>
          
             <div className="flex items-center gap-2 pt-1 pb-1">
-               <TagPriority name={priorityTag?.name} color={priorityTag.color} size='xs'/>
+               <TagPriority name={priorityTag?.name} color={priorityTag?.color} size='xs'/>
                <TagPhase name={phase} size='xs'/>
             </div>
 

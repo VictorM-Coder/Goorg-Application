@@ -9,7 +9,7 @@ export interface ActivityContextData {
    updateActivity: (data: ActivityCrud) => Promise<void>;
    deleteActivity: (id: number) => Promise<void>;
    updatePhase: (id: number, phase: string) => Promise<void>;
-   createTask: (id: number, data: any) => Promise<void>;
+   createTask: (data: any) => Promise<void>;
    completeTasks: (taks: any[]) => Promise<void>;
    createTag: (tag: ActivityTag) => Promise<void>;
 }
