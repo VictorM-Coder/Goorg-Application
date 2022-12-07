@@ -6,15 +6,15 @@ import { useParams } from 'react-router-dom';
 import { TasksComplete } from '../../../../../@types/Tasks/TasksComplete';
 
 import { useActivities } from '../../../../../hooks';
-import { TaskModal } from '../../../../Modal/TaskModal';
 import { CompleteTasks } from '../CompleteTasks';
+import { TaskCreate } from '../TaskCrud/TaskCreate';
 import { Task } from './Task';
 
 interface CardTasksProps {
    tasks: {
       id: number;
       title: string;
-      status: boolean;
+      complete: boolean;
    }[] | undefined;
 }
 
@@ -25,7 +25,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
 
    useEffect(() => {
       let count = 0;
-      tasks?.filter(item => item.status === true).forEach(item => count++)
+      tasks?.filter(item => item.complete === true).forEach(item => count++)
       setCountTasksComplete(count);
    }, [tasks])
 
@@ -67,7 +67,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
                   'bg-gray-100 text-gray-300': countTasksComplete === tasks?.length,
                   'bg-blue-100 text-blue-primary': countTasksComplete != tasks?.length
                })}
-               disabled={(countTasksComplete === tasks?.length)}
+               disabled={countTasksComplete === tasks?.length}
             >
                <span className="w-4 h-4 border-[1.5px] border-blue-primary rounded-full block bg-gray-50"></span>
                <span className="text-sm font-medium">Concluir tarefas marcadas</span>
@@ -79,7 +79,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
 
             <div className="flex flex-col px-8 py-5 gap-4">
                { tasks?.map(task => 
-                  <Task key={task.id} id={task.id} title={task.title} status={task.status} register={register} />
+                  <Task key={task.id} id={task.id} title={task.title} status={task.complete} register={register} />
                )}
 
                <div
@@ -97,7 +97,7 @@ export function CardTasks({ tasks }: CardTasksProps) {
             </div>     
          </form>
 
-         <TaskModal 
+         <TaskCreate 
             idActivity={idAc as string}
             isOpenTaskModal={isOpenTaskModal}
             onCloseTaskModal={handleCloseTaskModal}

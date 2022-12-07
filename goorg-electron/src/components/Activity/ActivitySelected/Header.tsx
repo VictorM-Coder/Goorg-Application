@@ -5,7 +5,10 @@ import { ProgressBar } from "./Tasks/ProgressBar";
 interface HeaderProps {
    title: string | undefined;
    description: string | undefined;
-   priorityTagName: string | undefined;
+   priorityTag: {
+      name: string | undefined;
+      color: string | undefined;
+   } | undefined ;
    phaseName: string | undefined;
    startDate: string | undefined;
    endDate: string | undefined;
@@ -16,7 +19,7 @@ interface HeaderProps {
 export function HeaderActivitySelected({ 
    title, 
    description, 
-   priorityTagName, 
+   priorityTag,
    phaseName, 
    startDate, 
    endDate,
@@ -32,7 +35,7 @@ export function HeaderActivitySelected({
                { title }
             </span>
             <div className="flex items-center gap-2">
-               <TagPriority name={priorityTagName} size='xs'/>
+               <TagPriority name={priorityTag?.name} color={priorityTag?.color} size='xs'/>
                <TagPhase name={phaseName} size='xs'/>
                <ProgressBar valueCurrent={tasksComplete} valueMax={tasksTotal}/>
             </div>
@@ -46,7 +49,7 @@ export function HeaderActivitySelected({
                after:top-4"
             >
                <span className="text-sm font-medium">Descrição</span>
-               <span className="text-xs text-gray-500">{ description }</span>
+               <span className="text-xs text-gray-500 break-words">{ description }</span>
             </div>
             <div className="w-1/3 flex flex-col gap-2">  
                <div 

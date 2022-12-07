@@ -10,7 +10,7 @@ import { FormControl, Input, Label } from '../../../../Form';
 import { HeaderModal } from '../../../../Modal';
 import { TaskSchemaYup } from '../../../../../validations/TaskSchemaYup'
 
-interface ActivityModalFields {
+interface TaskModalFields {
    title: string;
 }
 
@@ -18,19 +18,25 @@ interface TaskModalProps {
    idActivity: string;
    isOpenTaskModal: boolean; 
    onCloseTaskModal: () => void;
+   isFromPomodoro?: boolean;
 }
 
 export function TaskCreate({ 
    idActivity,
    isOpenTaskModal,
-   onCloseTaskModal
+   onCloseTaskModal,
+   isFromPomodoro = false
 }: TaskModalProps) {
  
    const { createTask } = useActivities();
-   const { register, handleSubmit } = useForm<ActivityModalFields>({ resolver: yupResolver(TaskSchemaYup)});
+   const { register, handleSubmit, formState: { errors } } = useForm<TaskModalFields>({ resolver: yupResolver(TaskSchemaYup)});
 
-   const handleSubmitData: SubmitHandler<ActivityModalFields> =  ({ title }) => {
-      createTask(Number(idActivity), { title: title })
+   const handleSubmitData: SubmitHandler<TaskModalFields> =  ({ title }) => {
+      createTask({ 
+         title, 
+         activity: { id: idActivity },
+         fromPomodoro: isFromPomodoro
+      })
       .then(() => onCloseTaskModal());
    }
 
@@ -56,6 +62,7 @@ export function TaskCreate({
                         type="text" 
                         name="title" 
                         register={register}
+                        errorMensage={errors.title?.message}
                      />
                   </FormControl>
                      

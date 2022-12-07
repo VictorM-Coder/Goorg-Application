@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Checks, ClockAfternoon } from 'phosphor-react';
 
- interface ProgressBarTasksProps {
-    totalTasks: number | undefined,
-    totalTasksDone: number
+interface ProgressBarTasksProps {
+    totalTasks: number | undefined;
+    totalTasksDone: number | undefined;
 } 
 
-export function ProgressBarTasks({totalTasks, totalTasksDone}: ProgressBarTasksProps) {
+export function ProgressBarTasks({totalTasks, totalTasksDone = 0}: ProgressBarTasksProps) {
     const [progress, setProgress] = useState(0);
     const [totalTasksPending, setTotalTasksPending] = useState(() => {
         if (totalTasks) return totalTasks - totalTasksDone;
         else return 0;
     })
 
-     useEffect(() => {
+    useEffect(() => {
         let progress = 0;
 
         if (totalTasks) {

@@ -23,15 +23,15 @@ export function ActivitySelected() {
                <HeaderActivitySelected 
                  title={activitySelected?.title}
                  description={activitySelected?.description}
-                 priorityTagName={activitySelected?.priorityTag.name}
+                 priorityTag={activitySelected?.priorityTag}
                  phaseName={activitySelected?.phase}
                  startDate={activitySelected?.startDate}
                  endDate={activitySelected?.endDate}
                  tasksTotal={activitySelected?.tasks.length}
-                 tasksComplete={activitySelected?.tasks.filter(t => t.status === true).length}
+                 tasksComplete={activitySelected?.tasks.filter(t => t.complete === true).length}
                />
-               <CardTasks tasks={activitySelected?.tasks}/>
-               <Pomodoro tasks={activitySelected?.tasks}/>
+               <CardTasks tasks={activitySelected?.tasks.filter(t => t.fromPomodoro === false)}/>
+               <Pomodoro tasks={activitySelected?.tasks.filter(t => t.fromPomodoro === true)}/>
             </div>
          </div>
 

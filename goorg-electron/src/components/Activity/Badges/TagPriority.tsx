@@ -4,10 +4,10 @@ import { darken } from "polished";
 interface TagPriorityProps {
    name: string | undefined;
    size?: 'xs' | 'sm' | 'md';
-   color?: string;
+   color: string | undefined;
 }
 
-export function TagPriority({ name, size, color }: TagPriorityProps) {
+export function TagPriority({ name, size, color = '000000' }: TagPriorityProps) {
    return (
       <span 
          style={{ backgroundColor: `#${color}`, color: darken(0.4, `#${color}`) }}
