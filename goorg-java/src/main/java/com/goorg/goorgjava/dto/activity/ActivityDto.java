@@ -10,13 +10,13 @@ import org.hibernate.annotations.Fetch;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class ActivityDto extends BaseEntityDto {
     @NotNull(message = "título é obrigatório")
@@ -38,6 +38,12 @@ public class ActivityDto extends BaseEntityDto {
 
     public String getWorkspaceName(){
         return this.workspace.getName();
+    }
+
+    public ActivityDto(){
+        this.phase = Phase.TO_DO;
+        this.tasks = new ArrayList<>();
+        this.startDate = LocalDate.now();
     }
 
     @Override
