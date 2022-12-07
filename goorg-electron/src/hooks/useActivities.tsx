@@ -45,6 +45,11 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
       await api.post(`task`, data);
       fetchActivitys();
    }
+
+   async function deleteTask(id: number): Promise<void> {
+      await api.delete(`task/${id}`);
+      fetchActivitys();
+   }
    
    async function completeTasks(tasks: TasksComplete[]): Promise<void> {
       await api.put(`task/all`, tasks);
@@ -63,6 +68,7 @@ export function ActivityProvider({ children }: ActivityProviderProps) {
          deleteActivity, 
          updatePhase,
          createTask,
+         deleteTask,
          completeTasks,
          createTag
       }}>
