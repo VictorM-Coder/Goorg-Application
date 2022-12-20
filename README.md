@@ -1,4 +1,7 @@
-# Goorg-Application
+<h1 align="center">
+  <img width="250px" title="Logo goorg" alt="Logo goorg" src="/logo-goorg.svg">
+</h1>
+
 ## 💻 Sobre o Projeto
 O sistema a ser criado trata-se de uma aplicação de organização pessoal tal qual softwares como Notion, Trello e Evernote. Nessa aplicação, será possível que os usuários consigam administrar todas as diversas atividades que são realizadas no cotidiano, sejam elas no contexto pessoal, nas tarefas do dia a dia, ou no cenário profissional, com funcionalidades que visem propiciar um maior controle das atividades profissionais, proporcionando uma maior organização sobre o fluxo de trabalho.
 
