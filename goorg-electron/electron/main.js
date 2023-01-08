@@ -3,11 +3,12 @@ const { join } = require('path');
 const { spawn } = require('child_process');
 
 if (!app.requestSingleInstanceLock()) {
-  app.quit()
-  process.exit(0)
+  app.quit();
+  process.exit(0);
 }
 
 let win = null;
+let apiJava = 0;
 
 async function createWindow () {
   win = new BrowserWindow({
@@ -24,11 +25,11 @@ async function createWindow () {
 
   if (app.isPackaged) {
     const jarPath = join(process.resourcesPath, "./app.asar.unpacked/electron/target/goorg-java-0.0.1-SNAPSHOT.jar")
-    spawn('java', ['-jar', jarPath]);
-    win.loadFile(join(__dirname, '../dist/index.html'))
+    apiJava = spawn('java', ['-jar', jarPath]).pid;
+    win.loadFile(join(__dirname, '../dist/index.html'));
   } else { 
     const jarPath = join(__dirname, "/target/goorg-java-0.0.1-SNAPSHOT.jar")
-    spawn('java', ['-jar', jarPath]);
+    apiJava = spawn('java', ['-jar', jarPath]);
     win.loadURL('http://127.0.0.1:5173/');
   }
 }

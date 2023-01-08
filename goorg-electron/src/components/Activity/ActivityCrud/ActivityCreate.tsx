@@ -20,7 +20,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace, p
    const { createActivity } = useActivities();
    const { workspaces } = useWorkspaces();
    
-   const { register, handleSubmit, reset, clearErrors, formState: { errors } } = 
+   const { register, handleSubmit, reset, clearErrors, setValue, formState: { errors } } = 
    useForm<ActivityModalFields>({ resolver: yupResolver(ActivitySchemaYup) });
 
    const handleSubmitData: SubmitHandler<ActivityModalFields> = ({ title, date, description, priority, workspace }) => {
@@ -41,6 +41,7 @@ export function ActivityCreate({ isOpenModal, onCloseModal, isSelectWorkspace, p
 
    useEffect(() => {
       if (isOpenModal) {
+         if (!isSelectWorkspace) setValue('workspace', 0);
          getTagsPriority();
       }
    }, [isOpenModal])

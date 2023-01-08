@@ -41,6 +41,7 @@ export function ActivityUpdate({ idActivity, isOpenModal, onCloseModal }: Activi
       setValue('description', res.data.description);
       setValue('date', res.data.endDate);
       setValue('priority', res.data.priorityTag.id);
+      setValue('workspace', 0);
    }
 
    function getTagsPriority() {

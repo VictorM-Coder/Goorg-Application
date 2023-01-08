@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { LogoLogin } from "../../components/Logo";
 import { InformNameModal } from "./InformNameModal";
 
 export function Login() {
    const [isOpenInformNameModal, setIsOpenInformNameModal] = useState(false);
+   const navigate = useNavigate();
 
    function handleCloseInformNameModal() {
       setIsOpenInformNameModal(false);
@@ -27,7 +29,7 @@ export function Login() {
                </p>
             </div>
             <button 
-               onClick={handleOpenInformNameModal}
+               onClick={() => navigate('inicio')}
                className="text-xs font-medium uppercase px-6 py-3 rounded-full text-white bg-blue-dark-100"
             >
                Acessar

@@ -1,0 +1,31 @@
+00 - Requisitos
+ - JDK 17
+ - Springboot 2.7.4
+ - Maven 3.8.6
+ - Node 16.17 LTS
+ - React 18.2.0
+ - postgresql configurado
+
+01 - Configurar o arquivo application.properties em 
+Goorg-Application/goorg-java/src/main/resources/application.properties
+
+spring.datasource.url=<url-database>
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+
+02 - Com o maven instalado em sua máquina execute o seguinte comando:
+mvn package -P src  
+
+03 - Copie a pasta Targert gerada e cole no seguinte diretório.
+Goorg-Application\goorg-electron\electron
+
+04 - No diretorio Goorg-Application\goorg-electron execute o seguinte comando.
+npm install
+
+05 - No diretorio Goorg-Application\goorg-electron execute o seguinte comando para gera
+o executável.
+npm run electron:build
+
+06 - Para instalar o executável entre no seguinte diretório 
+Goorg-Application\goorg-electron\release\1.0.0 e abra o arquivo goorg_1.0.0.
+

@@ -14,7 +14,7 @@ export function Home() {
             <div className="bg-white rounded flex overflow-hidden px-10 py-14 ">
                <div>
                   <h2 className="text-xl font-semibold text-gray-700 mb-[2px]">
-                     Seja Bem vindo, <span className="text-blue-primary">Daniel Almeida</span>
+                     Bem vindo ao <span className="text-blue-primary">Goorg</span>
                   </h2>
                   <p className="text-sm text-gray-300 w-4/5">
                      Tenha acesso abaixo a opções rápidas e diversificadas,
